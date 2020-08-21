@@ -10,24 +10,24 @@
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="{{URL::asset('asset/customer/css/open-iconic-bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('asset/customer/css/animate.css')}}">
+    <link rel="stylesheet" href="asset/customer/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="asset/customer/css/animate.css">
     
-    <link rel="stylesheet" href="{{URL::asset('asset/customer/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('asset/customer/css/owl.theme.default.min.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('asset/customer/css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="asset/customer/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="asset/customer/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="asset/customer/css/magnific-popup.css">
 
-    <link rel="stylesheet" href="{{URL::asset('asset/customer/css/aos.css')}}">
+    <link rel="stylesheet" href="asset/customer/css/aos.css">
 
-    <link rel="stylesheet" href="{{URL::asset('asset/customer/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="asset/customer/css/ionicons.min.css">
 
-    <link rel="stylesheet" href="{{URL::asset('asset/customer/css/bootstrap-datepicker.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('asset/customer/css/jquery.timepicker.css')}}">
+    <link rel="stylesheet" href="asset/customer/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="asset/customer/css/jquery.timepicker.css">
 
     
-    <link rel="stylesheet" href="{{URL::asset('asset/customer/css/flaticon.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('asset/customer/css/icomoon.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('asset/customer/css/style.css')}}">
+    <link rel="stylesheet" href="asset/customer/css/flaticon.css">
+    <link rel="stylesheet" href="asset/customer/css/icomoon.css">
+    <link rel="stylesheet" href="asset/customer/css/style.css">
   </head>
   <body class="goto-here">
 		{{-- <div class="py-1 bg-primary">
@@ -155,7 +155,7 @@
                </div>
               </li>
               <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-              <li class="nav-item"><a href="cart.html" class="nav-link"><img src="{{URL::asset('asset/admin/images/icon/avatar-01.jpg')}}" alt="John Doe" width="30" height="30" /></a>
+              <li class="nav-item"><a href="cart.html" class="nav-link"><img src="asset/admin/images/icon/avatar-01.jpg" alt="John Doe" width="30" height="30" /></a>
                 <div class="cart-hover">
                     <div >
                        <div class="select-items">
