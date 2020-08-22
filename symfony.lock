@@ -1,4 +1,7 @@
 {
+    "laravel/ui": {
+        "version": "v2.1.0"
+    },
     "php": {
         "version": "7.2"
     },

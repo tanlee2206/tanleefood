@@ -8301,7 +8301,7 @@ li.nav-item a {
 
 li.nav-item .cart-hover {
 	position: absolute;
-	right: -70px;
+	right: 4px;
 	top: 100px;
 	width: 350px;
 	background: #ffffff;
@@ -8314,11 +8314,22 @@ li.nav-item .cart-hover {
 	box-shadow: 0 13px 32px rgba(51, 51, 51, 0.1);
 	-webkit-transition: all 0.5s;
 	-o-transition: all 0.5s;
-	transition: all 0.5s;
+  transition: all 0.5s;
+  box-shadow: 5px 10px  5px #aaaaaa;
 }
 
 li.nav-item .cart-hover .select-items table {
 	width: 100%;
+}
+li.nav-item .cart-hover ul{
+  list-style-type: none;
+}
+li.nav-item .profile-user {
+  width: 300px;
+}
+li.nav-item .cart-hover li{
+  line-height: 40px;
+  text-align: right;
 }
 
 li.nav-item .cart-hover .select-items table tr td {
@@ -8364,9 +8375,13 @@ li.nav-item .cart-hover .select-total span {
 	float: left;
 }
 
-li.nav-item .cart-hover .select-total h5 {
+li.nav-item .cart-hover .select-total  h5 {
 	color: #e7ab3c;
 	float: right;
+}
+li.nav-item .cart-hover .select-items  h5 {
+	color: #e7ab3c;
+	text-align: right;
 }
 
 li.nav-item .cart-hover .select-button .view-card {

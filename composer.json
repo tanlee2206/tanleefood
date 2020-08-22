@@ -14,6 +14,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.24",
         "laravel/tinker": "^2.0",
+        "laravel/ui": "^2.1",
         "monolog/monolog": "^2.1",
         "symfony/flex": "^1.9",
         "symfony/twig-bridge": "^5.1",

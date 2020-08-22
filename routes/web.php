@@ -13,6 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
+ *đăng nhập 
+ */
+Route::get('/login',   'CustomerController@getLogin')->name('login.form');
+Route::post('/login',   'CustomerController@postLogin')->name('login');
+
+Route::get("/logout", function(){
+	Auth::logout();
+	return redirect('/');
+})->name('logout');
+
+
+
+
+
 Route::get('/', function () {
     return view('customer.index');
 });
@@ -22,3 +37,6 @@ Route::get('/admin', function () {
 Route::get('/shop', function () {
     return view('shop.index');
 });
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

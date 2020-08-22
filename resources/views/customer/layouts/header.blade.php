@@ -112,7 +112,7 @@
               </li>
 	          
               <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a>
-               <div class="cart-hover">
+               <div class="cart-hover ">
                   <div >
                      <div class="select-items">
                         <table>
@@ -155,50 +155,30 @@
                </div>
               </li>
               <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-              <li class="nav-item"><a href="cart.html" class="nav-link"><img src="asset/admin/images/icon/avatar-01.jpg" alt="John Doe" width="30" height="30" /></a>
-                <div class="cart-hover">
+
+              @if(isset(Auth::user()->name))
+              <li class="nav-item"><a href="cart.html" class="nav-link"><img src="@if(Auth::user()->img != null) {{Auth::user()->img}} @else asset/admin/images/icon/avatar-01.jpg @endif" alt="John Doe" width="30" height="30" /></a>
+               <span ><a href="" class="">hi, {{Auth::user()->name}}</a></span> 
+               <div class="cart-hover profile-user">
                     <div >
-                       <div class="select-items">
-                          <table>
-                             <tbody>
-                                @if (Session::has("Cart") != null)
-                                @foreach (Session::get("Cart")->products as $item)
-                                <tr>
-                                   <td class="si-pic"><img
-                                      src="{{$item['productInfo']->img}}"
-                                      width="60" height="60" alt=""></td>
-                                   <td class="si-text">
-                                      <div class="product-selected">
-                                         <p>{{ number_format($item['productInfo']->price).' '.'VNĐ'}}
-                                            x {{$item['quanty']}}
-                                         </p>
-                                         <h6>{{$item['productInfo']->name}}</h6>
-                                      </div>
-                                   </td>
-                                   <td class="si-close">
-                                      <i class="far fa-trash-alt"
-                                         data-id="{{$item['productInfo']->id}}"></i>
-                                   </td>
-                                </tr>
-                                @endforeach
-                                @endif
-                             </tbody>
-                          </table>
-                       </div>
                        <div class="select-total">
-                          <span>total:</span>
-                          @if (Session::has("Cart") != null)
-                          <h5>{{ number_format(Session::get("Cart")->totalPrice).' '.'VNĐ'}}</h5>
-                          @endif
+                          <ul>
+                             <li><a href="">Thông tin cá nhân</a> </li>
+                             <li><a href="">Lịch sử mua hàng</a> </li>
+                             <li><a href="">Giỏ hàng</a> </li>
+                          <li><a href="{{route('logout')}}">Đăng xuất</a> </li>
+                          </ul>
                        </div>
                     </div>
                     <div class="select-button">
-                       <a href="" class="primary-btn view-card">VIEW CARD</a>
-                       <a href="" class="primary-btn checkout-btn">CHECK OUT</a>
                     </div>
                  </div>
               </li>
-              <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><i class="icon-shopping_cart"></i><span>0</span></a>
+            
+              @else 
+            <li class="nav-item"><a href="{{route('login.form')}}" class="nav-link">Login</a></li>
+              @endif
+              <li class="nav-item"><a href="cart.html" class="nav-link"><i class="icon-shopping_cart"></i><span>0</span></a>
                 <div class="cart-hover">
                     <div id="change-item-cart">
                        <div class="select-items">
