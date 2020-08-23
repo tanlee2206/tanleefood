@@ -1,4 +1,7 @@
 {
+    "jzonta/faker-restaurant": {
+        "version": "1.1.7"
+    },
     "laravel/ui": {
         "version": "v2.1.0"
     },

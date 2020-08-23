@@ -25,12 +25,20 @@ Route::get("/logout", function(){
 })->name('logout');
 
 
+/*
+show food
+
+*/
+Route::get('/food', 'FoodController@showlist')->name('food');
+
+
+
 
 
 
 Route::get('/', function () {
     return view('customer.index');
-});
+})->name('home');
 Route::get('/admin', function () {
     return view('admin.index');
 });

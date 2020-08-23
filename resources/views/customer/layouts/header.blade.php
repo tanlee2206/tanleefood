@@ -65,7 +65,7 @@
                <li class="nav-item">
                   
                </li>
-               <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+               <li class="nav-item active"><a href="{{route('home')}}" class="nav-link">Home</a></li>
                <li class="nav-item dropdown">
                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
                    <div class="cart-hover">
@@ -154,19 +154,19 @@
                   </div>
                </div>
               </li>
-              <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+              <li class="nav-item"><a href="{{route('food')}}" class="nav-link">FOOD</a></li>
 
-              @if(isset(Auth::user()->name))
+              @if(isset(Auth::user()->id))
               <li class="nav-item"><a href="cart.html" class="nav-link"><img src="@if(Auth::user()->img != null) {{Auth::user()->img}} @else asset/admin/images/icon/avatar-01.jpg @endif" alt="John Doe" width="30" height="30" /></a>
-               <span ><a href="" class="">hi, {{Auth::user()->name}}</a></span> 
+               <span ><a href="" class="">hi, {{Auth::user()->first_name}}</a></span> 
                <div class="cart-hover profile-user">
                     <div >
                        <div class="select-total">
                           <ul>
-                             <li><a href="">Thông tin cá nhân</a> </li>
-                             <li><a href="">Lịch sử mua hàng</a> </li>
-                             <li><a href="">Giỏ hàng</a> </li>
-                          <li><a href="{{route('logout')}}">Đăng xuất</a> </li>
+                             <li><a href="" class="dropdown-item">Thông tin cá nhân</a> </li>
+                             <li><a href="" class="dropdown-item">Lịch sử mua hàng</a> </li>
+                             <li><a href="" class="dropdown-item">Chi Tiết giỏ hàng</a> </li>
+                             <li><a class="dropdown-item" href="{{ route('logout') }}"> Logout </a></li>
                           </ul>
                        </div>
                     </div>
