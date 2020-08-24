@@ -20,6 +20,39 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123'),
 
         ]);
+        DB::table('users')->insert([
+            'first_name' =>'admin',
+            'last_name' =>'1',
+            'login_name' =>'admin',
+            'groupuser_id' => '1',
+            'permission' => '1',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('123'),
+
+
+        ]);
+        DB::table('users')->insert([
+            'first_name' =>'shop',
+            'last_name' =>'2',
+            'login_name' =>'shop',
+            'groupuser_id' => '2',
+            'permission' => '2',
+            'email' => 'shop@gmail.com',
+            'password' => Hash::make('123'),
+
+
+        ]);
+        DB::table('users')->insert([
+            'first_name' =>'customer',
+            'last_name' =>'3',
+            'login_name' =>'customer',
+            'groupuser_id' => '3',
+            'permission' => '3',
+            'email' => 'customer@gmail.com',
+            'password' => Hash::make('123'),
+
+        ]);
+
 
     }
 }

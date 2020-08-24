@@ -9,9 +9,11 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
+    {{-- <link href="//cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"> --}}
     <link rel="stylesheet" href="asset/customer/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="asset/customer/css/animate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     
     <link rel="stylesheet" href="asset/customer/css/owl.carousel.min.css">
     <link rel="stylesheet" href="asset/customer/css/owl.theme.default.min.css">
@@ -73,27 +75,7 @@
                         <div class="select-items">
                            <table>
                               <tbody>
-                                 @if (Session::has("Cart") != null)
-                                 @foreach (Session::get("Cart")->products as $item)
-                                 <tr>
-                                    <td class="si-pic"><img
-                                       src="{{$item['productInfo']->img}}"
-                                       width="60" height="60" alt=""></td>
-                                    <td class="si-text">
-                                       <div class="product-selected">
-                                          <p>{{ number_format($item['productInfo']->price).' '.'VNĐ'}}
-                                             x {{$item['quanty']}}
-                                          </p>
-                                          <h6>{{$item['productInfo']->name}}</h6>
-                                       </div>
-                                    </td>
-                                    <td class="si-close">
-                                       <i class="far fa-trash-alt"
-                                          data-id="{{$item['productInfo']->id}}"></i>
-                                    </td>
-                                 </tr>
-                                 @endforeach
-                                 @endif
+                                 
                               </tbody>
                            </table>
                         </div>
@@ -117,27 +99,7 @@
                      <div class="select-items">
                         <table>
                            <tbody>
-                              @if (Session::has("Cart") != null)
-                              @foreach (Session::get("Cart")->products as $item)
-                              <tr>
-                                 <td class="si-pic"><img
-                                    src="{{$item['productInfo']->img}}"
-                                    width="60" height="60" alt=""></td>
-                                 <td class="si-text">
-                                    <div class="product-selected">
-                                       <p>{{ number_format($item['productInfo']->price).' '.'VNĐ'}}
-                                          x {{$item['quanty']}}
-                                       </p>
-                                       <h6>{{$item['productInfo']->name}}</h6>
-                                    </div>
-                                 </td>
-                                 <td class="si-close">
-                                    <i class="far fa-trash-alt"
-                                       data-id="{{$item['productInfo']->id}}"></i>
-                                 </td>
-                              </tr>
-                              @endforeach
-                              @endif
+                           
                            </tbody>
                         </table>
                      </div>
@@ -156,7 +118,7 @@
               </li>
               <li class="nav-item"><a href="{{route('food')}}" class="nav-link">FOOD</a></li>
 
-              @if(isset(Auth::user()->id))
+              @if(isset(Auth::user()->id)&& Auth::user()->permission ==3)
               <li class="nav-item"><a href="cart.html" class="nav-link"><img src="@if(Auth::user()->img != null) {{Auth::user()->img}} @else asset/admin/images/icon/avatar-01.jpg @endif" alt="John Doe" width="30" height="30" /></a>
                <span ><a href="" class="">hi, {{Auth::user()->first_name}}</a></span> 
                <div class="cart-hover profile-user">
@@ -178,48 +140,55 @@
               @else 
             <li class="nav-item"><a href="{{route('login.form')}}" class="nav-link">Login</a></li>
               @endif
-              <li class="nav-item"><a href="cart.html" class="nav-link"><i class="icon-shopping_cart"></i><span>0</span></a>
-                <div class="cart-hover">
-                    <div id="change-item-cart">
-                       <div class="select-items">
+              <li class="nav-item"><a href="{{route('cart')}}" class="nav-link"><i class="icon-shopping_cart"></i>
+                            @if (Session::has("Cart") != null)
+                                <span id="QuantyCartShow">{{Session::get("Cart")->totalQuanty}}</span>
+                            @else
+                                <span id="QuantyCartShow">0</span>
+                            @endif
+                           </a>
+               <div class="cart-hover">
+                  <div id="change-item-cart">
+                      <div class="select-items">
                           <table>
-                             <tbody>
-                                @if (Session::has("Cart") != null)
-                                @foreach (Session::get("Cart")->products as $item)
-                                <tr>
-                                   <td class="si-pic"><img
-                                      src="{{$item['productInfo']->img}}"
-                                      width="60" height="60" alt=""></td>
-                                   <td class="si-text">
-                                      <div class="product-selected">
-                                         <p>{{ number_format($item['productInfo']->price).' '.'VNĐ'}}
-                                            x {{$item['quanty']}}
-                                         </p>
-                                         <h6>{{$item['productInfo']->name}}</h6>
-                                      </div>
-                                   </td>
-                                   <td class="si-close">
-                                      <i class="far fa-trash-alt"
-                                         data-id="{{$item['productInfo']->id}}"></i>
-                                   </td>
-                                </tr>
-                                @endforeach
-                                @endif
-                             </tbody>
+                              <tbody>
+                              @if (Session::has("Cart") != null)
+                                  @foreach (Session::get("Cart")->food as $item)
+                                      <tr>
+                                          <td class="si-pic"><img
+                                                  src="asset/customer/images/product-1.jpg"
+                                                  width="60" height="60" alt=""></td>
+                                          <td class="si-text">
+                                              <div class="food-selected">
+                                                  <p>{{ number_format($item['foodInfo']->price).' '.'VNĐ'}}
+                                                      x {{$item['quanty']}}
+                                                  </p>
+                                                  <h6>{{$item['foodInfo']->name}}</h6>
+                                              </div>
+                                          </td>
+                                          <td class="si-close">
+                                              <i class="far fa-trash-alt"
+                                                 data-id="{{$item['foodInfo']->id}}"></i>
+                                          </td>
+                                      </tr>
+                                  @endforeach
+                              @endif
+                              </tbody>
                           </table>
-                       </div>
-                       <div class="select-total">
+                      </div>
+                      <div class="select-total">
                           <span>total:</span>
                           @if (Session::has("Cart") != null)
-                          <h5>{{ number_format(Session::get("Cart")->totalPrice).' '.'VNĐ'}}</h5>
+                              <h5>{{ number_format(Session::get("Cart")->totalPrice).' '.'VNĐ'}}</h5>
                           @endif
-                       </div>
-                    </div>
-                    <div class="select-button">
-                       <a href="" class="primary-btn view-card">VIEW CARD</a>
-                       <a href="" class="primary-btn checkout-btn">CHECK OUT</a>
-                    </div>
-                 </div>
+                      </div>
+                  </div>
+
+                  <div class="select-button">
+                      <a href="{{route("cart")}}" class="primary-btn view-card">VIEW CARD</a>
+                      <a href="" class="primary-btn checkout-btn">CHECK OUT</a>
+                  </div>
+              </div>
               </li>
              
               

@@ -43,11 +43,11 @@
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
-                                <img src="../asset/admin/images/icon/logo_shop.png" alt="CoolAdmin">
+                                <img src="../asset/admin/images/icon/logo_admin.png" alt="CoolAdmin">
                             </a>
                         </div>
                         <div class="login-form">
-                            <form  action="{{route('loginShop')}}" method="post">
+                            <form  action="{{route('loginAdmin')}}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label>Email or Login name</label>
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="*******">
+                                    <input class="au-input au-input--full" type="password" name="password" placeholder="******">
                                 </div>
                                 {{-- <div class="login-checkbox">
                                     <label>

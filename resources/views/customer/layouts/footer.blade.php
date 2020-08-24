@@ -106,14 +106,24 @@
   <script src="asset/customer/js/owl.carousel.min.js"></script>
   <script src="asset/customer/js/jquery.magnific-popup.min.js"></script>
   <script src="asset/customer/js/aos.js"></script>
+  <script src="asset/customer/js/cart.js"></script>
   <script src="asset/customer/js/jquery.animateNumber.min.js"></script>
   <script src="asset/customer/js/bootstrap-datepicker.js"></script>
   <script src="asset/customer/js/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="asset/customer/js/google-map.js"></script>
   <script src="asset/customer/js/main.js"></script>
-  {{-- <script src="asset/admin/js/main.js"></script> --}}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  {{-- <script src="sweetalert2.all.min.js"></script> --}}
+  <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    {{-- <script src="asset/admin/js/main.js"></script> --}}
   <script src="https://kit.fontawesome.com/2785f0239d.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+  <!-- Semantic UI theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+  <!-- Bootstrap theme -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
     
   </body>
 </html>
