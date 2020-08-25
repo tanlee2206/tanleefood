@@ -88,4 +88,8 @@ class FoodController extends Controller
         $food = Food::paginate(12);
         return view('customer.pages.food',compact('food'));
     }
+    public function showHome()
+    {
+        $food = Food::all()->take(10);
+    }
 }

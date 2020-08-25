@@ -52,15 +52,13 @@ Route::get('/UpdateItemListCart/{id}/{quanty}', 'CartController@UpdateItemListCa
 
 
 
-Route::get('/', function () {
-    return view('customer.index');
-})->name('home');
+Route::get('/','HomeController@index' )->name('home');
 Route::get('/admin', function () {
     return view('admin.index');
-})->middleware('adminMiddleware');
+})->middleware('adminMiddleware')->name('admin');
 Route::get('/shop', function () {
     return view('shop.index');
-})->middleware('shopMiddleware');
+})->middleware('shopMiddleware')->name('shop');
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

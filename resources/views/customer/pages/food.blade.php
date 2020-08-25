@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 
-<div class="hero-wrap hero-bread" style="background-image: url('asset/customer/images/bg_1.jpg');">
+<div class="hero-wrap hero-bread" style="background-image: url('asset/customer/images/bg_4.jpg');">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
@@ -26,6 +26,11 @@
                     <li><a href="#">Fruits</a></li>
                     <li><a href="#">Juice</a></li>
                     <li><a href="#">Dried</a></li>
+                    <li><a href="#">Vegetables</a></li>
+                    <li><a href="#">Fruits</a></li>
+                    <li><a href="#">Juice</a></li>
+                    <li><a href="#">Dried</a></li>
+                 
                 </ul>
             </div>
         </div>
@@ -33,7 +38,7 @@
             @foreach ($food as $item)     
             <div class="col-md-6 col-lg-3 ftco-animate">
                 <div class="product">
-                    <a href="#" class="img-prod"><img class="img-fluid" src="asset/customer/images/product-1.jpg"
+                <a href="#" class="img-prod"><img class="img-fluid" src="{{$item->img}}"
                             alt="Colorlib Template">
                         <span class="status">30%</span>
                         <div class="overlay"></div>

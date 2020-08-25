@@ -8316,6 +8316,7 @@ li.nav-item .cart-hover {
 	-o-transition: all 0.5s;
   transition: all 0.5s;
   box-shadow: 5px 10px  5px #aaaaaa;
+  box-sizing: inherit;
 }
 
 li.nav-item .cart-hover .select-items table {
@@ -8383,7 +8384,9 @@ li.nav-item .cart-hover .select-items  h5 {
 	color: #e7ab3c;
 	text-align: right;
 }
-
+.cart-hover img{
+  border-radius: 0%;
+}
 li.nav-item .cart-hover .select-button .view-card {
 	font-size: 12px;
 	letter-spacing: 2px;

@@ -68,32 +68,9 @@
                   
                </li>
                <li class="nav-item active"><a href="{{route('home')}}" class="nav-link">Home</a></li>
-               <li class="nav-item dropdown">
-                   <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-                   <div class="cart-hover">
-                     <div >
-                        <div class="select-items">
-                           <table>
-                              <tbody>
-                                 
-                              </tbody>
-                           </table>
-                        </div>
-                        <div class="select-total">
-                           <span>total:</span>
-                           @if (Session::has("Cart") != null)
-                           <h5>{{ number_format(Session::get("Cart")->totalPrice).' '.'VNĐ'}}</h5>
-                           @endif
-                        </div>
-                     </div>
-                     <div class="select-button">
-                        <a href="" class="primary-btn view-card">VIEW CARD</a>
-                        <a href="" class="primary-btn checkout-btn">CHECK OUT</a>
-                     </div>
-                  </div>
-              </li>
+               
 	          
-              <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a>
+              <li class="nav-item"><a href="" class="nav-link">Blog</a>
                <div class="cart-hover ">
                   <div >
                      <div class="select-items">
@@ -116,6 +93,7 @@
                   </div>
                </div>
               </li>
+              <li class="nav-item"><a href="{{route('shop')}}" class="nav-link">Shop</a></li>
               <li class="nav-item"><a href="{{route('food')}}" class="nav-link">FOOD</a></li>
 
               @if(isset(Auth::user()->id)&& Auth::user()->permission ==3)
@@ -156,14 +134,15 @@
                                   @foreach (Session::get("Cart")->food as $item)
                                       <tr>
                                           <td class="si-pic"><img
-                                                  src="asset/customer/images/product-1.jpg"
+                                          src="{{$item['foodInfo']->img}}"
                                                   width="60" height="60" alt=""></td>
                                           <td class="si-text">
                                               <div class="food-selected">
-                                                  <p>{{ number_format($item['foodInfo']->price).' '.'VNĐ'}}
-                                                      x {{$item['quanty']}}
-                                                  </p>
+                                                  
                                                   <h6>{{$item['foodInfo']->name}}</h6>
+                                                  <p>{{ number_format($item['foodInfo']->price).' '.'VNĐ'}}
+                                                   x {{$item['quanty']}}
+                                               </p>
                                               </div>
                                           </td>
                                           <td class="si-close">
@@ -183,6 +162,7 @@
                           @endif
                       </div>
                   </div>
+                  
 
                   <div class="select-button">
                       <a href="{{route("cart")}}" class="primary-btn view-card">VIEW CARD</a>
