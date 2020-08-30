@@ -25,7 +25,7 @@ return [
     | If both options are set to false, then shared folder will be activated.
     |
      */
-    
+    'base_directory' => 'storage',
 
     'allow_private_folder'     => true,
 
