@@ -51,14 +51,30 @@ Route::get('/DeleteItemListCart/{id}', 'CartController@DeleteItemListCart');
 Route::get('/UpdateItemListCart/{id}/{quanty}', 'CartController@UpdateItemListCart');
 
 
+Route::group(['prefix'=>'shop', 'middleware'=> 'shopMiddleware'],function(){
+	Route::view('/', 'shop.index')->name('shop');
+	Route::resource('food','FoodController');
+	Route::resource('orders','OrdersController')->names([
+		'index' => 'orders.list'
+	]);
+
+});
+
+
+Route::group(['prefix' => 'laravel-filemanager'], function () {
+	\UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
+
 
 Route::get('/','HomeController@index' )->name('home');
 Route::get('/admin', function () {
     return view('admin.index');
 })->middleware('adminMiddleware')->name('admin');
-Route::get('/shop', function () {
-    return view('shop.index');
-})->middleware('shopMiddleware')->name('shop');
+
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/voice', function () {
+    return view('voice');
+});

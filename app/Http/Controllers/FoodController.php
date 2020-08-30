@@ -14,7 +14,8 @@ class FoodController extends Controller
      */
     public function index()
     {
-        //
+        $food = Food::all();
+        return view('shop.pages.food.list',compact('food'));
     }
 
 
@@ -25,7 +26,7 @@ class FoodController extends Controller
      */
     public function create()
     {
-        //
+        return view('shop.pages.food.add');
     }
 
     /**

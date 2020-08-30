@@ -35,6 +35,7 @@ class UserSeeder extends Seeder
             'first_name' =>'shop',
             'last_name' =>'2',
             'login_name' =>'shop',
+            'address' => '3/2, phường xuân khánh, quận Ninh kiều Tp cân Thơ',
             'groupuser_id' => '2',
             'permission' => '2',
             'email' => 'shop@gmail.com',

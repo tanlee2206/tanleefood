@@ -2,7 +2,7 @@
 </div>
 
 </div>
-
+<base href="{{asset('') }}" />
 <!-- Jquery JS-->
 <script src="asset/admin/vendor/jquery-3.2.1.min.js"></script>
 <!-- Bootstrap JS-->
@@ -22,6 +22,14 @@
 <script src="asset/admin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
 <script src="asset/admin/vendor/chartjs/Chart.bundle.min.js"></script>
 <script src="asset/admin/vendor/select2/select2.min.js">
+</script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#bootstrap-data-table').DataTable();
+        $('div.dataTables_info').html('');
+    } );
 </script>
 
 <!-- Main JS-->

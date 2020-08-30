@@ -5,5 +5,6 @@
 @endsection
 
 @section('content')
+
 	@include('shop.pages.dashboard.dashboard')
 @endsection
