@@ -1,7 +1,7 @@
 @extends('customer.layouts.master')
 
 @section('title')
-		FOOD
+		SHOP
 @endsection
 @section('content')
 
@@ -9,8 +9,8 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
-                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span></p>
-                <h1 class="mb-0 bread">Products</h1>
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>shop</span></p>
+                <h1 class="mb-0 bread">shop</h1>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="row">
-            @foreach ($food as $item)     
+            @foreach ($shop as $item)     
             <div class="col-md-6 col-lg-3 ftco-animate">
                 <div class="product">
                 <a href="#" class="img-prod"><img class="img-fluid" src="{{$item->img}}"
@@ -39,7 +39,7 @@
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">
-                    <h3><a href="#">{{$item->name}}</a></h3>
+                    <h3><a href="#">{{$item->user->first_name}}</a></h3>
                         <div class="d-flex">
                             <div class="">
                                 <p class="">{!! Str::limit($item->description,26) !!}</p>
@@ -48,10 +48,10 @@
                         <div class="d-flex">
                             <div class="pricing">
                                 <p class="price"><span class="mr-2 price-dc">$120.00</span><span
-                                        class="price-sale">{{$item->price}} vnd</span></p>
+                                        class="price-sale">{{$item->address_id}} vnd</span></p>
                             </div>
                         </div>
-                        <div class="bottom-area d-flex px-3">
+                        {{-- <div class="bottom-area d-flex px-3">
                             <div class="m-auto d-flex">
                                 <a href="#"
                                     class="add-to-cart d-flex justify-content-center align-items-center text-center">
@@ -64,7 +64,7 @@
                                     <span><i class="ion-ios-heart"></i></span>
                                 </a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                         <li><a href="#">5</a></li>
                         <li><a href="#">&gt;</a></li>
                     </ul> --}}
-                    {{$food->links()}}
+                    {{$shop->links()}}
                 </div>
             </div>
         </div>

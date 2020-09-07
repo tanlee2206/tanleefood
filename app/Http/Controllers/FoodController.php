@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\Food;
+use App\Shop;
+use App\Category;
 use Illuminate\Http\Request;
 
 class FoodController extends Controller
@@ -14,7 +16,10 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $food = Food::all();
+
+        $shop = Shop::where('shop.user_id', Auth::user()->id)->first();
+        $food = Food::where('food.shop_id', $shop->id)->get();
+        // dd($food);
         return view('shop.pages.food.list',compact('food'));
     }
 
@@ -26,7 +31,8 @@ class FoodController extends Controller
      */
     public function create()
     {
-        return view('shop.pages.food.add');
+        $category = Category::all();   
+        return view('shop.pages.food.add', compact('category'));
     }
 
     /**
@@ -37,7 +43,37 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            // Validate the max number of characters to avoid database truncation
+            'name' => ['required', 'string', 'max:100','min:5'],
+            'price' => ['required', 'integer'],
+            'description' => ['required', 'min:20'],
+            'img' => ['required'],
+            // The user should select at least one category
+            'category_id' => ['required', 'array', 'min:1'],
+            'category_id.*' => ['required', 'integer', 'exists:category,id'],
+        ],[
+            'name.required'=>'Bạn chưa nhập tên món ăn',
+            'name.min'=>'Tên sản phẩm phải có độ dài từ 5 đến 100 ký tự',
+            'name.max'=>'Tên sản phẩm phải có độ dài từ 5 đến 100 ký tự',
+            'price.required'=>'Bạn chưa nhập giá',
+            'img.required'=>'Bạn chọn hình ảnh',
+            'price.integer'=>'giá phải là kiểu số',
+            'category_id.required'=>'Bạn chưa chọn danh mục món ăn',
+            'description.required'=> 'Bạn chưa nhập miêu tả'
+        ]
+        );
+        $shop = Shop::where('shop.user_id', Auth::user()->id)->first();
+        $food = new Food();
+        $food->name = $request->name;
+        $food->description = $request->description;
+        $food->img = $request->img;
+        $food->shop_id = $shop->id;
+        $food->price = $request->price;
+        $food->save();
+        $food->category()->attach($request->category_id);
+        
+        return redirect()->route('food.index');
     }
 
     /**
@@ -87,10 +123,19 @@ class FoodController extends Controller
     public function showlist()
     {
         $food = Food::paginate(12);
-        return view('customer.pages.food',compact('food'));
+        $category = Category::all();
+
+        return view('customer.pages.food',compact('food','category'));
     }
     public function showHome()
     {
         $food = Food::all()->take(10);
+    }
+    public function detailfood(Request $request, $id){
+        if ($request->ajax()) {
+            $food_detail = Food::where('id',$id)->first();
+            $html = view('shop.pages.food.food_detail', compact('food_detail'))->render();
+            return \response()->json($html);
+        }
     }
 }

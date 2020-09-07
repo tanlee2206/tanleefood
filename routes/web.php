@@ -32,18 +32,19 @@ Route::get("/admin/logout", function(){
 	return redirect('/admin/login');
 })->name('logoutAdmin');
 
-Route::get('/shop/login',   'ShopController@getLogin')->name('loginShop.form');
-Route::post('/shop/login',   'ShopController@postLogin')->name('loginShop');
+Route::get('/shop-manager/login',   'ShopController@getLogin')->name('loginShop.form');
+Route::post('/shop-manager/login',   'ShopController@postLogin')->name('loginShop');
 
-Route::get("/shop/logout", function(){
+Route::get("/shop-manager/logout", function(){
 	Auth::logout();
-	return redirect('/shop/login');
+	return redirect('/shop-manager/login');
 })->name('logoutShop');
 /*
 show food
 
 */
 Route::get('/food', 'FoodController@showlist')->name('food');
+Route::get('/shop', 'ShopController@showlist');
 Route::get('/cart', 'CartController@cart')->name('cart');
 Route::get('/Addcart/{id}', 'CartController@Addcart');
 Route::get('/DeleteItemCart/{id}', 'CartController@DeleteItemCart');
@@ -51,9 +52,10 @@ Route::get('/DeleteItemListCart/{id}', 'CartController@DeleteItemListCart');
 Route::get('/UpdateItemListCart/{id}/{quanty}', 'CartController@UpdateItemListCart');
 
 
-Route::group(['prefix'=>'shop', 'middleware'=> 'shopMiddleware'],function(){
+Route::group(['prefix'=>'shop-manager', 'middleware'=> 'shopMiddleware'],function(){
 	Route::view('/', 'shop.index')->name('shop');
 	Route::resource('food','FoodController');
+	route::get('/detail-food/{id}','FoodController@detailfood')->name('food.detail');
 	Route::resource('orders','OrdersController')->names([
 		'index' => 'orders.list'
 	]);

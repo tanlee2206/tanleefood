@@ -28,6 +28,21 @@
              <a href="{{route('food.index')}}">
                 <i class="fas fa-chart-bar"></i>Menu</a>
              </li>
+             <li class="{{ Route::is('shop-info') ? 'active' : '' }} has-sub">
+               <a class="js-arrow" href="#">
+               <i class="fas fa-tachometer-alt"></i>Shop</a>
+               <ul class="list-unstyled navbar__sub-list js-sub-list">
+                  <li>
+                     <a href="index.html">thông tin</a>
+                  </li>
+                  <li>
+                     <a href="index2.html">Chỉnh sửa</a>
+                  </li>
+                  <li>
+                     <a href="index3.html">Đơn hàng</a>
+                  </li>
+               </ul>
+            </li>
              <li>
                 <a href="table.html">
                 <i class="fas fa-table"></i>Đơn Hàng</a>
@@ -40,6 +55,7 @@
                 <a href="calendar.html">
                 <i class="fas fa-calendar-alt"></i>Khuyến mãi</a>
              </li>
+          
            
           </ul>
        </nav>

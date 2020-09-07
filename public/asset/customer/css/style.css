@@ -8844,11 +8844,15 @@ form:hover .fa{
       text-transform: uppercase; }
 
 .product-category li {
+  margin-bottom: 20px;
   display: inline-block;
+  margin-left: 15px;
   font-weight: 400;
-  font-size: 16px; }
+  font-size: 16px;
+   }
   .product-category li a {
-    color: #82ae46;
+    background: #82ae46;
+    color: #fff;
     padding: 5px 20px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
