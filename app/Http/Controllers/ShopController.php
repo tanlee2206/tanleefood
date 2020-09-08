@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\shop;
+use App\Shop;
 use App\Category;
 
 use Illuminate\Http\Request;
@@ -26,7 +26,7 @@ class ShopController extends Controller
 
     public function showlist()
     {
-        $shop = shop::paginate(12);
+        $shop = Shop::paginate(12);
         $category = Category::all();
 
         return view('customer.pages.shop',compact('shop','category'));
