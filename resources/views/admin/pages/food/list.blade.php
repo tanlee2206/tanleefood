@@ -1,9 +1,8 @@
-@extends('shop.layouts.master')
+@extends('admin.layouts.master')
 
 @section('title')
-		Trang chủ
+Trang chủ
 @endsection
-
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="main-content">
@@ -13,19 +12,13 @@
                 <div class="col-md-12">
                     <div class="overview-wrap">
                         <h2 class="title-1 m-b-25">Bảng món ăn</h2>
-                         <a href="{{route('food.create')}}" class="au-btn au-btn-icon au-btn--blue">
+                    <a href="{{route('food.create')}}" class="au-btn au-btn-icon au-btn--blue">
                             <i class="zmdi zmdi-plus"></i>Thêm món ăn</a>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    @if(session('message'))
-                        <div class="alert alert-success">
-                        {{session('message')}}
-                        </div>
-                     @endif
-
                     <div class="" id="list-food">
                             <table id="bootstrap-data-table" class="table table-shop table-borderless table-striped">
                                 {{-- <table  class="table table-shop table-borderless table-striped"> --}}
@@ -108,6 +101,4 @@
         </div>
     </div>
 </div>
-
-
 @endsection

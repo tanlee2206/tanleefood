@@ -60,6 +60,36 @@ class CategorySeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
 
         ]);
+        DB::table('category')->insert([
+            'name' =>'trà sữa',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+
+        ]);
+        DB::table('category')->insert([
+            'name' =>'bánh mặn',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+
+        ]);
+        DB::table('category')->insert([
+            'name' =>'món nướng',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+
+        ]);
+        DB::table('category')->insert([
+            'name' =>'hải sản',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+
+        ]);
+        DB::table('category')->insert([
+            'name' =>'trái cây',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+
+        ]);
 
 
     }

@@ -14,4 +14,8 @@ class Shop extends Model
         return $this->belongsTo('App\User', 'user_id', 'id');
         
     }
+    public function address()
+    {
+        return $this->hasOne('App\Address');
+    }
 }

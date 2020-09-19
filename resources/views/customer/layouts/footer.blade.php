@@ -1,4 +1,4 @@
-	<section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
+	{{-- <section class="ftco-section ftco-no-pt ftco-no-pb py-5 bg-light">
       <div class="container py-4">
         <div class="row d-flex justify-content-center py-5">
           <div class="col-md-6">
@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-    </section>
+  </section> --}}
     <footer class="ftco-footer ftco-section">
       <div class="container">
       	<div class="row">
@@ -110,13 +110,13 @@
   <script src="asset/customer/js/jquery.animateNumber.min.js"></script>
   <script src="asset/customer/js/bootstrap-datepicker.js"></script>
   <script src="asset/customer/js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="asset/customer/js/google-map.js"></script>
+  {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> --}}
+  {{-- <script src="asset/customer/js/google-map.js"></script> --}}
   <script src="asset/customer/js/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   {{-- <script src="sweetalert2.all.min.js"></script> --}}
   <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
-  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
     {{-- <script src="asset/admin/js/main.js"></script> --}}
   <script src="https://kit.fontawesome.com/2785f0239d.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
@@ -124,6 +124,17 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
   <!-- Bootstrap theme -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
-    
+  <script src="asset/customer/js/jquery.jqZoom.js"></script>
+<script>
+    $(function(){
+        $(".image").jqZoom({
+            selectorWidth: 30,
+            selectorHeight: 30,
+            viewerWidth: 400,
+            viewerHeight: 300
+        });
+
+    })
+</script>
   </body>
 </html>

@@ -11,13 +11,25 @@
           <div class="container">
              <div class="row slider-text justify-content-center align-items-center" data-scrollax-parent="true">
                 <div class="col-md-12 ftco-animate text-center">
-                  <form action="">
+                  {{-- <form action="">
                      <input type="search">
                      <i class="fa fa-search"></i>
-                   </form>
-                   <h1 class="mb-2">We serve Fresh Vegestables &amp; Fruits</h1>
-                   <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2>
-                   <p><a href="#" class="btn btn-primary">View Details</a></p>
+                   </form> --}}
+                  
+                   <h1 class="mb-2">welcome to Tan lee food</h1>
+                   <h2 class="subheading mb-4">We deliver organic vegetables &amp; fruits</h2> 
+                  {{-- <p><a href="#" class="btn btn-primary">View Details</a></p> --}}
+                   <div class="row justify-content-center">
+                     <div class="col-md-10 mb-5 text-center">
+                         <ul class="product-category">
+                             <li><a href="#" class="active">All</a></li>
+                             @foreach ($category as $item) 
+                         <li><a href="#" >{{$item->name}}</a></li>
+                             @endforeach
+                          
+                         </ul>
+                     </div>
+                 </div>
                 </div>
              </div>
           </div>

@@ -40,6 +40,10 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Shop');
     }
+    public function address()
+    {
+        return $this->hasOne('App\Address');
+    }
 
 
 }

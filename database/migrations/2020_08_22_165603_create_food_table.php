@@ -19,7 +19,8 @@ class CreateFoodTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->float('price');
+            $table->double('price');
+            $table->integer('sale')->default(0);
             $table->string('img')->nullable();
             $table->integer('status')->default(1);
             $table->integer('number')->nullable();

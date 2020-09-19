@@ -43,8 +43,15 @@ Route::get("/shop-manager/logout", function(){
 show food
 
 */
+// check slug
+Route::get('pages/check_slug', 'PagesController@check_slug')
+  ->name('pages.check_slug');
+
+
+
 Route::get('/food', 'FoodController@showlist')->name('food');
-Route::get('/shop', 'ShopController@showlist');
+// Route::get('/shop', 'ShopController@showlist')->name('shop.show');
+// Route::get('/shop-single/{shop}', 'ShopController@showShopSingle')->name('shopSingle.show');
 Route::get('/cart', 'CartController@cart')->name('cart');
 Route::get('/Addcart/{id}', 'CartController@Addcart');
 Route::get('/DeleteItemCart/{id}', 'CartController@DeleteItemCart');
@@ -53,12 +60,20 @@ Route::get('/UpdateItemListCart/{id}/{quanty}', 'CartController@UpdateItemListCa
 
 
 Route::group(['prefix'=>'shop-manager', 'middleware'=> 'shopMiddleware'],function(){
-	Route::view('/', 'shop.index')->name('shop');
+	// Route::view('/', 'shop.index')->name('shop');
+	Route::get('/','ShopController@dashboard')->name('shop');
 	Route::resource('food','FoodController');
+	Route::delete('/food','FoodController@destroy');
 	route::get('/detail-food/{id}','FoodController@detailfood')->name('food.detail');
 	Route::resource('orders','OrdersController')->names([
 		'index' => 'orders.list'
 	]);
+
+});
+Route::group(['prefix'=>'admin', 'middleware'=> 'adminMiddleware'],function(){
+	Route::view('/', 'admin.index')->name('admin');
+	route::get('/food','AdminController@showFood')->name('admin.food');
+
 
 });
 
@@ -68,11 +83,18 @@ Route::group(['prefix' => 'laravel-filemanager'], function () {
 });
 
 
+Route::resource('','HomeController');
+// Route::get('/{province}','HomeController@showhome' )->name('showhome');
+Route::group(['prefix'=>'/{province}'],function(){
+	Route::get('/','HomeController@showhome' )->name('showhome');
+	Route::get('/food', 'FoodController@showlist');
+	Route::get('/shop', 'ShopController@showlist')->name('shop.show');
+	Route::get('/shop-single/{shop}', 'ShopController@showShopSingle')->name('shopSingle.show');
 
-Route::get('/','HomeController@index' )->name('home');
-Route::get('/admin', function () {
-    return view('admin.index');
-})->middleware('adminMiddleware')->name('admin');
+});
+// Route::get('/admin', function () {
+//     return view('admin.index');
+// })->middleware('adminMiddleware')->name('admin');
 
 // Auth::routes();
 

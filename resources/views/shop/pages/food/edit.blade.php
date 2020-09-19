@@ -1,7 +1,7 @@
 @extends('shop.layouts.master')
 
 @section('title')
-		Trang chủ
+		Chỉnh sửa món ăn
 @endsection
 
 @section('content')
@@ -10,33 +10,33 @@
         <div class="col-md-10 offset-md-3 mr-auto ml-auto">
             <div class="card">
                 <div class="card-header">
-                    <small> Thêm mới</small>
+                    <small> Chỉnh sửa</small>
                     <strong>Món ăn</strong>
                 </div>
                 <div class="card-body card-block">
                       <div class="row form-group">
                         <div class="col-8">
-                        <form action="{{route('food.store')}}" method="POST" >
+                        <form action="{{route('food.update', $food->id)}}" method="POST" >
                                 @csrf
+                                @method('PUT')
                             <div class="form-group">
                                 <label  class=" form-control-label {{ $errors->has('name') ? ' has-error' : '' }}">Tên món</label>
-                                <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="" class="form-control">
+                                <input type="text" name="name" id="name" value="{{ $food->name }}" placeholder="" class="form-control">
                                 <small class="text-danger">{{ $errors->first('name') }}</small>
                             </div>
                             <div class="form-group">
                                 <label  class=" form-control-label">Slug</label>
-                                <input type="text" name="slug" id="slug" value="{{ old('slug') }}" placeholder="" class="form-control">
+                                <input type="text" name="slug" id="slug" value="{{ $food->slug }}" placeholder="" class="form-control">
                             
                             </div>
-                            
                             <div class="form-group">
                                 <label  class=" form-control-label {{ $errors->has('price') ? ' has-error' : '' }}">Giá</label>
-                                <input type="text" name="price" value="{{ old('price') }}" placeholder="" class="form-control">
+                                <input type="text" name="price" value="{{ $food->price }}" placeholder="" class="form-control">
                                 <small class="text-danger">{{ $errors->first('price') }}</small>
                             </div>
                             <div class="form-group">
                                 <label  class=" form-control-label {{ $errors->has('sale') ? ' has-error' : '' }}">Giảm giá (%)</label>
-                                <input type="text" name="sale" value="{{ old('sale') }}" placeholder="" class="form-control">
+                                <input type="text" name="sale" value="{{ $food->sale }}" placeholder="" class="form-control">
                                 <small class="text-danger">{{ $errors->first('sale') }}</small>
                             </div>
                             <div class=" form-group">
@@ -44,12 +44,17 @@
                                     <label for="select" class=" form-control-label">Danh mục</label>
                          
                                 <div class="{{ $errors->has('category_id') ? ' has-error' : '' }}">
-                                   @if (old("category_id"))
+                                   {{-- @if (old("category_id"))
                                    {{ dd(old("category_id")) }}
-                                   @endif 
+                                   @endif  --}}
                                     <select class="selectpicker form-control" name="category_id[]"  multiple="multiple" data-live-search="true">
                                         @foreach ($category as $category)
-                                          <option value="{{ $category->id }}" {{ (collect(old('category_id'))->contains($category->id)) ? 'selected':'' }} >{{ $category->name }}</option>
+                                          <option value="{{ $category->id }}"
+                                            @if ($category_id != null)
+                                            {{ (collect($category_id)->contains($category->id)) ? 'selected':'' }}
+                                            @endif
+                                             >
+                                             {{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                     <small class="text-danger">{{ $errors->first('category_id') }}</small>
@@ -67,12 +72,12 @@
                                         @if ((old('img') != null))
                                         <img src="{{ old('img') }}" width="250" height="250" alt="">
                                         @else
-                                        <img src="asset/admin/images/image-placeholder.jpg" width="250" height="250" alt="">
+                                        <img src="{{ $food->img }}" width="250" height="250" alt="">
                                         @endif
                                     </div>
                                   </a>
                                 </span>
-                                <input hidden id="thumbnail" class="form-control" value="{{ old('img') }}"  name="img">
+                                <input hidden id="thumbnail" class="form-control" value="{{ $food->img }}"  name="img">
                                 
                               </div>
                               <small class="text-danger">{{ $errors->first('img') }}</small>
@@ -82,8 +87,8 @@
                    
                     <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
                         <label  class=" form-control-label">Mô tả</label>
-                        <textarea class="form-control" id="summary-ckeditor" name="description">
-                            {{ old('description') }}
+                        <textarea class="form-control"  id="summary-ckeditor" name="description">
+                            {{ $food->description }}
                         </textarea>
                         <small class="text-danger">{{ $errors->first('description') }}</small>
                     </div>

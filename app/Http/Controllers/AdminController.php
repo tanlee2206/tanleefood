@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Food;
+use App\Shop;
+use App\Category;
 
 class AdminController extends Controller
 {
@@ -21,4 +25,14 @@ class AdminController extends Controller
             return back()->with('error','không thể đăng nhập');
         }
     }
+    public function showFood()
+    {
+
+       
+        $food = Food::all();
+        // dd($food);
+        return view('admin.pages.food.list',compact('food'));
+    }
+
+    
 }

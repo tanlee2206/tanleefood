@@ -24,7 +24,7 @@ class CreateShopTable extends Migration
             $table->float('rating')->nullable();
             $table->integer('number_rating')->nullable();
             $table->integer('status')->default(1);
-            
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

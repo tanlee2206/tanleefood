@@ -35,7 +35,9 @@
                 <div class="product">
                 <a href="#" class="img-prod"><img class="img-fluid" src="{{$item->img}}"
                             alt="Colorlib Template">
-                        <span class="status">30%</span>
+                         @if ($item->sale > 0)
+                        <span class="blob status">sale {{$item->sale}}%</span>
+                          @endif
                         <div class="overlay"></div>
                     </a>
                     <div class="text py-3 pb-4 px-3 text-center">

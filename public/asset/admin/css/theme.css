@@ -301,7 +301,7 @@ section {
 
 .page-container2 {
     background: #f2f2f2;
-    padding-left: 300px;
+    padding-left: 260px;
 }
 
 @media (max-width: 991px) {
@@ -2126,7 +2126,7 @@ section {
 }
 
 .menu-sidebar2 {
-    width: 300px;
+    width: 260px;
     position: fixed;
     left: 0;
     top: 0;
@@ -2317,7 +2317,7 @@ section {
     z-index: 1001;
     top: 0;
     right: 0;
-    left: 300px;
+    left: 260px;
 }
 
 @media (max-width: 991px) {
@@ -3194,7 +3194,7 @@ section {
 }
 
 .overview-box .icon i {
-    font-size: 60px;
+    font-size: 30px;
     color: #fff;
 }
 
@@ -14820,3 +14820,26 @@ section {
     padding: 0;
     padding-bottom: 1rem;
 }
+.block-27 ul {
+    padding: 0;
+    float: right;
+    margin: 0; }
+.block-27 ul li {
+      display: inline-block;
+      margin-bottom: 4px;
+      font-weight: 400; }
+.block-27 ul li a, .block-27 ul li span {
+        color: #000000;
+        text-align: center;
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        /* border-radius: 50%; */
+        border: 1px solid #e6e6e6;
+        background: #fff; }
+.block-27 ul li.active a, .block-27 ul li.active span {
+        background: #82ae46;
+        color: #fff;
+        border: 1px solid transparent; }
+  

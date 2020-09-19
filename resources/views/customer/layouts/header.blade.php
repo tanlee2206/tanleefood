@@ -4,7 +4,7 @@
     <title> @yield('title')</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+    <base href="{{asset('') }}" />
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
@@ -53,30 +53,55 @@
 		    </div>
 		  </div>
     </div> --}}
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+   <div class="container">
+      <a class="navbar-brand" href="index.html">Tanlee Food</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="oi oi-menu"></span>
+      </button>
       
-	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Tanlee Food</a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
-
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
+      
+      <div class="collapse navbar-collapse" id="ftco-nav">
+         <div class="dropdown" >
+            <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" style="width: 240px;">
+               @if (isset($province_now))
+               {{$province_now->name}}
+               @else 
+               Cần thơ
+               @endif
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu" >
+               @foreach ($province as $province)
+            <li><a href="{{route('showhome',$province->id)}}">{{$province->name}}</a></li>
+                  @foreach ($province->district as $districts)
+                  {{-- <li><a href="#">{{$item->name}}</a></li> --}}
+                     @foreach ($districts->ward as $wards)
+                        @foreach ($wards->address as $item)
+                           
+                        @endforeach
+                     @endforeach
+                  @endforeach
+               @endforeach
               
-               <li class="nav-item">
-                  
-               </li>
-               <li class="nav-item active"><a href="{{route('home')}}" class="nav-link">Home</a></li>
+             
+            </ul>
+          </div>
+         <ul class="navbar-nav ml-auto">
+            <li class="nav-item">  
+                            
+            </li>
+            <li class="nav-item">
                
-	          
-              <li class="nav-item"><a href="" class="nav-link">Blog</a>
+            </li>
+            
+            <li class="nav-item {{ Route::is('showhome') ? 'active' : null }}"><a href="{{route('showhome','1')}}" class="nav-link">Home</a></li>
+            <li class="nav-item">
+               <a href="" class="nav-link">Blog</a>
                <div class="cart-hover ">
                   <div >
                      <div class="select-items">
                         <table>
                            <tbody>
-                           
                            </tbody>
                         </table>
                      </div>
@@ -92,89 +117,99 @@
                      <a href="" class="primary-btn checkout-btn">CHECK OUT</a>
                   </div>
                </div>
-              </li>
-              <li class="nav-item"><a href="{{route('shop')}}" class="nav-link">Shop</a></li>
-              <li class="nav-item"><a href="{{route('food')}}" class="nav-link">FOOD</a></li>
-
-              @if(isset(Auth::user()->id)&& Auth::user()->permission ==3)
-              <li class="nav-item"><a href="cart.html" class="nav-link"><img src="@if(Auth::user()->img != null) {{Auth::user()->img}} @else asset/admin/images/icon/avatar-01.jpg @endif" alt="John Doe" width="30" height="30" /></a>
+            </li>
+           
+            <li class="nav-item"><a href="{{route('shop.show',$province_now->id)}}" class="nav-link {{ Route::is('shop.show') ? 'active' : null }} ">Shop</a></li>
+            {{-- <li class="nav-item"><a href="{{route('food')}}" class="nav-link {{ Route::is('food') ? 'active' : null }}">FOOD</a></li> --}}
+            <li class="nav-item">
+               <a  class="nav-link">Search</a>
+               <div class="cart-hover ">
+                  <div >
+                     <div class="select-items">
+                        <form class="form-inline  my-2 my-lg-0">
+                           <input class="form-control form-search mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                     </div>
+                  
+                  </div>
+               </div>
+            </li>
+            @if(isset(Auth::user()->id)&& Auth::user()->permission ==3)
+            <li class="nav-item">
+               <a href="cart.html" class="nav-link"><img src="@if(Auth::user()->img != null) {{Auth::user()->img}} @else asset/admin/images/icon/avatar-01.jpg @endif" alt="John Doe" width="30" height="30" /></a>
                <span ><a href="" class="">hi, {{Auth::user()->first_name}}</a></span> 
                <div class="cart-hover profile-user">
-                    <div >
-                       <div class="select-total">
-                          <ul>
-                             <li><a href="" class="dropdown-item">Thông tin cá nhân</a> </li>
-                             <li><a href="" class="dropdown-item">Lịch sử mua hàng</a> </li>
-                             <li><a href="" class="dropdown-item">Chi Tiết giỏ hàng</a> </li>
-                             <li><a class="dropdown-item" href="{{ route('logout') }}"> Logout </a></li>
-                          </ul>
-                       </div>
-                    </div>
-                    <div class="select-button">
-                    </div>
-                 </div>
-              </li>
-            
-              @else 
+                  <div >
+                     <div class="select-total">
+                        <ul>
+                           <li><a href="" class="dropdown-item">Thông tin cá nhân</a> </li>
+                           <li><a href="" class="dropdown-item">Lịch sử mua hàng</a> </li>
+                           <li><a href="" class="dropdown-item">Chi Tiết giỏ hàng</a> </li>
+                           <li><a class="dropdown-item" href="{{ route('logout') }}"> Logout </a></li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="select-button">
+                  </div>
+               </div>
+            </li>
+            @else 
             <li class="nav-item"><a href="{{route('login.form')}}" class="nav-link">Login</a></li>
-              @endif
-              <li class="nav-item"><a href="{{route('cart')}}" class="nav-link"><i class="icon-shopping_cart"></i>
-                            @if (Session::has("Cart") != null)
-                                <span id="QuantyCartShow">{{Session::get("Cart")->totalQuanty}}</span>
-                            @else
-                                <span id="QuantyCartShow">0</span>
-                            @endif
-                           </a>
+            @endif
+            <li class="nav-item">
+               <a href="{{route('cart')}}" class="nav-link"><i class="icon-shopping_cart"></i>
+               @if (Session::has("Cart") != null)
+               <span id="QuantyCartShow">{{Session::get("Cart")->totalQuanty}}</span>
+               @else
+               <span id="QuantyCartShow">0</span>
+               @endif
+               </a>
                <div class="cart-hover">
                   <div id="change-item-cart">
-                      <div class="select-items">
-                          <table>
-                              <tbody>
+                     <div class="select-items">
+                        <table>
+                           <tbody>
                               @if (Session::has("Cart") != null)
-                                  @foreach (Session::get("Cart")->food as $item)
-                                      <tr>
-                                          <td class="si-pic"><img
-                                          src="{{$item['foodInfo']->img}}"
-                                                  width="60" height="60" alt=""></td>
-                                          <td class="si-text">
-                                              <div class="food-selected">
-                                                  
-                                                  <h6>{{$item['foodInfo']->name}}</h6>
-                                                  <p>{{ number_format($item['foodInfo']->price).' '.'VNĐ'}}
-                                                   x {{$item['quanty']}}
-                                               </p>
-                                              </div>
-                                          </td>
-                                          <td class="si-close">
-                                              <i class="far fa-trash-alt"
-                                                 data-id="{{$item['foodInfo']->id}}"></i>
-                                          </td>
-                                      </tr>
-                                  @endforeach
+                              @foreach (Session::get("Cart")->food as $item)
+                              <tr>
+                                 <td class="si-pic"><img
+                                    src="{{$item['foodInfo']->img}}"
+                                    width="60" height="60" alt=""></td>
+                                 <td class="si-text">
+                                    <div class="food-selected">
+                                       <h6>{{$item['foodInfo']->name}}</h6>
+                                       <p>{{ number_format($item['foodInfo']->price).' '.'VNĐ'}}
+                                          x {{$item['quanty']}}
+                                       </p>
+                                    </div>
+                                 </td>
+                                 <td class="si-close">
+                                    <i class="far fa-trash-alt"
+                                       data-id="{{$item['foodInfo']->id}}"></i>
+                                 </td>
+                              </tr>
+                              @endforeach
                               @endif
-                              </tbody>
-                          </table>
-                      </div>
-                      <div class="select-total">
-                          <span>total:</span>
-                          @if (Session::has("Cart") != null)
-                              <h5>{{ number_format(Session::get("Cart")->totalPrice).' '.'VNĐ'}}</h5>
-                          @endif
-                      </div>
+                           </tbody>
+                        </table>
+                     </div>
+                     <div class="select-total">
+                        <span>total:</span>
+                        @if (Session::has("Cart") != null)
+                        <h5>{{ number_format(Session::get("Cart")->totalPrice).' '.'VNĐ'}}</h5>
+                        @endif
+                     </div>
                   </div>
-                  
-
                   <div class="select-button">
-                      <a href="{{route("cart")}}" class="primary-btn view-card">VIEW CARD</a>
-                      <a href="" class="primary-btn checkout-btn">CHECK OUT</a>
+                     <a href="{{route("cart")}}" class="primary-btn view-card">VIEW CARD</a>
+                     <a href="" class="primary-btn checkout-btn">CHECK OUT</a>
                   </div>
-              </div>
-              </li>
-             
-              
-
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
+               </div>
+            </li>
+         </ul>
+      </div>
+      
+   </div>
+</nav>
     <!-- END nav -->
