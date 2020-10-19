@@ -57,7 +57,22 @@
             }).done(function(response){
                 $("#list-food").empty();
                 $("#list-food").html(response);
-                $('#bootstrap-data-table').DataTable();
+                $(".js_food_item").click(function(event){
+                    event.preventDefault();
+                    let $this = $(this);
+                    let url = $this.attr('href');
+                    $(".foods-id").text('').text($this.attr('data-id'));
+                    $("#myModalfood").modal('show');
+                    $.ajax({
+                    url: url,
+                    }).done(function(result){
+                        console.log(result);
+                        if (result) {
+                            $("#md_content_food").html('').append(result);
+                        }
+                    });
+                });
+                $('#bootstrap-data-food-table').DataTable();
                 $('div.dataTables_info').html('');
                 Swal.fire({
                     toast: true,
@@ -69,6 +84,7 @@
                     timer: 1500,
                     width: 350,
                 })
+               
             });
         });
     });
@@ -92,10 +108,24 @@
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#bootstrap-data-table').DataTable();
+        $('#bootstrap-data-food-table').DataTable({
+            "language": {
+            "search": "Tìm kiếm",
+            "paginate": {
+                            "next":       "Sau",
+                            "previous":   "Trước"
+                        },
+            "info": "hiển thị _START_ tới _END_ của _TOTAL_ món ăn",
+            "infoEmpty": "không có món ăn hiển thị",
+            "lengthMenu": "_MENU_ món ăn",
+            },
+            
+        });
         $('div.dataTables_info').html('');
+        
     } );
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 

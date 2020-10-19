@@ -73,6 +73,13 @@ Route::group(['prefix'=>'shop-manager', 'middleware'=> 'shopMiddleware'],functio
 Route::group(['prefix'=>'admin', 'middleware'=> 'adminMiddleware'],function(){
 	Route::view('/', 'admin.index')->name('admin');
 	route::get('/food','AdminController@showFood')->name('admin.food');
+	Route::resource('user','UserController');
+	Route::delete('/user','UserController@destroy');
+	Route::resource('shop','ShopController');
+	Route::resource('category','CategoryController');
+	route::get('/detail-user/{id}','UserController@detailuser')->name('user.detail');
+	Route::get('/getdistricts','UserController@getDistricts');
+	Route::get('/getwards','UserController@getWards');
 
 
 });
@@ -89,6 +96,7 @@ Route::group(['prefix'=>'/{province}'],function(){
 	Route::get('/','HomeController@showhome' )->name('showhome');
 	Route::get('/food', 'FoodController@showlist');
 	Route::get('/shop', 'ShopController@showlist')->name('shop.show');
+	Route::get('/shop/{id}', 'ShopController@showlistCategory')->name('shop.showCategory');
 	Route::get('/shop-single/{shop}', 'ShopController@showShopSingle')->name('shopSingle.show');
 
 });

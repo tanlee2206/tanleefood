@@ -72,12 +72,24 @@
                                         @if ((old('img') != null))
                                         <img src="{{ old('img') }}" width="250" height="250" alt="">
                                         @else
-                                        <img src="{{ $food->img }}" width="250" height="250" alt="">
+                                        <img src="
+                                        @if($food->img != null)
+                                        {{ $food->img }}
+                                        @else
+                                        asset/admin/images/image-placeholder.jpg
+                                        @endif
+                                        " width="250" height="250" alt="">
                                         @endif
                                     </div>
                                   </a>
                                 </span>
-                                <input hidden id="thumbnail" class="form-control" value="{{ $food->img }}"  name="img">
+                                <input hidden id="thumbnail" class="form-control" value="
+                                @if($food->img != null)
+                                {{ $food->img }}
+                                @else
+                                asset/admin/images/image-placeholder.jpg
+                                @endif
+                                "  name="img">
                                 
                               </div>
                               <small class="text-danger">{{ $errors->first('img') }}</small>

@@ -19,7 +19,7 @@ class AdminMiddleware
     {
         if(Auth::check()){
             $user = Auth::user();
-            if ($user->permission==1) {
+            if ($user->permission->permission=='admin') {
                 return $next($request);
             }else {
                 return redirect()->route('loginAdmin.form');

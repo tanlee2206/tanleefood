@@ -275,7 +275,7 @@ section {
 /*Page Objects*/
 .page-wrapper {
     overflow: hidden;
-    background: #e5e5e5;
+    background: #f2f2f2;;
     padding-bottom: 8vh;
 }
 
@@ -4363,8 +4363,8 @@ section {
 }
 
 .table-data {
-    height: 472px;
-    overflow-y: auto;
+    margin-left: 20px;
+    margin-right: 50px;
 }
 
 .table-data thead tr td {
@@ -14842,4 +14842,6 @@ section {
         background: #82ae46;
         color: #fff;
         border: 1px solid transparent; }
-  
+.caret{
+    display: none !important;
+}

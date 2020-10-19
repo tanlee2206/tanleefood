@@ -1,7 +1,7 @@
 @if ($food != null)
 <div class="" id="list-food">
-    <table id="bootstrap-data-table" class="table table-shop table-borderless table-striped">
-    {{-- <table  class="table table-shop table-borderless table-striped"> --}}
+    <table id="bootstrap-data-food-table" class="table table-shop table-borderless table-striped">
+        {{-- <table  class="table table-shop table-borderless table-striped"> --}}
         <thead>
             <tr>
                 <th>#</th>
@@ -27,9 +27,9 @@
                         <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
                             <i class="zmdi zmdi-mail-send"></i>
                         </button>
-                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                    <a href="{{route('food.edit',$item->id)}}" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                             <i class="zmdi zmdi-edit"></i>
-                        </button>
+                        </a>
                         <button id="deleteFoodModal" data-toggle="modal" data-target="#deleteModal" data-token="{{ csrf_token() }}"
                              class="item" id="deletefood" data-id="{{ $item->id }}" >
                             <i class="zmdi zmdi-delete"></i>
@@ -42,6 +42,6 @@
             </tr> 
             @endforeach         
         </tbody>
-    </table>
+    </table>  
 </div>
 @endif

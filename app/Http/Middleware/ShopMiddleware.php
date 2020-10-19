@@ -18,7 +18,7 @@ class ShopMiddleware
     {
         if(Auth::check()){
             $user = Auth::user();
-            if ($user->permission==2) {
+            if ($user->permission->permission=='shop') {
                 return $next($request);
             }else {
                 return redirect()->route('loginShop.form');

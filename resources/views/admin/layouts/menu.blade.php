@@ -1,13 +1,13 @@
 <aside class="menu-sidebar2">
     <div class="logo">
-        <a href="#">
+    <a href="{{route('admin')}}">
             <img src="asset/admin/images/icon/logo-white.png" alt="Cool Admin" />
         </a>
     </div>
     <div class="menu-sidebar2__content js-scrollbar1">
         <div class="account2">
-            <div class="image img-cir img-120">
-                <img src="{{Auth::user()->img}}" alt="admin" />
+            <div class="image img-cir">
+                <img src="@if(Auth::user()->img != null) {{Auth::user()->img}} @else asset/admin/images/icon/avatar-01.jpg @endif" width="80" height="80" alt="admin" />
             </div>
             <h4 class="name">{{Auth::user()->first_name}}</h4>
             <a href="#">Sign out</a>
@@ -26,53 +26,64 @@
                             <a href="index.html">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard 1</a>
                         </li>
-                        <li>
-                            <a href="index2.html">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard 2</a>
-                        </li>
-                        <li>
-                            <a href="index3.html">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard 3</a>
-                        </li>
-                        <li>
-                            <a href="index4.html">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard 4</a>
-                        </li>
+                      
                     </ul>
-                </li>
-                <li>
-                    <a href="inbox.html">
-                        <i class="fas fa-chart-bar"></i>Inbox</a>
-                    {{-- <span class="inbox-num">3</span> --}}
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-shopping-basket"></i>eCommerce</a>
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fas fa-trophy"></i>Features
+                        <i class="fas fa-trophy"></i>User
                         <span class="arrow">
                             <i class="fas fa-angle-down"></i>
                         </span>
                     </a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="table.html">
-                                <i class="fas fa-table"></i>Tables</a>
+                            <a href="{{route('user.index')}}">
+                               Danh sách user</a>
                         </li>
                         <li>
-                            <a href="form.html">
-                                <i class="far fa-check-square"></i>Forms</a>
+                        <a href="{{route('user.create')}}">
+                               Thêm mới user</a>
+                        </li>
+                      
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-trophy"></i>Danh mục
+                        <span class="arrow">
+                            <i class="fas fa-angle-down"></i>
+                        </span>
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="{{route('shop.index')}}">
+                                <i class="fas fa-table"></i>Danh sách shop</a>
                         </li>
                         <li>
-                            <a href="calendar.html">
-                                <i class="fas fa-calendar-alt"></i>Calendar</a>
+                            <a href="{{route('shop.create')}}">
+                                <i class="far fa-check-square"></i>Thêm mới</a>
+                        </li>
+                      
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-trophy"></i>Cửa hàng
+                        <span class="arrow">
+                            <i class="fas fa-angle-down"></i>
+                        </span>
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="{{route('category.index')}}">
+                                <i class="fas fa-table"></i>Danh sách category</a>
                         </li>
                         <li>
-                            <a href="map.html">
-                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                            <a href="{{route('category.create')}}">
+                                <i class="far fa-check-square"></i>Thêm mới</a>
                         </li>
+                      
                     </ul>
                 </li>
                 <li class="has-sub">

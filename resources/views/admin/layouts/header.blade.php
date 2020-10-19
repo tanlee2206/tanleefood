@@ -39,6 +39,7 @@
 
 
 <body class="animsition">
+   
     <div class="page-wrapper">
         <!-- MENU SIDEBAR-->
         @include('admin.layouts.menu')
@@ -157,7 +158,7 @@
                 <div class="menu-sidebar2__content js-scrollbar2">
                     <div class="account2">
                         <div class="image img-cir img-120">
-                            <img src="{{Auth::user()->img}}" alt="John Doe" />
+                            <img src="@if(Auth::user()->img != null) {{Auth::user()->img}} @else asset/admin/images/icon/avatar-01.jpg @endif" width="100" height="100" alt="John Doe" />
                         </div>
                         <h4 class="name">{{Auth::user()->first_name}}</h4>
                         <a href="#">Sign out</a>

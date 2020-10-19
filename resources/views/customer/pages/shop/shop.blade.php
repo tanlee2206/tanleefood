@@ -23,14 +23,15 @@
                 <ul class="product-category">
                     <li><a href="#" class="active">All</a></li>
                     @foreach ($category as $item) 
-                <li><a href="#" >{{$item->name}}</a></li>
+                <li><a href="{{URL::to($province_now->id.'/shop/'.$item->id)}}" >{{$item->name}}</a></li>
                     @endforeach
                  
                 </ul>
             </div>
         </div>
         <div class="row">
-            @foreach ($shop as $item)     
+            
+            @foreach ($shop as $item)    
             <div class="col-md-6 col-lg-3 ftco-animate">
                 <div class="product">
                 <a href="{{URL::to($province_now->id.'/shop-single/'.$item->slug)}}" class="img-prod"><img class="img-fluid" src="{{$item->img}}"
@@ -42,13 +43,15 @@
                     <h3><a href="">{{$item->name}}</a></h3>
                         <div class="d-flex">
                             <div class="">
+                                <p class="x">{{$item->address->address_detail}}, {{$item->address->ward->name}},
+                                    {{$item->address->ward->district->name}}, {{$item->address->ward->district->province->name}}</p>
                                 <p class="">{!! Str::limit($item->description,26) !!}</p>
                             </div>
                         </div>
                         <div class="d-flex">
                             <div class="pricing">
-                                <p class="price"><span class="mr-2 price-dc">$120.00</span><span
-                                        class="price-sale">{{$item->address_id}} vnd</span></p>
+                                {{-- <p class="price"><span class="mr-2 price-dc">$120.00</span><span --}}
+                                        {{-- class="price-sale">{{$item->address_id}} vnd</span></p> --}}
                             </div>
                         </div>
                         {{-- <div class="bottom-area d-flex px-3">

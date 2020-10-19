@@ -18,4 +18,8 @@ class Shop extends Model
     {
         return $this->hasOne('App\Address');
     }
+    public function food()
+    {
+        return $this->hasMany('App\Food');
+    }
 }

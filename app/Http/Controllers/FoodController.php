@@ -170,6 +170,7 @@ class FoodController extends Controller
      */
     public function destroy(Request $request)
     {
+        // dd($request);
         Food::findOrFail($request->id)->delete();
         $shop = Shop::where('shop.user_id', Auth::user()->id)->first();
         $food = Food::where('food.shop_id', $shop->id)->get();

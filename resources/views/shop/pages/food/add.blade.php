@@ -44,9 +44,9 @@
                                     <label for="select" class=" form-control-label">Danh mục</label>
                          
                                 <div class="{{ $errors->has('category_id') ? ' has-error' : '' }}">
-                                   @if (old("category_id"))
+                                   {{-- @if (old("category_id"))
                                    {{ dd(old("category_id")) }}
-                                   @endif 
+                                   @endif  --}}
                                     <select class="selectpicker form-control" name="category_id[]"  multiple="multiple" data-live-search="true">
                                         @foreach ($category as $category)
                                           <option value="{{ $category->id }}" {{ (collect(old('category_id'))->contains($category->id)) ? 'selected':'' }} >{{ $category->name }}</option>

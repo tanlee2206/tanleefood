@@ -27,7 +27,7 @@
                      @endif
 
                     <div class="" id="list-food">
-                            <table id="bootstrap-data-table" class="table table-shop table-borderless table-striped">
+                            <table id="bootstrap-data-food-table" class="table table-shop table-borderless table-striped">
                                 {{-- <table  class="table table-shop table-borderless table-striped"> --}}
                                 <thead>
                                     <tr>

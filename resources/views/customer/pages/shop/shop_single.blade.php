@@ -11,7 +11,11 @@
         <div class="col-lg-12 ftco-animate introduce">
           <div class="row">
             <div class="col-lg-5">
+              <div class="box">
+                <span></span>
+                <span></span>
               <div class="grid-wrapper">
+                
                 <div class="grid-item"></div>
                 <div class="grid-item"></div>
                 <div class="grid-item"></div>
@@ -39,6 +43,7 @@
                 <div class="grid-item"></div>
                 <img class="zoom-image " src="{{$shop->img}}" alt="" >
               </div>
+              </div>
             </div>
             <div class="col-lg-7">
               <h2 class="mb-3">{{$shop->name}}</h2>
@@ -62,10 +67,9 @@
               <p>Molestiae cupiditata incidunt rem assumenda evenietlore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
               <div class="tag-widget post-tag-container mb-5 mt-5">
                 <div class="tagcloud">
-                  <a href="#" class="tag-cloud-link">Life</a>
-                  <a href="#" class="tag-cloud-link">Sport</a>
-                  <a href="#" class="tag-cloud-link">Tech</a>
-                  <a href="#" class="tag-cloud-link">Travel</a>
+                  @foreach ($category_name as $item)
+                <a href="#" class="tag-cloud-link">{{$item}}</a>
+                  @endforeach
                 </div>
               </div>
             </div>

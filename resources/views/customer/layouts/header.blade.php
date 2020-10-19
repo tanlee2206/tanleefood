@@ -55,7 +55,29 @@
     </div> --}}
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
-      <a class="navbar-brand" href="index.html">Tanlee Food</a>
+      
+      <a class="navbar-brand" href="index.html">
+         <div class="stage">
+            <div class="wrapper">
+                <div class="slash"></div>
+                <div class="sides">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+                <div class="textx">
+                    <div class="text--backing">tanlee</div>
+                    <div class="text--left">
+                        <div class="inner">tanlee</div>
+                    </div>
+                    <div class="text--right">
+                        <div class="inner">tanlee</div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="oi oi-menu"></span>
       </button>
@@ -63,7 +85,7 @@
       
       <div class="collapse navbar-collapse" id="ftco-nav">
          <div class="dropdown" >
-            <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" style="width: 240px;">
+            <button class="btn btn-success button-city dropdown-toggle" type="button" data-toggle="dropdown" style="width: 240px;">
                @if (isset($province_now))
                {{$province_now->name}}
                @else 
@@ -94,7 +116,7 @@
                
             </li>
             
-            <li class="nav-item {{ Route::is('showhome') ? 'active' : null }}"><a href="{{route('showhome','1')}}" class="nav-link">Home</a></li>
+            <li class="nav-item {{ Route::is('showhome') ? 'active' : null }}"><a href="{{route('showhome','$province_now->id')}}" class="nav-link">Home</a></li>
             <li class="nav-item">
                <a href="" class="nav-link">Blog</a>
                <div class="cart-hover ">
@@ -135,7 +157,7 @@
                   </div>
                </div>
             </li>
-            @if(isset(Auth::user()->id)&& Auth::user()->permission ==3)
+            @if(isset(Auth::user()->id)&& Auth::user()->permission_id ==3)
             <li class="nav-item">
                <a href="cart.html" class="nav-link"><img src="@if(Auth::user()->img != null) {{Auth::user()->img}} @else asset/admin/images/icon/avatar-01.jpg @endif" alt="John Doe" width="30" height="30" /></a>
                <span ><a href="" class="">hi, {{Auth::user()->first_name}}</a></span> 
