@@ -5,12 +5,9 @@
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Login</title>
+    <title>Đăng ký</title>
 
     <!-- Fontfaces CSS-->
     <link href="asset/admin/css/font-face.css" rel="stylesheet" media="all">
@@ -41,49 +38,33 @@
             <div class="container">
                 <div class="login-wrap">
                     <div class="login-content">
-                        @if(session('message'))
-                        <div class="alert alert-warning" role="alert">
-                        {{session('message')}}
-                        </div>
-                         @endif
                         <div class="login-logo">
                             <a href="#">
-                             
-                                <img src="asset/admin/images/icon/logo_customer.png" alt="CoolAdmin">
+                                {{-- <img src="asset/admin/images/icon/logo_customer.png" alt="CoolAdmin"> --}}
+                                <h3 style="font-family: Noto Sans,Arial,sans-serif;">Đăng ký</h3>
                             </a>
                         </div>
                         <div class="login-form">
-                            <form  action="{{route('login')}}" method="post">
+                            <form  action="{{route('register')}}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    {{-- <label>Email hoặc Login name</label> --}}
-                                    <input class="au-input au-input--full" name="email" autocomplete="false" placeholder="email or login name">
+                                    <input class="au-input au-input--full" name="login_name" autocomplete="false" placeholder="tên đăng nhập">
                                 </div>
                                 <div class="form-group">
-                                    {{-- <label>Mật khẩu</label> --}}
-                                    <input class="au-input au-input--full" type="password" autocomplete="false" name="password" placeholder="password">
+                                    <input class="au-input au-input--full" name="email" autocomplete="false" placeholder="email">
                                 </div>
-                                {{-- <div class="login-checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember">Remember Me
-                                    </label>
-                                    <label>
-                                        <a href="#">Forgotten Password?</a>
-                                    </label>
-                                </div> --}}
+                                <div class="form-group">
+                                    <input class="au-input au-input--full" type="password" autocomplete="false" name="password" placeholder="mật khẩu">
+                                </div>
+                                <div class="form-group">
+                                    <input class="au-input au-input--full" type="password" autocomplete="false" name="re_password" placeholder="nhập lại">
+                                </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Đăng nhập</button>
-                                <div class="social-login-content">
-                                    <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">Đăng nhập với facebook</button>
-                                        <button class="au-btn au-btn--block au-btn--blue2 m-b-20">Đăng nhập với twitter</button>
-                                        <button class="au-btn au-btn--block au-btn--red">Đăng nhập với google</button>
-                                    </div>
-                                </div>
                             </form>
                             <div class="register-link">
                                 <p>
-                                    bạn chưa có tài khoản?
-                                <a href="{{route("register.form")}}">Đăng ký ở đây</a>
+                                    bạn đã có tài khoản?
+                                <a href="{{route('login.form')}}">Đăng nhập ở đây</a>
                                 </p>
                             </div>
                         </div>

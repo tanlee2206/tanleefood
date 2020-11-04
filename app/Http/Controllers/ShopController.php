@@ -8,7 +8,9 @@ use Auth;
 use App\Address;
 use App\Ward;
 use App\District;
+use App\User;
 use App\Province;
+
 
 use Illuminate\Http\Request;
 
@@ -34,19 +36,14 @@ class ShopController extends Controller
     {
         $province_now = Province::find($province);
         $province = Province::whereIn('name', ['Thành phố Hà Nội', 'Thành phố Cần Thơ','Thành phố Hồ Chí Minh'])->get();
-        $address_id = [];
+        // dd($province_now->address);
+        // $address_id = [];
+        foreach ($province_now->address as $address) {   
+             $shop_id[] = $address->shop_id;
 
-           foreach ($province_now->district as $district) {
-               foreach ($district->ward as $ward) {
-                 foreach ($ward->address as $address) {
-                    $address_id[] = $address->id;
-                 }
-
-               }  
-           }
-
+        }
     //    $shop_count = Shop::whereIn('shop.address_id',$address_count)->get();
-        $shop = Shop::whereIn('shop.address_id',$address_id)->paginate(8);
+        $shop = Shop::whereIn('shop.id',$shop_id)->paginate(8);
         $category = Category::all();
         //    dd($shop);
         return view('customer.pages.shop.shop',compact('shop','category','province','province_now'));
@@ -55,24 +52,24 @@ class ShopController extends Controller
     {
         $province_now = Province::find($province);
         $province = Province::whereIn('name', ['Thành phố Hà Nội', 'Thành phố Cần Thơ','Thành phố Hồ Chí Minh'])->get();
-        $address_id = [];
+        foreach ($province_now->address as $address) {   
+            $shop_id1[] = $address->shop_id;
 
-           foreach ($province_now->district as $district) {
-               foreach ($district->ward as $ward) {
-                 foreach ($ward->address as $address) {
-                    $address_id[] = $address->id;
-                 }
-
-               }  
-           }
-        
+       }
+    //  dd($shop_id1);
         $category_now = Category::find($id);
         $food=$category_now->food;
-        $shop_id=[];
+        // dd($food);
         foreach ($food as $item) {
-            $shop_id[]= $item->shop_id ; 
+            // if (!in_array($item->shop_id,$shop_id)) {
+            //     $shop_id[]= $item->shop_id ; 
+            // }
+            $shop_id2[]= $item->shop_id ; 
+            
         }
-        $shop = Shop::whereIn('shop.id', $shop_id)->whereIn('shop.address_id',$address_id)->paginate(2);
+        
+        // dd($shop_id2);
+        $shop = Shop::whereIn('shop.id', $shop_id1)->whereIn('shop.id', $shop_id2)->paginate(8);
         // dd($shop);
         // foreach ($category->food->shop as $food) {
         //    echo $food->name;
@@ -87,20 +84,17 @@ class ShopController extends Controller
         $province_now = Province::find($province);
         
         $province = Province::whereIn('name', ['Thành phố Hà Nội', 'Thành phố Cần Thơ','Thành phố Hồ Chí Minh'])->get();
-        $address_id = [];
+    //     foreach ($province_now->address as $address) {   
+    //         $shop_id[] = $address->shop_id;
 
-           foreach ($province_now->district as $district) {
-               foreach ($district->ward as $ward) {
-                 foreach ($ward->address as $address) {
-                    $address_id[] = $address->id;
-                 }
-
-               }  
-           }
+    //    }
         
-        $shop = Shop::where('slug', $slug)->whereIn('address_id', $address_id)->firstOrFail();
+        $shop = Shop::where('slug', $slug)->firstOrFail();
         $shop_id = $shop->id;
         $foods = Food::where('shop_id',$shop_id)->get();
+
+        
+
         $category_name = [];
     
         foreach ($foods as $item) {
@@ -133,16 +127,149 @@ class ShopController extends Controller
         return view('admin.pages.shop.list',compact('shop'));
     }
     public function create(){
+        // $category = Category::all();   
+        $province= Province::all();
+        return view('admin.pages.shop.add', compact('province'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Food  $food
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id){
+         // dd($request);
+         // $this->validate($request, [
+        //     // Validate the max number of characters to avoid database truncation
+        //     'name' => ['required', 'string', 'max:100','min:1'],
+        //     
+        //     'img' => ['required'],
+        //     'address'=>['required', 'string'],
+        //    
+        //     'ward_id'=>['required'],
+        //    
+        //     // The user should select at least one category
+        // ],[
+        //     'name.required'=>'Bạn chưa nhập tên ',
+        //     'name.min'=>'Tên phải có độ dài từ 1 đến 100 ký tự',
+        //     'name.max'=>'Tên phải có độ dài từ 1 đến 100 ký tự',
+        //     
+        //     'img.required'=>'Bạn chọn hình ảnh',
+        //     'address.required'=>'Bạn chưa nhập địa chỉ chi tiết',
+        //     'ward_id.required'=>'Bạn chưa chọn phường xã',   
+        // ]
+        // );
+        $shop = Shop::find($id);
+        if ($shop->address != null) {
+            $address = Address::find($shop->address->id);
+        }
+        else{
+            $address = new Address();
+        }
+        $shop->slug = $request->slug;
+        $shop->name = $request->name;
+        $shop->cost = $request->cost;
+        $shop->open_time = $request->open_time;
+        $shop->close_time = $request->close_time;
+        $shop->description = $request->description;
+        $shop->img = $request->img;
+        $shop->save();
+        
+
+        $address->ward_id = $request->ward_id;
+        $address->shop_id = $shop->id;
+        $address->address_detail = $request->address;
+        
+        $address->save();  
+        return redirect()->route('shop.index')->with('message', 'thêm mới thành công!');
+        
         
     }
-    public function update(){
+    public function store(Request $request){
+        // dd($request);
+         // $this->validate($request, [
+        //     // Validate the max number of characters to avoid database truncation
+        //     'name' => ['required', 'string', 'max:100','min:1'],
+        //     'user_name' => ['required', 'string', 'max:100','min:1'],
+        //     'img' => ['required'],
+        //     'address'=>['required', 'string'],
+        //     'email'=>['required', 'email'],
+        //     'ward_id'=>['required'],
+        //     'password'=>'required|min:3|max:20',
+        //     're_password'=>'required|same:password',
+        //     // The user should select at least one category
+        // ],[
+        //     'name.required'=>'Bạn chưa nhập tên ',
+        //     'name.min'=>'Tên phải có độ dài từ 1 đến 100 ký tự',
+        //     'name.max'=>'Tên phải có độ dài từ 1 đến 100 ký tự',
+        //     'user_name.required'=>'Bạn chưa nhập họ ',
+        //     'user_name.min'=>'họ phải có độ dài từ 1 đến 100 ký tự',
+        //     'user_name.max'=>'họ phải có độ dài từ 1 đến 100 ký tự',
+        //     'img.required'=>'Bạn chọn hình ảnh',
+        //     'address.required'=>'Bạn chưa nhập địa chỉ chi tiết',
+        //     'ward_id.required'=>'Bạn chưa chọn phường xã',
+        //     'email.required'=>'Bạn chưa nhập email',
+        //     'email.email'=>'không đúng định dạng email',
+            // 'password.required'=>'Bạn chưa password',
+            // 'password.min'=>'password phải có độ dài từ 3 đến 10 kí tự',
+            // 'password.max'=>'password phải có độ dài từ 3 đến 10 kí tự',
+            // 're_password.required'=>'Bạn chưa nhập lại password',
+            // 're_password.same'=>'mật khẩu không khớp',
+                
+            
+        // ]
+        // );
+
+        $user = new User();
+        $address = new Address();
+        $shop = new Shop();
+        $shop->slug = $request->slug;
+        $user->login_name = $request->user_name;
+        $user->password=bcrypt($request->password);
+        $user->email = $request->email;
+        $user->permission_id = 2;
+        $user->save(); 
+
+
+        $shop->name = $request->name;
+        $shop->user_id = $user->id;
+        $shop->cost = $request->cost;
+        $shop->open_time = $request->open_time;
+        $shop->close_time = $request->close_time;
+        $shop->description = $request->description;
+        $shop->img = $request->img;
+        $shop->save();
+        
+
+        $address->ward_id = $request->ward_id;
+        $address->shop_id = $shop->id;
+        $address->address_detail = $request->address;
+        
+        $address->save();  
+        return redirect()->route('shop.index')->with('message', 'thêm mới thành công!');
         
     }
-    public function store(){
-        
+    public function edit($id){
+        $province= Province::all();
+        $shop = Shop::find($id);
+        return view('admin.pages.shop.edit', compact('province','shop'));
     }
-    public function destroy(){
-        
+   
+
+    public function destroy(Request $request){
+        Shop::find($request->id)->delete();
+        $shop = shop::all();
+        // dd($shop);
+        return view('admin.pages.shop.list_ajax',compact('shop'));
+    }
+    public function profile(){
+        $province= Province::all();
+        $shop = Shop::where('user_id',Auth::user()->id)->first();
+        if (isset(Auth::user()->id)) {
+            return view('shop.pages.profile.profile',compact('shop','province'));
+        }
+    //    return view('admin.pages.shop.profile',compact('shop'));
     }
 
 }

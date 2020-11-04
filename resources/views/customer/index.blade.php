@@ -104,92 +104,42 @@
        </div>
     </div>
  </section>
- {{-- <section class="ftco-section ftco-category ftco-no-pt">
-    <div class="container">
-       <div class="row">
-          <div class="col-md-8">
-             <div class="row">
-                <div class="col-md-6 order-md-last align-items-stretch d-flex">
-                   <div class="category-wrap-2 ftco-animate img align-self-stretch d-flex" style="background-image: url(asset/customer/images/category.jpg);">
-                      <div class="text text-center">
-                         <h2>Vegetables</h2>
-                         <p>Protect the health of every home</p>
-                         <p><a href="#" class="btn btn-primary">Shop now</a></p>
-                      </div>
-                   </div>
-                </div>
-                <div class="col-md-6">
-                   <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url(asset/customer/images/category-1.jpg);">
-                      <div class="text px-3 py-1">
-                         <h2 class="mb-0"><a href="#">Fruits</a></h2>
-                      </div>
-                   </div>
-                   <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(asset/customer/images/category-2.jpg);">
-                      <div class="text px-3 py-1">
-                         <h2 class="mb-0"><a href="#">Vegetables</a></h2>
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
-          <div class="col-md-4">
-             <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url(asset/customer/images/category-3.jpg);">
-                <div class="text px-3 py-1">
-                   <h2 class="mb-0"><a href="#">Juices</a></h2>
-                </div>
-             </div>
-             <div class="category-wrap ftco-animate img d-flex align-items-end" style="background-image: url(asset/customer/images/category-4.jpg);">
-                <div class="text px-3 py-1">
-                   <h2 class="mb-0"><a href="#">Dried</a></h2>
-                </div>
-             </div>
-          </div>
-       </div>
-    </div>
- </section> --}}
- <section class="ftco-section">
+ <section class="ftco-section" style="padding-top: 0px;">
     <div class="container">
        <div class="row justify-content-center mb-3 pb-3">
           <div class="col-md-12 heading-section text-center ftco-animate">
-             <span class="subheading">Featured Products</span>
-             <h2 class="mb-4">Our Products</h2>
-             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+             {{-- <span class="subheading">Featured Products</span> --}}
+          <h2 class="mb-4">Cửa hàng ở {{$province_now->name}}</h2>
+             {{-- <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p> --}}
           </div>
        </div>
     </div>
     <div class="container">
        <div class="row">
-         @foreach ($food as $item)  
-          <div class="col-md-6 col-lg-3 ftco-animate">
+         @foreach ($shop as $item)    
+         <div class="col-md-6 col-lg-3 ftco-animate">
              <div class="product">
-                <a href="#" class="img-prod">
-                   <img class="img-fluid" src="{{$item->img}}" alt="Colorlib Template">
-                   <span class="status">30%</span>
-                   <div class="overlay"></div>
-                </a>
-                <div class="text py-3 pb-4 px-3 text-center">
-                   <h3><a href="#">{{$item->name}}</a></h3>
-                   <div class="d-flex">
-                      <div class="pricing">
-                         <p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">{{$item->price}} VND</span></p>
-                      </div>
-                   </div>
-                   <div class="bottom-area d-flex px-3">
-                      <div class="m-auto d-flex">
-                         <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                         <span><i class="ion-ios-menu"></i></span>
-                         </a>
-                         <a onclick="AddCart({{$item->id}})" href="javascript:" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                         <span><i class="ion-ios-cart"></i></span>
-                         </a>
-                         <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                         <span><i class="ion-ios-heart"></i></span>
-                         </a>
-                      </div>
-                   </div>
-                </div>
+             <a href="{{URL::to($province_now->id.'/shop-single/'.$item->slug)}}" class="img-prod">
+                 <img class="img-fluid" src="@if($item->img != null) {{$item->img}} @else asset/admin/images/image-placeholder.jpg @endif"
+                         alt="Colorlib Template">
+                     <span class="status">30%</span>
+                     <div class="overlay"></div>
+                 </a>
+                 <div class="text py-3 pb-4 px-3 text-center">
+                 <h3><a href="">{{$item->name}}</a></h3>
+                     <div class="d-flex">
+                         <div class="">
+                             {{-- <p class="x">{!! $item->address->address_detail !!}, {{$item->address->ward->name}},
+                                 {{$item->address->ward->district->name}}, {{$item->address->ward->district->province->name}}</p>
+                             <p class="">{!! Str::limit($item->description,26) !!}</p> --}}
+                             <p>
+                                 {!! $item->address->address_detail !!}
+                             </p>
+                         </div>
+                     </div> 
+                 </div>
              </div>
-          </div>
+         </div>
          @endforeach
        </div>
     </div>

@@ -19,4 +19,8 @@ class Food extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+    public function image_food()
+    {
+        return $this->hasMany(Image_food::class);
+    }
 }

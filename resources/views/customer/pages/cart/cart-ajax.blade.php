@@ -8,7 +8,7 @@
 
                 <tr>
                     {{-- {{$item['foodInfo']->img}} --}}
-                <td class="si-pic"><img src="{{$item['foodInfo']->img}}" width="60" height="60" alt=""></td>
+                <td class="si-pic"><img src="{{$item['image']}}" width="60" height="60" alt=""></td>
                     <td class="si-text">
                         <div class="food-selected">
                         <p>{{ number_format($item['foodInfo']->price).' '.'VNĐ'}} x {{$item['quanty']}}</p>

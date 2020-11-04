@@ -50,7 +50,7 @@
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fas fa-trophy"></i>Danh mục
+                        <i class="fas fa-trophy"></i>Cửa Hàng
                         <span class="arrow">
                             <i class="fas fa-angle-down"></i>
                         </span>
@@ -69,7 +69,7 @@
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fas fa-trophy"></i>Cửa hàng
+                        <i class="fas fa-trophy"></i>Danh mục
                         <span class="arrow">
                             <i class="fas fa-angle-down"></i>
                         </span>
@@ -77,7 +77,7 @@
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
                             <a href="{{route('category.index')}}">
-                                <i class="fas fa-table"></i>Danh sách category</a>
+                                <i class="fas fa-table"></i>Danh Mục</a>
                         </li>
                         <li>
                             <a href="{{route('category.create')}}">

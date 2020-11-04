@@ -22,4 +22,8 @@ class Shop extends Model
     {
         return $this->hasMany('App\Food');
     }
+    public function category()
+    {
+        return $this->hasManyThrough(Category::class, Food::class);
+    }
 }

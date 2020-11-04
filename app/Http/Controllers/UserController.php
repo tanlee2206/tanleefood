@@ -147,7 +147,13 @@ class UserController extends Controller
     {
         //  dd($request);
         $user = User::find($id);
-        $address = Address::find($user->address->id);
+        if ($user->address != null) {
+            $address = Address::find($user->address->id);
+        }
+        else{
+            $address = new Address();
+        }
+       
         // dd($address);
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;

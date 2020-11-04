@@ -34,7 +34,8 @@
             @foreach ($shop as $item)    
             <div class="col-md-6 col-lg-3 ftco-animate">
                 <div class="product">
-                <a href="{{URL::to($province_now->id.'/shop-single/'.$item->slug)}}" class="img-prod"><img class="img-fluid" src="{{$item->img}}"
+                <a href="{{URL::to($province_now->id.'/shop-single/'.$item->slug)}}" class="img-prod">
+                    <img class="img-fluid" src="@if($item->img != null) {{$item->img}} @else asset/admin/images/image-placeholder.jpg @endif"
                             alt="Colorlib Template">
                         <span class="status">30%</span>
                         <div class="overlay"></div>
@@ -43,31 +44,14 @@
                     <h3><a href="">{{$item->name}}</a></h3>
                         <div class="d-flex">
                             <div class="">
-                                <p class="x">{{$item->address->address_detail}}, {{$item->address->ward->name}},
+                                {{-- <p class="x">{!! $item->address->address_detail !!}, {{$item->address->ward->name}},
                                     {{$item->address->ward->district->name}}, {{$item->address->ward->district->province->name}}</p>
-                                <p class="">{!! Str::limit($item->description,26) !!}</p>
+                                <p class="">{!! Str::limit($item->description,26) !!}</p> --}}
+                                <p>
+                                    {!! $item->address->address_detail !!}
+                                </p>
                             </div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="pricing">
-                                {{-- <p class="price"><span class="mr-2 price-dc">$120.00</span><span --}}
-                                        {{-- class="price-sale">{{$item->address_id}} vnd</span></p> --}}
-                            </div>
-                        </div>
-                        {{-- <div class="bottom-area d-flex px-3">
-                            <div class="m-auto d-flex">
-                                <a href="#"
-                                    class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                    <span><i class="ion-ios-menu"></i></span>
-                                </a>
-                                <a onclick="AddCart({{$item->id}})" href="javascript:" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                    <span><i class="ion-ios-cart"></i></span>
-                                </a>
-                                <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                    <span><i class="ion-ios-heart"></i></span>
-                                </a>
-                            </div>
-                        </div> --}}
+                        </div> 
                     </div>
                 </div>
             </div>

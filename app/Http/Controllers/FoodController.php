@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Food;
 use App\Shop;
+use App\Image_food;
 use App\Category;
 use App\Address;
 use App\Ward;
@@ -47,6 +48,7 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $this->validate($request, [
             // Validate the max number of characters to avoid database truncation
             'name' => ['required', 'string', 'max:100','min:5'],
@@ -69,19 +71,40 @@ class FoodController extends Controller
             'description.required'=> 'Bạn chưa nhập miêu tả'
         ]
         );
+
         $shop = Shop::where('shop.user_id', Auth::user()->id)->first();
         $food = new Food();
         $food->name = $request->name;
         $food->description = $request->description;
-        $food->img = $request->img;
+        // $food->img = $request->img;
         $food->slug = $request->slug;
         $food->shop_id = $shop->id;
         $food->price = $request->price;
         $food->sale = $request->sale;
         $food->save();
         $food->category()->attach($request->category_id);
+        $img = new Image_food();
+        $img->path = $request->img;
+        $img->food_id = $food->id;
+        $img->index = 0;
+        $img->save();
+        $img1 = new Image_food();
+        $img1->path = $request->img1;
+        $img1->food_id = $food->id;
+        $img1->index = 1;
+        $img1->save();
+        $img2 = new Image_food();
+        $img2->path = $request->img2;
+        $img2->food_id = $food->id;
+        $img2->index = 2;
+        $img2->save();
+        $img3 = new Image_food();
+        $img3->path = $request->img3;
+        $img3->food_id = $food->id;
+        $img3->index = 3;
+        $img3->save();
         
-        return redirect()->route('food.index')->with('message', 'thêm mới thành công!');
+        
     }
 
     /**
@@ -105,13 +128,17 @@ class FoodController extends Controller
     {
         $category = Category::all(); 
         $food = Food::find($id);
+        $img = Image_food::where('food_id',$id)->where('index',0)->first();
+        $img1 = Image_food::where('food_id',$id)->where('index',1)->first();
+        $img2 = Image_food::where('food_id',$id)->where('index',2)->first();
+        $img3 = Image_food::where('food_id',$id)->where('index',3)->first();
         $category_id=[];
         foreach ($food->category as $item) {
             $category_id[] = $item->id;
         }
         
         // dd($category_id);
-        return view('shop.pages.food.edit', compact('category','food','category_id'));
+        return view('shop.pages.food.edit', compact('category','food','category_id','img','img1','img2','img3'));
     }
 
     /**
@@ -123,6 +150,9 @@ class FoodController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
+        // $img = Image_food::where('food_id',$id)->where('index',1)->first();
+        // dd($img);
         $this->validate($request, [
             // Validate the max number of characters to avoid database truncation
             'name' => ['required', 'string', 'max:100','min:5'],
@@ -150,13 +180,64 @@ class FoodController extends Controller
         $food->category()->detach();
         $food->name = $request->name;
         $food->description = $request->description;
-        $food->img = $request->img;
+        // $food->img = $request->img;
         $food->slug = $request->slug;
         $food->shop_id = $shop->id;
         $food->price = $request->price;
         $food->sale = $request->sale;
         $food->save();
         $food->category()->attach($request->category_id);
+        $img = Image_food::where('food_id',$id)->where('index',0)->first();
+        if ($img != null) {
+            $img->path = $request->img;
+            $img->save();
+        }else{
+            $img = new Image_food();
+            $img->path = $request->img;
+            $img->food_id = $food->id;
+            $img->index = 0;
+            $img->save();
+        }
+
+        $img1 = Image_food::where('food_id',$id)->where('index',1)->first();
+        if ($img1 != null) {
+            $img1->path = $request->img1;
+            $img1->save();
+        }else{
+            $img1 = new Image_food();
+            $img1->path = $request->img1;
+            $img1->food_id = $food->id;
+            $img1->index = 1;
+            $img1->save();
+        }
+
+        $img2 = Image_food::where('food_id',$id)->where('index',2)->first();
+        if ($img2 != null) {
+            $img2->path = $request->img2;
+            $img2->save();
+        }else{
+            $img2 = new Image_food();
+            $img2->path = $request->img2;
+            $img2->food_id = $food->id;
+            $img2->index = 2;
+            $img2->save();
+        }
+
+        $img3 = Image_food::where('food_id',$id)->where('index',3)->first();
+        if ($img3 != null) {
+            $img3->path = $request->img3;
+            $img3->save();
+        }else{
+            $img3 = new Image_food();
+            $img3->path = $request->img3;
+            $img3->food_id = $food->id;
+            $img3->index = 3;
+            $img3->save();
+        }
+        
+
+        
+        
         
         return redirect()->route('food.index')->with('message', 'chỉnh sửa thành công!');
         
@@ -197,6 +278,13 @@ class FoodController extends Controller
         if ($request->ajax()) {
             $food_detail = Food::where('id',$id)->first();
             $html = view('shop.pages.food.food_detail', compact('food_detail'))->render();
+            return \response()->json($html);
+        }
+    }
+    public function detailfoodindex(Request $request, $id){
+        if ($request->ajax()) {
+            $food_detail = Food::where('id',$id)->first();
+            $html = view('customer.pages.shop.food_detail', compact('food_detail'))->render();
             return \response()->json($html);
         }
     }

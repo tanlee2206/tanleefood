@@ -45,7 +45,13 @@
                                     <tr>
                                         <td>{{$key + 1}}</td>
                                         <td>{{$item->name}}</td>
-                                        <td><img src="{{$item->img}}" width="80" height="80"></td>
+                                        {{-- {{dd($item->image_food)}} --}}
+                                        <td>@foreach ($item->image_food as $image)
+                                            @if ($image->index == 0)
+                                            <img src="{{$image->path}}" width="80" height="80">
+                                            @endif
+
+                                        @endforeach</td>
                                         <td >{{number_format($item->price,0)}}</td>
                                         <td >{!! Str::limit($item->description,40) !!}</td>
                                         <td>0.9</td>

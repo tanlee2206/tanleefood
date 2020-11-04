@@ -110,7 +110,7 @@
                             <div class="{{ $errors->has('category_id') ? ' has-error' : '' }}">
                           
                                 <select class="form-control" name="districts" id="districts"  style="height: auto;" data-live-search="true">
-                                    <option >quận / huyện</option>
+                                    <option value="">quận / huyện</option>
                                 </select>
                                
                             </div>
@@ -119,7 +119,7 @@
                             <label for="select" class=" form-control-label">Phường / Xã</label>
                             <div class="{{ $errors->has('ward_id') ? ' has-error' : '' }}">
                                 <select class="form-control" name="ward_id" id="wards" style="height: auto;"  data-live-search="true">
-                                    <option >phường/ xã</option>
+                                    <option value="" >phường/ xã</option>
                                 </select>
                                 <small class="text-danger">{{ $errors->first('ward_id') }}</small>
                             </div>

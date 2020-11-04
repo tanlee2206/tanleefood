@@ -28,13 +28,13 @@
                     </div>
                 </td>
                 <td>
-                    @if ($item->permission == 1)
-                    <span class="role admin">admin</span>
-                    @elseif ($item->permission == 2)
-                    <span class="role member">Shop</span>
-                    @elseif ($item->permission == 3)
-                    <span class="role user">Customer</span>
-                    @endif
+                    @if ($item->permission->permission == 'admin')
+                        <span class="role admin">admin</span>
+                        @elseif ($item->permission->permission == 'shop')
+                        <span class="role member">Shop</span>
+                        @elseif ($item->permission->permission == 'customer')
+                        <span class="role user">Customer</span>
+                        @endif
                     
                 </td>
                 <td>

@@ -1,157 +1,198 @@
 @if ($user_detail)
-<h4>{{$user_detail->email}}</h4>
-  
-    {{-- <section class="ftco-section">
-    	<div class="container">
-    		<div class="row">
-    			<div class="col-lg-6 mb-5 ftco-animate">
-					<a href="{{$user_detail->img}}" class="image-popup"><img src="{{$user_detail->img}}" class="img-fluid">
-					</a>
-					<button type="button" class="btn btn-primary btn-lg btn-block">Chỉnh sửa</button>
-					<button type="button" class="btn btn-danger btn-lg btn-block">Xóa</button>
-    			</div>
-    			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
-    				<h3>{{$user_detail->name}}</h3>
-    				<div class="rating d-flex">
-							<p class="text-left mr-4">
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-							</p>
-							<p class="text-left mr-4">
-								<a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
-							</p>
-							<p class="text-left">
-								<a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">bình luận</span></a>
-							</p>
-						</div>
-    				<p class="price"><span>{{number_format($user_detail->price,0)}} VNĐ</span></p>
-					<p>{!! $user_detail->description !!}	</p>
-					<div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
-						
-						<div class="au-inbox-wrap js-inbox-wrap">
-							<div class="au-message js-list-load " >
-								<div class="au-message__noti">
-									
-								</div>
-								<div class="au-message-list"> 
-									<div class="au-message__item ">
-										<div class="au-message__item-inner comment-user">
-											<div class="au-message__item-text">
-												<div class="avatar-wrap">
-													<div class="avatar">
-														<img src="asset/admin/images/icon/avatar-02.jpg" alt="John Smith">
-													</div>
-												</div>
-												<div class="text">
-													<h5 class="name">John Smith</h5>
-													<p>Have sent a photo</p>
-												</div>
-											</div>
-											<div class="au-message__item-time">
-												<span>12 Min ago</span>
-											</div>
-										</div>
-									</div>
-									<div class="au-message__item ">
-										<div class="au-message__item-inner comment-user">
-											<div class="au-message__item-text">
-												<div class="avatar-wrap online">
-													<div class="avatar">
-														<img src="asset/admin/images/icon/avatar-03.jpg" alt="Nicholas Martinez">
-													</div>
-												</div>
-												<div class="text">
-													<h5 class="name">Nicholas Martinez</h5>
-													<p>You are now connected on message</p>
-												</div>
-											</div>
-											<div class="au-message__item-time">
-												<span>11:00 PM</span>
-											</div>
-										</div>
-									</div>
-									<div class="au-message__item">
-										<div class="au-message__item-inner comment-user">
-											<div class="au-message__item-text">
-												<div class="avatar-wrap online">
-													<div class="avatar">
-														<img src="asset/admin/images/icon/avatar-04.jpg" alt="Michelle Sims">
-													</div>
-												</div>
-												<div class="text">
-													<h5 class="name">Michelle Sims</h5>
-													<p>Lorem ipsum dolor sit amet</p>
-												</div>
-											</div>
-											<div class="au-message__item-time">
-												<span>Yesterday</span>
-											</div>
-										</div>
-									</div>
-									<div class="au-message__item">
-										<div class="au-message__item-inner comment-user">
-											<div class="au-message__item-text">
-												<div class="avatar-wrap">
-													<div class="avatar">
-														<img src="asset/admin/images/icon/avatar-05.jpg" alt="Michelle Sims">
-													</div>
-												</div>
-												<div class="text">
-													<h5 class="name">Michelle Sims</h5>
-													<p>Purus feugiat finibus</p>
-												</div>
-											</div>
-											<div class="au-message__item-time">
-												<span>Sunday</span>
-											</div>
-										</div>
-									</div>
-									<div class="au-message__item js-load-item">
-										<div class="au-message__item-inner comment-user">
-											<div class="au-message__item-text">
-												<div class="avatar-wrap online">
-													<div class="avatar">
-														<img src="asset/admin/images/icon/avatar-04.jpg" alt="Michelle Sims">
-													</div>
-												</div>
-												<div class="text">
-													<h5 class="name">Michelle Sims</h5>
-													<p>Lorem ipsum dolor sit amet</p>
-												</div>
-											</div>
-											<div class="au-message__item-time">
-												<span>Yesterday</span>
-											</div>
-										</div>
-									</div>
-									<div class="au-message__item js-load-item">
-										<div class="au-message__item-inner comment-user">
-											<div class="au-message__item-text">
-												<div class="avatar-wrap">
-													<div class="avatar">
-														<img src="asset/admin/images/icon/avatar-05.jpg" alt="Michelle Sims">
-													</div>
-												</div>
-												<div class="text">
-													<h5 class="name">Michelle Sims</h5>
-													<p>Purus feugiat finibus</p>
-												</div>
-											</div>
-											<div class="au-message__item-time">
-												<span>Sunday</span>
-											</div>
-										</div>
-									</div>
-								</div>	
-							</div>
-						</div>
-					</div>
-    			</div>
-    		</div>
-    	</div>
-    </section> --}}
+<style>
+	label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    /* -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; */
+}
+</style>
+<div class="">
+    <div class="row">
+        <div class="col-md-12 offset-md-3 mr-auto ml-auto">
+            <div class="card">
+                <div class="card-header">
+                    <small>Chỉnh sửa</small>
+                    <strong>người dùng</strong>
+                </div>
+                <div class="card-body card-block">
+                      <div class="row form-group">
+                        <div class="col-8">
+                        <form action="" method="POST"  >
+                                @csrf
+                                @method('PUT')
+                            <div class="row">
+                                <div class=" form-group col-lg-12 ">    
+                                    <label for="select" class=" form-control-label">Quyền</label>
+                                    <div class="{{ $errors->has('permission') ? ' has-error' : '' }}">
+                                        <select class="form-control" style="height: auto;" name="permission_id" id="permission" data-live-search="true">
+                                            {{-- @foreach ($permission as $permission)
+                                           
+                                            <option value="{{ $permission->id }}" {{ ($user_detail->permission->id == $permission->id) ? 'selected':'' }} >{{ $permission->permission }}</option>
+                                             @endforeach --}}
+                                                                                          
+                                        </select>
+                                        <small class="text-danger">{{ $errors->first('permission') }}</small>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label  class=" form-control-label {{ $errors->has('first_name') ? ' has-error' : '' }}">first name</label>
+                                    <input type="text" name="first_name" id="first_name" value="{{$user_detail->first_name}}" placeholder="" class="form-control">
+                                    <small class="text-danger">{{ $errors->first('first_name') }}</small>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label  class=" form-control-label {{ $errors->has('last_name') ? ' has-error' : '' }}">last name</label>
+                                    <input type="text" name="last_name" id="last_name" value="{{$user_detail->last_name}}" placeholder="" class="form-control">
+                                    <small class="text-danger">{{ $errors->first('last_name') }}</small>
+                                </div>
+                                <div class="form-group col-lg-12">
+                                    <label  class=" form-control-label {{ $errors->has('login_name') ? ' has-error' : '' }}">Tên đăng nhập</label>
+                                    <input type="text" name="login_name" id="login_name" value="{{ $user_detail->login_name}}" placeholder="" class="form-control">
+                                    <small class="text-danger">{{ $errors->first('login_name') }}</small>
+                                </div>
+                                <div class="form-group col-lg-12">
+                                    <label  class=" form-control-label {{ $errors->has('email') ? ' has-error' : '' }}">email</label>
+                                    <input type="email" name="email" id="email" value="{{  $user_detail->email }}" placeholder="" class="form-control">
+                                    <small class="text-danger">{{ $errors->first('email') }}</small>
+                                </div>
+                            </div>
+
+                            
+                            <div class="form-group">
+                                <label  class=" form-control-label {{ $errors->has('phone') ? ' has-error' : '' }}">Số điện thoại</label>
+                                <input type="text" name="phone" value="{{  $user_detail->phone }}" placeholder="" class="form-control">
+                                <small class="text-danger">{{ $errors->first('phone') }}</small>
+                            </div>
+                           
+                           
+                           
+                        </div>
+                        <div class="col-4 {{ $errors->has('img') ? ' has-error' : '' }}">
+                            <div class="input-group form-group  ">
+                                <span class="input-group-btn">
+                                  <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn">
+                                    <div id="holder" >
+                                        @if ((old('img') != null))
+                                        <img src="{{ old('img') }}" width="250"  alt="">
+                                        @else
+                                        <img src="
+                                        @if($user_detail->img != null)
+                                        {{ $user_detail->img }}
+                                        @else
+                                        asset/admin/images/image-placeholder.jpg
+                                        @endif
+                                        " width="250"  alt="">
+                                        @endif
+                                        
+                                    </div>
+                                  </a>
+                                </span>
+                                <input hidden id="thumbnail" class="form-control" value="
+                                @if($user_detail->img != null)
+                                {{ $user_detail->img }}
+                                @else
+                                asset/admin/images/image-placeholder.jpg
+                                @endif
+                                "  name="img">
+                                
+                              </div>
+                              <small class="text-danger">{{ $errors->first('img') }}</small>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class=" form-group col-lg-4">    
+                            <label for="select" class=" form-control-label">Tỉnh / TP </label>
+                            <div class="{{ $errors->has('category_id') ? ' has-error' : '' }}">
+                                <select class="form-control" style="height: auto;" name="province" id="province" data-live-search="true">
+                                    <option >tỉnh</option>
+{{-- 
+                                    @foreach ($province as $province)
+                                        @if ($user_detail->address != null)
+                                        <option value="{{ $province->id }} "{{ $user_detail->address->ward->district->province->id == $province->id ? 'selected':'' }} >{{ $province->name }}</option>
+                                        @else 
+                                        <option value="{{ $province->id }}" >{{ $province->name }}</option>
+                                        @endif
+
+                                     @endforeach --}}
+                                </select>
+                               
+                            </div>
+                        </div>
+                        <div class=" form-group col-lg-4">    
+                            <label for="select" class=" form-control-label">Quận / Huyện</label>
+                            <div class="{{ $errors->has('category_id') ? ' has-error' : '' }}">
+                                
+                                <select class="form-control" name="districts" id="districts"  style="height: auto;" data-live-search="true">
+                                   @if ($user_detail->address != null)
+                                   <option value="{{  $user_detail->address->ward->district->id}} " selected>{{  $user_detail->address->ward->district->name }}</option>  
+                                   @else 
+                                   <option >quận / huyện</option>  
+                                   @endif
+                                </select>
+                               
+                            </div>
+                        </div>
+                        <div class=" form-group col-lg-4">    
+                            <label for="select" class=" form-control-label">Phường / Xã</label>
+                            <div class="{{ $errors->has('ward_id') ? ' has-error' : '' }}">
+                                <select class="form-control" name="ward_id" id="wards" style="height: auto;"  data-live-search="true">
+                                   @if ($user_detail->address != null)
+                                   <option value="{{ $user_detail->address->ward->id}} " selected>{{  $user_detail->address->ward->name }}</option>
+                                   @else 
+                                   <option >phường/ xã</option>
+                                   @endif
+                                </select>
+                                <small class="text-danger">{{ $errors->first('ward_id') }}</small>
+                            </div>
+                        </div>
+                     </div>
+                   
+                    <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
+                        <label  class=" form-control-label">địa chỉ chi tiết</label>
+                        <textarea class="form-control" id="summary-ckeditor" name="address">
+                            @if ($user_detail->address != null)
+                            {!! $user_detail->address->address_detail !!}
+                            @endif
+                           
+                        </textarea>
+                        <small class="text-danger">{{ $errors->first('address') }}</small>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Submit
+                        </button>
+                        <button type="reset" class="btn btn-danger btn-sm">
+                            <i class="fa fa-ban"></i> Reset
+                        </button>
+                    </div>
+                </form>
+                    
+                </div>
+            </div>
+        </div>
+      </div>
+</div>
+
 
 @endif

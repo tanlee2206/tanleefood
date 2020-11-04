@@ -56,15 +56,23 @@
                     <a href="#"><span class="ion-ios-star-outline"></span></a>
                     <a href="#"><span class="ion-ios-star-outline"></span></a>
                   </p>
-                  <p class="text-left mr-4">
+                  {{-- <p class="text-left mr-4">
                     <a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
                   </p>
                   <p class="text-left">
                     <a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
+                  </p> --}}
+                  
+                  <p class="text-left mr-4">
+                    <i class="fas fa-clock"></i>
+                    {{date("h:i a", strtotime($shop->open_time))}} - {{date("h:i a", strtotime($shop->close_time))}}
+                  </p>
+                  <p class="text-left">
+                    <i class="fas fa-dollar-sign"></i>
+                    {{$shop->cost}}
                   </p>
               </div>
-              <p>Lorem ipsum dot. rro aolore perferendis, enim praesentium omnis, iste doloremque quia officia optio deserunt molestiae voluptates soluta architecto tempora.</p>
-              <p>Molestiae cupiditata incidunt rem assumenda evenietlore amet fugit perspiciatis ipsa, odit. Nesciunt dolor minima esse vero ut ea, repudiandae suscipit!</p>
+            <p>{!!$shop->description !!}</p>
               <div class="tag-widget post-tag-container mb-5 mt-5">
                 <div class="tagcloud">
                   @foreach ($category_name as $item)
@@ -84,6 +92,13 @@
             <div class="col-lg-12 search-panel">
               <form action="#" class="search-form">
                 <div class="row">
+                  <div class="sidebar-box col-lg-5">
+                    <div class="form-group">
+                      <span class="icon ion-ios-search"></span>
+                      <input type="text" id="search" name="search" class="form-control" placeholder="Search...">
+                    <input value="{{$shop->id}}" name="shop_id" hidden>
+                    </div>
+                </div>
                   <div class="sidebar-box col-lg-7">
                     <div class="form-group">
                       <select class="form-control" id="exampleFormControlSelect1">
@@ -95,23 +110,27 @@
                       </select>
                     </div>
                   </div>
-                  <div class="sidebar-box col-lg-5">
-                      <div class="form-group">
-                        <span class="icon ion-ios-search"></span>
-                        <input type="text" class="form-control" placeholder="Search...">
-                      </div>
-                  </div>
+                  
                </div>
               </form>
             </div>
             <div class="col-lg-7" style="padding-left: 0;">
               <div class="food-panel" id="style-5">
-                 <div class="row">
+                 <div class="row" id="menu-food">
                    @foreach ($foods as $item)
                    <div class="col-lg-12 food-panel-item">
                      <div class="row">
                         <div class="shop-single-food__img col-lg-2 zoom-box ">
+                          @if ($item->image_food != null)
+                          @foreach ($item->image_food as $image)
+                              @if ($image->index == 0)
+                              <img src="{{$image->path}}" class="image" width="70" height="70" alt="Image placeholder" >    
+                              @endif
+                          @endforeach
+                          @else
                           <img src="{{$item->img}}" class="image" width="70" height="70" alt="Image placeholder" >
+                          @endif
+                          {{-- <img src="{{$item->img}}" class="image" width="70" height="70" alt="Image placeholder" > --}}
                           @if ($item->sale > 0)
                         <span class="blob btn btn-danger">sale {{$item->sale}}%</span>
                           @endif
@@ -134,10 +153,13 @@
                              @endif
                             
                           </div>
-                           <div type="col-lg-4" class="buy-button">
-                              <a onclick="AddCart({{$item->id}})" href="javascript:" >+</a>
-                             
+                          <div type="col-lg-2" class="eye-button">
+                              <a href="{{route('food.detail_index',$item->id)}}" data-id="{{$item->id}}" class="js_food_detail" title="detail" ><i class="fas fa-eye"></i></a>
                            </div>
+                           <div type="col-lg-2" class="buy-button">
+                              <a onclick="AddCart({{$item->id}})" href="javascript:" >+</a>
+                           </div>
+                           
                           </div>
                           
                         </div>
@@ -266,7 +288,19 @@
           
     </div>
 
+  <!-- Modal detail-->
 
+  <div class="modal fade " id="myModalfood" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-body" id="md_content_food">
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
 
 </section> <!-- .section -->
 @endsection

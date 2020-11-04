@@ -62,10 +62,17 @@ class HomeController extends Controller
     }
     public function showhome($province)
     {
+
         $province_now = Province::find($province);
         $province = Province::whereIn('name', ['Thành phố Hà Nội', 'Thành phố Cần Thơ','Thành phố Hồ Chí Minh'])->get();
+        foreach ($province_now->address as $address) {   
+             $shop_id[] = $address->shop_id;
+
+        }
+        $shop = Shop::whereIn('shop.id',$shop_id)->paginate(8);
+
+
         $food = Food::all()->take(12);
-        $shop = Shop::all();
         $category = Category::all();
         return view('customer.index', compact('food','category','province','province_now','shop'));
     }

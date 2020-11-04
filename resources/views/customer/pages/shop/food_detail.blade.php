@@ -1,9 +1,9 @@
 @if ($food_detail)
   {{-- {{dd($food_detail->image_food)}} --}}
-    <section class="ftco-section">
+    <section class="">
     	<div class="container">
     		<div class="row">
-    			<div class="col-lg-6 mb-5 ftco-animate">
+    			<div class="col-lg-6 mb-5 ">
 					@foreach ($food_detail->image_food as $image)
 					@if ($image->index == 0)
 					<a href="{{$image->path}}" class="image-popup"><img src="{{$image->path}}" class="img-fluid">
@@ -16,7 +16,7 @@
 					<button type="button" class="btn btn-primary btn-lg btn-block">Chỉnh sửa</button>
 					<button type="button" class="btn btn-danger btn-lg btn-block">Xóa</button>
     			</div>
-    			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
+    			<div class="col-lg-6 product-details pl-md-5 ">
     				<h3>{{$food_detail->name}}</h3>
     				<div class="rating d-flex">
 							<p class="text-left mr-4">

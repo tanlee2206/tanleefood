@@ -50,12 +50,12 @@
                             <form  action="{{route('loginShop')}}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <label>Email or Login name</label>
-                                    <input class="au-input au-input--full" name="email" placeholder="tan@gmail.com">
+                                    {{-- <label>Email or Login name</label> --}}
+                                    <input class="au-input au-input--full" name="email" autocomplete="false" placeholder="email or login name">
                                 </div>
                                 <div class="form-group">
-                                    <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="*******">
+                                    {{-- <label>Password</label> --}}
+                                    <input class="au-input au-input--full" type="password" autocomplete="false" name="password" placeholder="password">
                                 </div>
                                 {{-- <div class="login-checkbox">
                                     <label>

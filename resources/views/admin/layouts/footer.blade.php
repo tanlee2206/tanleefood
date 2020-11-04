@@ -51,7 +51,7 @@
             $('#deleteModal').modal('show');
             $('input[name=del_id]').val($(this).data('id'));
         });
-
+        
         // delete user
         $('.modal-footer').on('click', '#delete', function () {
             event.preventDefault();
@@ -93,7 +93,7 @@
                     position: 'top-start',
                     background: '#7fff9c',
                     icon: 'error',
-                    text: 'đã xóa món ăn ',
+                    text: 'đã xóa user ',
                     showConfirmButton: false,
                     timer: 1500,
                     width: 350,
@@ -106,7 +106,132 @@
 </script>
 
 
+{{-- xóa shop --}}
+<script>
+    $(document).ready(function(){
+        // open delete shop modal
+        $(document).on('click', '#deleteShopButton', function () {
+            event.preventDefault();
+            console.log("222222222222");
+            $('#deleteShopModal').modal('show');
+            $('input[name=del_id]').val($(this).data('id'));
+        });
 
+        delete shop
+        $('.modal-footer').on('click', '#deleteshop', function () {
+            event.preventDefault();
+            var token = $("meta[name='csrf-token']").attr("content");
+            $.ajax({
+                type: 'delete',
+                url: '/admin/shop',
+                headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') },
+                data: {
+                    _token: token,
+                    id: $('input[name=del_id]').val()
+                },
+                success: function (data) {
+                    $('#deleteShopModal').modal('hide');
+                    
+                }
+            }).done(function(response){
+                $("#list-shop").empty();
+                $("#list-shop").html(response);
+                $(".js_shop_item").click(function(event){
+                    event.preventDefault();
+                    let $this = $(this);
+                    let url = $this.attr('href');
+                    $(".shops-id").text('').text($this.attr('data-id'));
+                    $("#myModalshop").modal('show');
+                    $.ajax({
+                    url: url,
+                    }).done(function(result){
+                        console.log(result);
+                        if (result) {
+                            $("#md_content_shop").html('').append(result);
+                        }
+                    });
+                });
+                $('#bootstrap-data-shop-table').DataTable();
+                $('div.dataTables_info').html('');
+                Swal.fire({
+                    toast: true,
+                    position: 'top-start',
+                    background: '#7fff9c',
+                    icon: 'error',
+                    text: 'đã xóa shop ',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    width: 350,
+                })
+               
+            });
+        });
+    });
+
+</script>
+{{-- xóa category --}}
+<script>
+    $(document).ready(function(){
+        // open delete shop modal
+        $(document).on('click', '#deleteCategoryButton', function () {
+            event.preventDefault();
+            console.log("222222222222");
+            $('#deleteCategoryModal').modal('show');
+            $('input[name=del_id]').val($(this).data('id'));
+        });
+
+        // delete category
+        $('.modal-footer').on('click', '#deletecategory', function () {
+            event.preventDefault();
+            var token = $("meta[name='csrf-token']").attr("content");
+            $.ajax({
+                type: 'delete',
+                url: '/admin/category',
+                headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') },
+                data: {
+                    _token: token,
+                    id: $('input[name=del_id]').val()
+                },
+                success: function (data) {
+                    $('#deleteCategoryModal').modal('hide');
+                    
+                }
+            }).done(function(response){
+                $("#list-category").empty();
+                $("#list-category").html(response);
+                $(".js_category_item").click(function(event){
+                    event.preventDefault();
+                    let $this = $(this);
+                    let url = $this.attr('href');
+                    $(".categorys-id").text('').text($this.attr('data-id'));
+                    $("#myModalcategory").modal('show');
+                    $.ajax({
+                    url: url,
+                    }).done(function(result){
+                        console.log(result);
+                        if (result) {
+                            $("#md_content_category").html('').append(result);
+                        }
+                    });
+                });
+                $('#bootstrap-data-category-table').DataTable();
+                $('div.dataTables_info').html('');
+                Swal.fire({
+                    toast: true,
+                    position: 'top-start',
+                    background: '#7fff9c',
+                    icon: 'error',
+                    text: 'đã xóa category ',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    width: 350,
+                })
+               
+            });
+        });
+    });
+
+</script>
 
 <!-- Vendor JS       -->
 <script src="asset/admin/vendor/slick/slick.min.js">
@@ -132,6 +257,7 @@
 <script>
     $(document).ready(function() {
         $('#bootstrap-data-shop-table').DataTable();
+        $('#bootstrap-data-category-table').DataTable();
         $('#bootstrap-data-user-table').DataTable({
             "language": {
             "search": "Tìm kiếm",

@@ -64,35 +64,185 @@
                             </div>
                            
                         </div>
+                        {{-- {{dd($food->image_food->count())}} --}}
                         <div class="col-4 {{ $errors->has('img') ? ' has-error' : '' }}">
-                            <div class="input-group form-group  ">
-                                <span class="input-group-btn">
-                                  <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn">
-                                    <div id="holder" >
-                                        @if ((old('img') != null))
-                                        <img src="{{ old('img') }}" width="250" height="250" alt="">
-                                        @else
-                                        <img src="
-                                        @if($food->img != null)
-                                        {{ $food->img }}
-                                        @else
-                                        asset/admin/images/image-placeholder.jpg
-                                        @endif
-                                        " width="250" height="250" alt="">
-                                        @endif
-                                    </div>
-                                  </a>
-                                </span>
-                                <input hidden id="thumbnail" class="form-control" value="
-                                @if($food->img != null)
-                                {{ $food->img }}
+                            <div class="row">
+                                @if ($food->image_food->count())
+                                            <div class="input-group form-group col-lg-12  ">
+                                                <span class="input-group-btn">
+                                                <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn">
+                                                    <div id="holder" >
+                                                        @if ((old('img') != null))
+                                                        <img src="{{ old('img') }}" width="280" height="250" alt="">
+                                                        @else
+                                                        <img src="
+                                                        @if($img->path != null)
+                                                        {{ $img->path }}
+                                                        @else
+                                                        asset/admin/images/image-placeholder.jpg
+                                                        @endif
+                                                        " width="270" height="250" alt="">
+                                                        @endif
+                                                    </div>
+                                                </a>
+                                                </span>
+                                                <input hidden id="thumbnail" class="form-control" value="
+                                                @if($img->path != null)
+                                                {{ $img->path }}
+                                                @else
+                                                asset/admin/images/image-placeholder.jpg
+                                                @endif
+                                                "  name="img">
+                                                
+                                            </div>
+                                 
+
+                                            <div class="input-group form-group col-lg-4  ">
+                                                <span class="input-group-btn">
+                                                <a id="lfm1" data-input="thumbnail1" data-preview="holder1" class="btn">
+                                                    <div id="holder1" >
+                                                        @if ((old('img') != null))
+                                                        <img src="{{ old('img') }}" width="70" height="70" alt="">
+                                                        @else
+                                                        <img src="
+                                                        @if($img1->path != null)
+                                                        {{ $img1->path }}
+                                                        @else
+                                                        asset/admin/images/image-placeholder.jpg
+                                                        @endif
+                                                        " width="70" height="70" alt="">
+                                                        @endif
+                                                    </div>
+                                                </a>
+                                                </span>
+                                                <input hidden id="thumbnail1" class="form-control" value="
+                                                @if($img1->path != null)
+                                                {{ $img1->path }}
+                                                @else
+                                                asset/admin/images/image-placeholder.jpg
+                                                @endif
+                                                "  name="img1">
+                                                
+                                            </div>
+                                            <div class="input-group form-group col-lg-4  ">
+                                                <span class="input-group-btn">
+                                                <a id="lfm2" data-input="thumbnail2" data-preview="holder2" class="btn">
+                                                    <div id="holder2" >
+                                                        @if ((old('img') != null))
+                                                        <img src="{{ old('img') }}" width="70" height="70" alt="">
+                                                        @else
+                                                        <img src="
+                                                        @if($img2->path != null)
+                                                        {{ $img2->path }}
+                                                        @else
+                                                        asset/admin/images/image-placeholder.jpg
+                                                        @endif
+                                                        " width="70" height="70" alt="">
+                                                        @endif
+                                                    </div>
+                                                </a>
+                                                </span>
+                                                <input hidden id="thumbnail2" class="form-control" value="
+                                                @if($img2->path != null)
+                                                {{ $img2->path }}
+                                                @else
+                                                asset/admin/images/image-placeholder.jpg
+                                                @endif
+                                                "  name="img2">
+                                                
+                                            </div>
+                                            <div class="input-group form-group col-lg-4  ">
+                                                <span class="input-group-btn">
+                                                <a id="lfm3" data-input="thumbnail3" data-preview="holder3" class="btn">
+                                                    <div id="holder3" >
+                                                        @if ((old('img') != null))
+                                                        <img src="{{ old('img') }}" width="70" height="70" alt="">
+                                                        @else
+                                                        <img src="
+                                                        @if($img3->path != null)
+                                                        {{ $img3->path }}
+                                                        @else
+                                                        asset/admin/images/image-placeholder.jpg
+                                                        @endif
+                                                        " width="70" height="70" alt="">
+                                                        @endif
+                                                    </div>
+                                                </a>
+                                                </span>
+                                                <input hidden id="thumbnail3" class="form-control" value="
+                                                @if($img3->path != null)
+                                                {{ $img3->path }}
+                                                @else
+                                                asset/admin/images/image-placeholder.jpg
+                                                @endif
+                                                "  name="img3">
+                                                
+                                            </div>
                                 @else
-                                asset/admin/images/image-placeholder.jpg
+                                    {{--------------------- hình lớn ---------------------------}}
+                                    <div class="input-group form-group col-lg-12  ">
+                                        <span class="input-group-btn">
+                                          <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn">
+                                            <div id="holder" >
+                                                @if ((old('img') != null))
+                                                <img src="{{ old('img') }}" width="270" height="250" alt="">
+                                                @else
+                                                <img src="asset/admin/images/image-placeholder.jpg" width="270" height="250" alt="">
+                                                @endif
+                                            </div>
+                                          </a>
+                                        </span>
+                                        <input hidden id="thumbnail" class="form-control" value="{{ old('img') }}"  name="img">  
+                                    </div> 
+                                    {{------------------------------ hình nhỏ ----------------------}}
+                                    <div class="input-group form-group col-lg-4 ">
+                                        <span class="input-group-btn">
+                                          <a id="lfm1" data-input="thumbnail1" data-preview="holder1" class="btn">
+                                            <div id="holder1" >
+                                                @if ((old('img') != null))
+                                                <img src="{{ old('img') }}" width="70" height="70" alt="">
+                                                @else
+                                                <img src="asset/admin/images/image-placeholder.jpg" width="70" height="70" alt="">
+                                                @endif
+                                            </div>
+                                          </a>
+                                        </span>
+                                        <input hidden id="thumbnail1" class="form-control" value="{{ old('img') }}"  name="img1">  
+                                    </div>
+                                    <div class="input-group form-group col-lg-4 ">
+                                        <span class="input-group-btn">
+                                          <a id="lfm2" data-input="thumbnail2" data-preview="holder2" class="btn">
+                                            <div id="holder2" >
+                                                @if ((old('img') != null))
+                                                <img src="{{ old('img') }}" width="70" height="70" alt="">
+                                                @else
+                                                <img src="asset/admin/images/image-placeholder.jpg" width="70" height="70" alt="">
+                                                @endif
+                                            </div>
+                                          </a>
+                                        </span>
+                                        <input hidden id="thumbnail2" class="form-control" value="{{ old('img') }}"  name="img2">  
+                                    </div>
+                                    <div class="input-group form-group col-lg-4 ">
+                                        <span class="input-group-btn">
+                                          <a id="lfm3" data-input="thumbnail3" data-preview="holder3" class="btn">
+                                            <div id="holder3" >
+                                                @if ((old('img') != null))
+                                                <img src="{{ old('img') }}" width="70" height="70" alt="">
+                                                @else
+                                                <img src="asset/admin/images/image-placeholder.jpg" width="70" height="70" alt="">
+                                                @endif
+                                            </div>
+                                          </a>
+                                        </span>
+                                        <input hidden id="thumbnail3" class="form-control" value="{{ old('img') }}"  name="img3">  
+                                    </div>
+                                    <small class="text-danger">{{ $errors->first('img') }}</small>
+    
                                 @endif
-                                "  name="img">
-                                
-                              </div>
-                              <small class="text-danger">{{ $errors->first('img') }}</small>
+                               
+                                <small class="text-danger">{{ $errors->first('img') }}</small>
+                            </div>
                         </div>
                     </div>
                      
@@ -137,6 +287,9 @@
 <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
 <script>
      $('#lfm').filemanager('image');
+     $('#lfm1').filemanager('image');
+     $('#lfm2').filemanager('image');
+     $('#lfm3').filemanager('image');
 </script>
 <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 <script>

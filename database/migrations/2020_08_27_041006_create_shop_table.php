@@ -21,6 +21,9 @@ class CreateShopTable extends Migration
             $table->longText('description')->nullable();
             $table->string('img')->nullable();
             $table->string('cost')->nullable();
+            $table->string('cost')->nullable();
+            $table->time('open_time')->nullable();
+            $table->time('close_time')->nullable();
             $table->float('rating')->nullable();
             $table->integer('number_rating')->nullable();
             $table->integer('status')->default(1);

@@ -20,6 +20,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "monolog/monolog": "^2.1",
+        "spatie/laravel-searchable": "^1.7",
+        "staudenmeir/eloquent-has-many-deep": "1.12",
         "symfony/flex": "^1.9",
         "symfony/twig-bridge": "^5.1",
         "twig/twig": "^3.0",

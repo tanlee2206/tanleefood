@@ -74,7 +74,7 @@ button {
 
 img {
     max-width: 100%;
-    height: auto;
+    /* height: auto; */
 }
 
 p {
@@ -253,6 +253,9 @@ section {
 .section__content--p30 {
     padding: 0 0px;
 }
+.section__content--p30cp {
+    padding: 0 30px;
+}
 
 @media (max-width: 991px) {
     .section__content--p30 {
@@ -332,7 +335,7 @@ section {
 }
 
 .page-content--bge5 {
-    background: #e5e5e5;
+    background: #fff;
     height: 100vh;
 }
 
@@ -389,7 +392,9 @@ section {
     padding: 30px 30px 20px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    border-radius: 2px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+
 }
 
 .social-login-content {
@@ -723,7 +728,7 @@ section {
     padding: 0 17px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    border-radius: 3px;
+    border-radius: 10px;
     -webkit-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -2153,7 +2158,7 @@ section {
     -moz-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    background: #365cad;
+    background:#22252d;
     padding: 0 35px;
 }
 
@@ -2312,7 +2317,7 @@ section {
 
 .header-desktop2 {
     height: 75px;
-    background: #4272d7;
+    background:#3b3f46;
     position: fixed;
     z-index: 1001;
     top: 0;

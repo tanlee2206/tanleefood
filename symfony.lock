@@ -8,6 +8,9 @@
     "kjmtrue/vietnam-zone": {
         "version": "v1.0.0"
     },
+    "laravel/helpers": {
+        "version": "v1.3.0"
+    },
     "laravel/ui": {
         "version": "v2.1.0"
     },
@@ -38,6 +41,12 @@
     "psr/http-factory": {
         "version": "1.0.1"
     },
+    "spatie/laravel-searchable": {
+        "version": "1.7.0"
+    },
+    "staudenmeir/eloquent-has-many-deep": {
+        "version": "v1.12"
+    },
     "symfony/flex": {
         "version": "1.0",
         "recipe": {
@@ -49,6 +58,9 @@
         "files": [
             "./.env"
         ]
+    },
+    "symfony/http-client-contracts": {
+        "version": "v2.3.1"
     },
     "symfony/twig-bridge": {
         "version": "v5.1.3"

@@ -17,8 +17,10 @@ class Cart{
 		}
 
 	}
-	public function Addcart($food,$id){
-		$newfood = ['quanty'=>0,'price'=>$food->price,'foodInfo'=>$food];  // tạo mới
+	
+	public function Addcart($food,$id,$image){
+		// $image = Where:
+		$newfood = ['quanty'=>0,'price'=>$food->price,'image'=>$image,'foodInfo'=>$food];  // tạo mới
 		if($this->food){
 			if(array_key_exists($id, $this->food)){  //  kt nếu đã tồn tại
 				$newfood =$this->food[$id];

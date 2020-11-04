@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <base href="{{asset('') }}" />
+    
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
@@ -25,13 +26,19 @@
 
     <link rel="stylesheet" href="asset/customer/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="asset/customer/css/jquery.timepicker.css">
-
     
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
     <link rel="stylesheet" href="asset/customer/css/flaticon.css">
     <link rel="stylesheet" href="asset/customer/css/icomoon.css">
     <link rel="stylesheet" href="asset/customer/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   </head>
-  <body class="goto-here">
+  <body class="goto-here ">
 		{{-- <div class="py-1 bg-primary">
     	<div class="container">
     		<div class="row no-gutters d-flex align-items-start align-items-center px-md-0">
@@ -53,6 +60,7 @@
 		    </div>
 		  </div>
     </div> --}}
+
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
    <div class="container">
       
@@ -94,7 +102,7 @@
             <span class="caret"></span></button>
             <ul class="dropdown-menu" >
                @foreach ($province as $province)
-            <li><a href="{{route('showhome',$province->id)}}">{{$province->name}}</a></li>
+            <li><a class="province" data-title="chuyển thành phố?" href="{{route('showhome',$province->id)}}">{{$province->name}}</a></li>
                   @foreach ($province->district as $districts)
                   {{-- <li><a href="#">{{$item->name}}</a></li> --}}
                      @foreach ($districts->ward as $wards)
@@ -116,41 +124,21 @@
                
             </li>
             
-            <li class="nav-item {{ Route::is('showhome') ? 'active' : null }}"><a href="{{route('showhome','$province_now->id')}}" class="nav-link">Home</a></li>
+            <li class="nav-item {{ Route::is('showhome') ? 'active' : null }}"><a href="{{route('showhome',$province_now->id)}}" class="nav-link">Trang chủ</a></li>
             <li class="nav-item">
-               <a href="" class="nav-link">Blog</a>
-               <div class="cart-hover ">
-                  <div >
-                     <div class="select-items">
-                        <table>
-                           <tbody>
-                           </tbody>
-                        </table>
-                     </div>
-                     <div class="select-total">
-                        <span>total:</span>
-                        @if (Session::has("Cart") != null)
-                        <h5>{{ number_format(Session::get("Cart")->totalPrice).' '.'VNĐ'}}</h5>
-                        @endif
-                     </div>
-                  </div>
-                  <div class="select-button">
-                     <a href="" class="primary-btn view-card">VIEW CARD</a>
-                     <a href="" class="primary-btn checkout-btn">CHECK OUT</a>
-                  </div>
-               </div>
+               <a href="" class="nav-link">Tin tức</a>
             </li>
            
-            <li class="nav-item"><a href="{{route('shop.show',$province_now->id)}}" class="nav-link {{ Route::is('shop.show') ? 'active' : null }} ">Shop</a></li>
+            <li class="nav-item"><a href="{{route('shop.show',$province_now->id)}}" class="nav-link {{ Route::is('shop.show') ? 'active' : null }} ">Cửa hàng</a></li>
             {{-- <li class="nav-item"><a href="{{route('food')}}" class="nav-link {{ Route::is('food') ? 'active' : null }}">FOOD</a></li> --}}
             <li class="nav-item">
-               <a  class="nav-link">Search</a>
+               <a  class="nav-link">tìm kiếm</a>
                <div class="cart-hover ">
                   <div >
                      <div class="select-items">
                         <form class="form-inline  my-2 my-lg-0">
-                           <input class="form-control form-search mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                           <input class="form-control form-search mr-sm-2" type="search" placeholder="..." aria-label="Search">
+                           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">tìm</button>
                         </form>
                      </div>
                   
@@ -168,7 +156,7 @@
                            <li><a href="" class="dropdown-item">Thông tin cá nhân</a> </li>
                            <li><a href="" class="dropdown-item">Lịch sử mua hàng</a> </li>
                            <li><a href="" class="dropdown-item">Chi Tiết giỏ hàng</a> </li>
-                           <li><a class="dropdown-item" href="{{ route('logout') }}"> Logout </a></li>
+                           <li><a class="dropdown-item" href="{{ route('logout') }}"> Đang xuất </a></li>
                         </ul>
                      </div>
                   </div>
@@ -177,10 +165,10 @@
                </div>
             </li>
             @else 
-            <li class="nav-item"><a href="{{route('login.form')}}" class="nav-link">Login</a></li>
+            <li class="nav-item"><a href="{{route('login.form')}}" class="nav-link">Đăng nhập</a></li>
             @endif
             <li class="nav-item">
-               <a href="{{route('cart')}}" class="nav-link"><i class="icon-shopping_cart"></i>
+               <a href="{{route('cart',$province_now->id)}}" class="nav-link"><i class="icon-shopping_cart"></i>
                @if (Session::has("Cart") != null)
                <span id="QuantyCartShow">{{Session::get("Cart")->totalQuanty}}</span>
                @else
@@ -196,7 +184,7 @@
                               @foreach (Session::get("Cart")->food as $item)
                               <tr>
                                  <td class="si-pic"><img
-                                    src="{{$item['foodInfo']->img}}"
+                                    src="{{$item['image']}}"
                                     width="60" height="60" alt=""></td>
                                  <td class="si-text">
                                     <div class="food-selected">
@@ -224,8 +212,8 @@
                      </div>
                   </div>
                   <div class="select-button">
-                     <a href="{{route("cart")}}" class="primary-btn view-card">VIEW CARD</a>
-                     <a href="" class="primary-btn checkout-btn">CHECK OUT</a>
+                     <a href="{{route("cart",$province_now->id)}}" class="primary-btn view-card">XEM GIỎ HÀNG</a>
+                     <a href="" class="primary-btn checkout-btn">THANH TOÁN</a>
                   </div>
                </div>
             </li>

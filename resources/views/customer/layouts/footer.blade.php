@@ -124,7 +124,10 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
   <!-- Bootstrap theme -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
   <script src="asset/customer/js/jquery.jqZoom.js"></script>
+  
 <script>
     $(function(){
         $(".image").jqZoom({
@@ -135,6 +138,119 @@
         });
 
     })
+</script>
+<script>
+  $('a.province').confirm({
+    content: "khi bạn chuyển thành phố thì món ăn trong giỏ hàng sẽ reset lại",
+    buttons: {
+        yes: function(){
+          text: 'hey there!';
+          btnClass: 'btn-red any-other-class';
+            $.ajax({
+                url:'DeleteCart/',
+                type:'GET',
+            });
+            location.href = this.$target.attr('href');
+        },
+        cancel: function(){
+            
+        }
+    }
+  });
+// $('a.province').confirm({
+    
+// });
+</script>
+<script>
+  $(function(){
+      $(".js_food_detail").click(function(event){
+          event.preventDefault();
+          let $this = $(this);
+          let url = $this.attr('href');
+          $(".foods-id").text('').text($this.attr('data-id'));
+          
+          $.ajax({
+          url: url,
+          }).done(function(result){
+              console.log(result);
+              if (result) {
+                  $("#md_content_food").html('').append(result);
+              }
+          });
+          $("#myModalfood").modal('show');
+      });
+  })
+</script>
+
+
+
+<script type="text/javascript">
+  $('#search').on('keyup',function(){
+      $value = $(this).val();
+      $.ajax({
+          type: 'get',
+          url: '{{ URL::to('search') }}',
+          data: {
+              'search': $value,
+              'shop_id': $('input[name=shop_id]').val()
+          },
+          success:function(data){
+              $("#menu-food").empty();
+              $("#menu-food").html(data);
+          }
+      });
+  })
+  $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
+
+<script type="text/javascript">
+  $('#province').change(function(){
+  var provinceID = $(this).val();    
+  if(provinceID){
+      $.ajax({
+         type:"GET",
+         url:"{{url('/getdistricts')}}?province_id="+provinceID,
+         success:function(res){               
+          if(res){
+              $("#districts").empty();
+              // $("#districts").append('<option>Select</option>');
+              $.each(res,function(key,value){
+                  $("#districts").append('<option value="'+key+'">'+value+'</option>');
+              });
+         
+          }else{
+             $("#districts").empty();
+          }
+         }
+      });
+  }else{
+      $("#districts").empty();
+      $("#wards").empty();
+  }      
+ });
+  $('#districts').on('change',function(){
+  var districtsID = $(this).val();    
+  if(districtsID){
+      $.ajax({
+         type:"GET",
+         url:"{{url('/getwards')}}?districts_id="+districtsID,
+         success:function(res){               
+          if(res){
+              $("#wards").empty();
+              $.each(res,function(key,value){
+                  $("#wards").append('<option value="'+key+'">'+value+'</option>');
+              });
+         
+          }else{
+             $("#wards").empty();
+          }
+         }
+      });
+  }else{
+      $("#wards").empty();
+  }
+      
+ });
 </script>
   </body>
 </html>
