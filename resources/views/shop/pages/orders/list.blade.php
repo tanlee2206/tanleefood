@@ -12,9 +12,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="overview-wrap">
-                        <h2 class="title-1 m-b-25">Bảng món ăn</h2>
-                         <a href="{{route('food.create')}}" class="au-btn au-btn-icon au-btn--blue">
-                            <i class="zmdi zmdi-plus"></i>Thêm món ăn</a>
+                        <h2 class="title-1 m-b-25">Bảng đơn hàng</h2>
+                         <a href="{{route('orders.create')}}" class="au-btn au-btn-icon au-btn--blue">
+                            <i class="zmdi zmdi-plus"></i>Thêm đơn hàng</a>
                     </div>
                 </div>
             </div>
@@ -35,51 +35,22 @@
                       </div>
                     @endif
 
-                    <div class="" id="list-food">
-                            <table id="bootstrap-data-food-table" class="table table-shop table-borderless table-striped">
+                    <div class="" id="list-orders">
+                            <table id="bootstrap-data-orders-table" class="table table-shop table-borderless table-striped">
                                 {{-- <table  class="table table-shop table-borderless table-striped"> --}}
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Tên món</th>
-                                        <th>Hình ảnh</th>
-                                        <th>Giá</th>
-                                        <th>Mô tả</th>
-                                        <th>Rating</th>
+                                        <th>tin nhắn</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($food as $key => $item)                                
+                                    @foreach ($orders as $key => $item)                                
                                     <tr>
                                         <td>{{$key + 1}}</td>
-                                        <td>{{$item->name}}</td>
-                                        {{-- {{dd($item->image_food)}} --}}
-                                        <td>@foreach ($item->image_food as $image)
-                                            @if ($image->index == 0)
-                                            <img src="{{$image->path}}" width="80" height="80">
-                                            @endif
-
-                                        @endforeach</td>
-                                        <td >{{number_format($item->price,0)}}</td>
-                                        <td >{!! Str::limit($item->description,40) !!}</td>
-                                        <td>0.9</td>
+                                        <td>{{$item->message}}</td>
                                         <td>
-                                            <div class="table-data-feature">
-                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                                    <i class="zmdi zmdi-mail-send"></i>
-                                                </button>
-                                            <a href="{{route('food.edit',$item->id)}}" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                    <i class="zmdi zmdi-edit"></i>
-                                                </a>
-                                                <button id="deleteFoodModal" data-toggle="modal" data-target="#deleteModal" data-token="{{ csrf_token() }}"
-                                                     class="item" id="deletefood" data-id="{{ $item->id }}" >
-                                                    <i class="zmdi zmdi-delete"></i>
-                                                </button>
-                                                <a href="{{route('food.detail',$item->id)}}" data-id="{{$item->id}}" class="item js_food_item" title="detail">
-                                                    <i class="zmdi zmdi-eye"></i>
-                                                </a >
-                                            </div>
                                         </td>
                                     </tr> 
                                     @endforeach         
@@ -91,11 +62,11 @@
         </div>     
     </div>
       <!-- Modal detail-->
-    <div class="modal fade" id="myModalfood" tabindex="-1" role="dialog">
+    <div class="modal fade" id="myModalorders" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="modal-body" id="md_content_food">
+                    <div class="modal-body" id="md_content_orders">
                     </div>
                 </div>
             </div>
@@ -106,13 +77,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete food Confirmation</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Delete orders Confirmation</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn có muốn xóa món ăn ?</p>
+                    <p>Bạn có muốn xóa đơn hàng ?</p>
                     <input type="hidden" name="del_id"/>
                 </div>
                 <div class="modal-footer">

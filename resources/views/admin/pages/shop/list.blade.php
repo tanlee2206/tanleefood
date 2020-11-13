@@ -9,10 +9,19 @@
     <h3 class="title-3 m-b-30">
         <i class="zmdi zmdi-account-calendar"></i> data</h3>
         @if(session('message'))
-        <div class="alert alert-success">
-        {{session('message')}}
-        </div>
-     @endif
+        <div class="toast toast-success">
+            <div class="icon__holder">
+              <i class="fas fa-check"></i>
+            </div>
+            <div class="text">
+              <h5>thành công</h5>
+              <p>{{session('message')}}</p>
+            </div>
+            <div class="close">
+              <i class="fas fa-times"></i>
+            </div>
+          </div>
+        @endif
     <div class="table-data" id="list-shop">
         <table  id="bootstrap-data-shop-table"  class="table">
             <thead>

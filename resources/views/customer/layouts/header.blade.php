@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <base href="{{asset('') }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
@@ -26,6 +27,7 @@
 
     <link rel="stylesheet" href="asset/customer/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="asset/customer/css/jquery.timepicker.css">
+
     
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -37,6 +39,7 @@
     <link rel="stylesheet" href="asset/customer/css/icomoon.css">
     <link rel="stylesheet" href="asset/customer/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    
   </head>
   <body class="goto-here ">
 		{{-- <div class="py-1 bg-primary">

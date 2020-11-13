@@ -13,14 +13,16 @@ class Cart{
 			$this->food = $cart->food;
 			$this->totalPrice = $cart->totalPrice;
 			$this->totalQuanty = $cart->totalQuanty;
+			// $this->order = $cart->order;
 
 		}
 
 	}
 	
-	public function Addcart($food,$id,$image){
+	
+	public function Addcart($food,$id,$image,$shop){
 		// $image = Where:
-		$newfood = ['quanty'=>0,'price'=>$food->price,'image'=>$image,'foodInfo'=>$food];  // tạo mới
+		$newfood = ['quanty'=>0,'price'=>$food->price,'image'=>$image,'foodInfo'=>$food ,'shop'=>$shop];  // tạo mới
 		if($this->food){
 			if(array_key_exists($id, $this->food)){  //  kt nếu đã tồn tại
 				$newfood =$this->food[$id];

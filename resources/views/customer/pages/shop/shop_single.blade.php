@@ -47,7 +47,7 @@
             </div>
             <div class="col-lg-7">
               <h2 class="mb-3">{{$shop->name}}</h2>
-              <div class="rating d-flex">
+              <div class=" d-flex">
                   <p class="text-left mr-4">
                     <a href="#" class="mr-2">5.0</a>
                     <a href="#"><span class="ion-ios-star-outline"></span></a>
@@ -95,7 +95,7 @@
                   <div class="sidebar-box col-lg-5">
                     <div class="form-group">
                       <span class="icon ion-ios-search"></span>
-                      <input type="text" id="search" name="search" class="form-control" placeholder="Search...">
+                      <input type="text" autocomplete="off" id="search" name="search" class="form-control" placeholder="Search...">
                     <input value="{{$shop->id}}" name="shop_id" hidden>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                </div>
               </form>
             </div>
-            <div class="col-lg-7" style="padding-left: 0;">
+            <div class="col-lg-8" style="padding-left: 0;">
               <div class="food-panel" id="style-5">
                  <div class="row" id="menu-food">
                    @foreach ($foods as $item)
@@ -173,45 +173,74 @@
               </div>
                 
             </div>
-            <div class="col-lg-5 comment-panel">
+            <div class="col-lg-4 comment-panel">
               <div class="">
                 <h3 class="mb-5"></h3>
-                <ul class="comment-list">
+                <ul class="comment-list" id="rating_list">
+                  @foreach ($rating as $item)
                   <li class="comment">
                     <div class="vcard bio">
-                      <img src="asset/customer/images/person_1.jpg" alt="Image placeholder">
+                      <img src="{{$item->user->img}}" width="50px" height="50px" alt="Image placeholder">
                     </div>
                     <div class="comment-body">
-                      <h3>John Doe</h3>
-                      <span class="meta">June 27, 2018 at 2:21pm</span>
-                      <p>sam impedipedit necessitatibus, nihil?</p>
-                      <p><a href="#" class="reply">Reply</a></p>
+                    <h3 style="margin-bottom: 0px">{{$item->user->last_name}} {{$item->user->first_name}}</h3>
+                      <span class="meta"> {{date("D, d.m.Y h:i a", strtotime($item->created_at))}}</span>
+                    <p style="margin-bottom: 0px">{{$item->content}}</p>
+                    <div class="rating3">
+                      <input id="star10" type="radio" value="5" disabled class="radio-btn hide" {{$item->rating == 5 ?'checked': ''}} />
+                      <label for="star10" >☆</label>
+                      <input id="star9" type="radio" value="4" disabled class="radio-btn hide" {{$item->rating == 4 ?'checked': ''}}/>
+                      <label for="star9" >☆</label>
+                      <input id="star8" type="radio" value="3" disabled class="radio-btn hide" {{$item->rating == 3 ?'checked': ''}}/>
+                      <label for="star8" >☆</label>
+                      <input id="star7" type="radio" value="2" disabled class="radio-btn hide" {{$item->rating == 2 ?'checked': ''}} />
+                      <label for="star7" >☆</label>
+                      <input id="star6" type="radio" value="1" disabled class="radio-btn hide" {{$item->rating == 1 ?'checked': ''}} />
+                      <label for="star6" >☆</label>
+                      <div class="clear"></div>
+                  </div>
+                    @if (Auth::user() && $item->user->id == Auth::user()->id )
+                    <p><a href="#" class="reply">xóa</a></p>
+                    @endif
+                      
                     </div>
-                  </li>
-                  <li class="comment">
-                    <div class="vcard bio">
-                      <img src="asset/customer/images/person_1.jpg" alt="Image placeholder">
-                    </div>
-                    <div class="comment-body">
-                      <h3>John Doe</h3>
-                      <div class="meta">June 27, 2018 at 2:21pm</div>
-                      <p>Lorem ipsu ipsam impedit vitaeamit necessitatibus, nihil?</p>
-                      <p><a href="#" class="reply">Reply</a></p>
-                    </div>
-                  </li>
+                  </li> 
+                  @endforeach
+                  
                 </ul>
                 <!-- END comment-list -->
                 
-                <div class="comment-form-wrap ">
-                  <form action="#" class="">
+                <div class="comment-form-wrap " style="height: 15rem">
+                  @if (Auth::user())
+                  <form action="#" id="ratingform"  class="">
                     <div class="form-group">
-                      <textarea name="" id="message" cols="30" rows="3" class="form-control"></textarea>
+                      <textarea name="content" id="message" cols="30" rows="3" class="form-control"></textarea>
+                    <input hidden value="{{$shop->id}}" name="shop_id">
+                    <input hidden value="{{Auth::user() ? Auth::user()->id : ''}}" name="user_id">
                     </div>
-                    <div class="form-group">
-                      <input type="submit" value="Post Comment" class="btn py-3 px-4 btn-secondary">
+                    
+                    <div class="rating2">
+                      <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
+                      <label for="star5" >☆</label>
+                      <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
+                      <label for="star4" >☆</label>
+                      <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+                      <label for="star3" >☆</label>
+                      <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
+                      <label for="star2" >☆</label>
+                      <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
+                      <label for="star1" >☆</label>
+                      <div class="clear"></div>
+                  </div>
+                    <div class="form-group" >
+                      <input type="submit" value="Post Comment" id="save-comment" class="btn py-3 px-4 btn-secondary">
                     </div>
-    
                   </form>
+                  @else
+                  <div class="form-group" style="height: 15rem">
+                  <p>bạn phải đăng nhập để bình luận</p>
+                  @endif
+                  </div>
                 </div>
               </div>
             </div>

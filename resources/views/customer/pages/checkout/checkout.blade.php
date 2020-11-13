@@ -14,11 +14,33 @@ Thanh Toán
       </div>
     </div>
 </div>
+<div class="process-wrapper">
+   <ul class="process-list">
+     <li class="process-step active first">
+       <div class="step-wrapper">
+        <span>đăng nhập</span>
+       </div>
+     </li>
+     <li class="process-step active">
+       <div class="step-wrapper">
+         <span>đặt hàng</span>
+       </div>
+     </li>
+     <li class="process-step last">
+       <div class="step-wrapper">
+            <span>hoàn thành</span>
+       </div>
+     </li>
+   </ul>
+ </div>
+   
 <section class="ftco-section">
     <div class="container">
        <div class="row justify-content-center">
           <div class="col-xl-7 ftco-animate">
-             <form action="#" class="billing-form">
+          <form action="{{route('checkout',$province_now->id)}}" method="post" class="billing-form">
+            @csrf
+            <input type="text" hidden value="{{$user->id}}" name="user_id">
                 <h3 class="mb-4 billing-heading">Thông tin chi tiết</h3>
                 <div class="row align-items-end">
                    <div class="col-md-6">
@@ -37,7 +59,7 @@ Thanh Toán
                    <div class="col-md-6">
                      <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="text" readonly value="{{$user->phone}}" class="form-control" placeholder="">
+                        <input type="text" readonly value="{{$user->phone}}" name="phone" class="form-control" placeholder="">
                      </div>
                   </div>
                   <div class="col-md-6">
@@ -55,7 +77,7 @@ Thanh Toán
                          <div class="select-wrap">
                             <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                             <select name="province" id="province" class="form-control">
-                            <option value="">{{$province_now->name}}</option>
+                            <option value="{{$province_now->id}}">{{$province_now->name}}</option>
                             </select>
                          </div>
                       </div>
@@ -66,6 +88,7 @@ Thanh Toán
                         <div class="select-wrap">
                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                            <select name="districts" id="districts"  class="form-control">
+                              <option >--quận/huyện--</option>
                               @foreach ($districts as $item)      
                               <option value="{{ $item->id }}" >{{ $item->name }}</option>
                                @endforeach
@@ -75,11 +98,11 @@ Thanh Toán
                   </div>
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label for="country">Xã/Phường</label>
+                        <label for="country">--Xã/Phường--</label>
                         <div class="select-wrap">
                            <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                            <select name="ward_id" id="wards" class="form-control">
-                             <option></option>
+                             <option>xã / phường</option>
                            </select>
                         </div>
                      </div>
@@ -92,9 +115,15 @@ Thanh Toán
                       </div>
                    </div>
                    <div class="w-100"></div>
+                   <div class="col-md-12">
+                     <div class="form-group">
+                        <label for="">ghi chú</label>
+                        <input type="text" class="form-control" value="" name="message" placeholder="">
+                     </div>
+                  </div>
                    
                 </div>
-             </form>
+           
              <!-- END -->
           </div>
           <div class="col-xl-5">
@@ -123,6 +152,7 @@ Thanh Toán
                                  <span>Thành tiền</span>
                                  @if (Session::has("Cart") != null)
                                  <span>{{ number_format(Session::get("Cart")->totalPrice).' '.'VNĐ'}}</span>
+                                 <input type="text" hidden value="{{Session::get("Cart")->totalPrice}}" name="total">
                                  @else 
                                  <span>0 vnd</span>
                                  @endif
@@ -136,27 +166,28 @@ Thanh Toán
                       <div class="form-group">
                          <div class="col-md-12">
                             <div class="radio">
-                               <label><input type="radio" name="optradio" class="mr-2"> Thanh toán khi nhận hàng</label>
+                               <label><input type="radio" name="payment_method" value="1" class="mr-2"> Thanh toán khi nhận hàng</label>
                             </div>
                          </div>
                       </div>
                       <div class="form-group">
                          <div class="col-md-12">
                             <div class="radio">
-                               <label><input type="radio" name="optradio" class="mr-2"> VNpay</label>
+                               <label><input type="radio" name="payment_method" value="2" class="mr-2"> VNpay</label>
                             </div>
                          </div>
                       </div>
                       <div class="form-group">
                          <div class="col-md-12">
                             <div class="radio">
-                               <label><input type="radio" name="optradio" class="mr-2"> Paypal</label>
+                               <label><input type="radio" name="payment_method" value="3" class="mr-2"> Paypal</label>
                             </div>
                          </div>
                       </div>
          
-                      <p><button class="btn btn-primary py-3 px-4">đặt hàng</button></p>
+                      <p><button type="submit" class="btn btn-primary py-3 px-4">đặt hàng</button></p>
                    </div>
+                  </form>
                 </div>
              </div>
           </div>

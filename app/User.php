@@ -49,6 +49,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Permission');
     }
+    public function rating()
+    {
+        return $this->hasMany(Rating::class);
+    }
 
 
 }

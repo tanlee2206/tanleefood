@@ -2,123 +2,167 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
-
-    <!-- Title Page-->
-    <title>Login</title>
-
-    <!-- Fontfaces CSS-->
-    <link href="asset/admin/css/font-face.css" rel="stylesheet" media="all">
-    <link href="asset/admin/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="asset/admin/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
-    <link href="asset/admin/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-
-    <!-- Bootstrap CSS-->
-    <link href="asset/admin/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
-
-    <!-- Vendor CSS-->
-    <link href="asset/admin/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="asset/admin/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="asset/admin/vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="asset/admin/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="asset/admin//slick/slick.css" rel="stylesheet" media="all">
-    <link href="asset/admin/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="asset/admin/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
-
-    <!-- Main CSS-->
-    <link href="asset/admin/css/theme.css" rel="stylesheet" media="all">
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="asset/customer/css/style_login.css">
+	<title>
+		Animated login signup
+	</title>
 </head>
 
-<body class="animsition">
-    <div class="page-wrapper">
-        <div class="page-content--bge5">
-            <div class="container">
-                <div class="login-wrap">
-                    <div class="login-content">
-                        @if(session('message'))
-                        <div class="alert alert-warning" role="alert">
-                        {{session('message')}}
-                        </div>
-                         @endif
-                        <div class="login-logo">
-                            <a href="#">
-                             
-                                <img src="asset/admin/images/icon/logo_customer.png" alt="CoolAdmin">
-                            </a>
-                        </div>
-                        <div class="login-form">
-                            <form  action="{{route('login')}}" method="post">
-                                @csrf
-                                <div class="form-group">
-                                    {{-- <label>Email hoặc Login name</label> --}}
-                                    <input class="au-input au-input--full" name="email" autocomplete="false" placeholder="email or login name">
-                                </div>
-                                <div class="form-group">
-                                    {{-- <label>Mật khẩu</label> --}}
-                                    <input class="au-input au-input--full" type="password" autocomplete="false" name="password" placeholder="password">
-                                </div>
-                                {{-- <div class="login-checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember">Remember Me
-                                    </label>
-                                    <label>
-                                        <a href="#">Forgotten Password?</a>
-                                    </label>
-                                </div> --}}
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Đăng nhập</button>
-                                <div class="social-login-content">
-                                    <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">Đăng nhập với facebook</button>
-                                        <button class="au-btn au-btn--block au-btn--blue2 m-b-20">Đăng nhập với twitter</button>
-                                        <button class="au-btn au-btn--block au-btn--red">Đăng nhập với google</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="register-link">
-                                <p>
-                                    bạn chưa có tài khoản?
-                                <a href="{{route("register.form")}}">Đăng ký ở đây</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+<body>
+	<div id="container" class="container">
+		<!-- FORM SECTION -->
+		<div class="row">
+			<!-- SIGN UP -->
+			<div class="col align-items-center flex-col sign-up">
+                <form  action="{{route('register')}}" method="post">
+                    @csrf
+				<div class="form-wrapper align-items-center">
+					<div class="form sign-up">
+						<div class="input-group">
+							<i class='bx bxs-user'></i>
+							<input type="text" name="login_name" placeholder="tên đăng nhập">
+						</div>
+						<div class="input-group">
+							<i class='bx bx-mail-send'></i>
+							<input type="email"  name="email" placeholder="Email">
+						</div>
+						<div class="input-group">
+							<i class='bx bxs-lock-alt'></i>
+							<input type="password" " name="password" placeholder="mật khẩu">
+						</div>
+						<div class="input-group">
+							<i class='bx bxs-lock-alt'></i>
+							<input type="password" name="re_password" placeholder="nhập lại mật khẩu">
+						</div>
+						<button type="submit">
+							Đăng ký
+						</button>
+						<p>
+							<span>
+								bạn đã có tài khoản?
+							</span>
+							<b onclick="toggle()" class="pointer">
+								đăng nhập ở đây
+							</b>
+						</p>
+					</div>
+				</div>
+				<div class="form-wrapper">
+					<div class="social-list align-items-center sign-up">
+						<div class="align-items-center facebook-bg">
+							<i class='bx bxl-facebook'></i>
+						</div>
+						<div class="align-items-center google-bg">
+							<i class='bx bxl-google'></i>
+						</div>
+						<div class="align-items-center twitter-bg">
+							<i class='bx bxl-twitter'></i>
+						</div>
+						<div class="align-items-center insta-bg">
+							<i class='bx bxl-instagram-alt'></i>
+						</div>
+					</div>
                 </div>
-            </div>
-        </div>
+                </form>
+			</div>
+			<!-- END SIGN UP -->
+			<!-- SIGN IN -->
+			<div class="col align-items-center flex-col sign-in">
+                <form  action="{{route('login')}}" method="post">
+                    @csrf
+				<div class="form-wrapper align-items-center">
+					<div class="form sign-in">
+						<div class="input-group">
+							<i class='bx bxs-user'></i>
+							<input type="text" name="email" placeholder="email">
+						</div>
+						<div class="input-group">
+							<i class='bx bxs-lock-alt'></i>
+							<input type="password" name="password" placeholder="mật khẩu">
+						</div>
+						<button type="submit">
+							Đăng nhập
+						</button>
+						<p>
+							<b>
+								quên mật khẩu
+							</b>
+						</p>
+						<p>
+							<span>
+								chưa có tài khoản?
+							</span>
+							<b onclick="toggle()" class="pointer">
+								đăng ký ở đây
+							</b>
+						</p>
+					</div>
+				</div>
+				<div class="form-wrapper">
+					<div class="social-list align-items-center sign-in">
+						<div class="align-items-center facebook-bg">
+							<i class='bx bxl-facebook'></i>
+						</div>
+						<div class="align-items-center google-bg">
+							<i class='bx bxl-google'></i>
+						</div>
+						<div class="align-items-center twitter-bg">
+							<i class='bx bxl-twitter'></i>
+						</div>
+						<div class="align-items-center insta-bg">
+							<i class='bx bxl-instagram-alt'></i>
+						</div>
+					</div>
+                </div>
+                </form>
+			</div>
+			<!-- END SIGN IN -->
+		</div>
+		<!-- END FORM SECTION -->
+		<!-- CONTENT SECTION -->
+		<div class="row content-row">
+			<!-- SIGN IN CONTENT -->
+			<div class="col align-items-center flex-col">
+				<div class="text sign-in">
+					<h2>
+						TanLee Food
+					</h2>
+					<p>
+                        Chào mừng bạn trở lại,
+						Hãy đăng nhập để thực hiện nhiều chức năng khác của website. Và nhận nhiều ưu đãi khác
+					</p>
+				</div>
+				<div class="img sign-in">
+					<img src="asset/customer/images/undraw_different_love_a3rg.svg" alt="welcome">
+                </div>
+              
+			</div>
+			<!-- END SIGN IN CONTENT -->
+			<!-- SIGN UP CONTENT -->
+			<div class="col align-items-center flex-col">
+				<div class="img sign-up">
+					<img src="asset/customer/images/undraw_creative_team_r90h.svg" alt="welcome">
+                </div>
+               
+				<div class="text sign-up">
+					<h2>
+						Tanlee Food
+					</h2>
+					<p>
+                        Hãy tạo một tài khoản để có thể đăng nhập vào website
+                        cùng nhau khám phá những món ăn ngon.
+					</p>
+				</div>
+			</div>
+			<!-- END SIGN UP CONTENT -->
+		</div>
+		<!-- END CONTENT SECTION -->
+	</div>
 
-    </div>
-
-    <!-- Jquery JS-->
-    <script src="asset/admin/vendor/jquery-3.2.1.min.js"></script>
-    <!-- Bootstrap JS-->
-    <script src="asset/admin/vendor/bootstrap-4.1/popper.min.js"></script>
-    <script src="asset/admin/vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="asset/admin/vendor/slick/slick.min.js">
-    </script>
-    <script src="asset/admin/vendor/wow/wow.min.js"></script>
-    <script src="asset/admin/vendor/animsition/animsition.min.js"></script>
-    <script src="asset/admin/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="asset/admin/vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="asset/admin/vendor/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="asset/admin/vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="asset/admin/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="asset/admin/vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="asset/admin/vendor/select2/select2.min.js">
-    </script>
-
-    <!-- Main JS-->
-    <script src="asset/admin/js/main.js"></script>
-
+	<script src="asset/admin/js/login.js"></script>
 </body>
 
 </html>
-<!-- end document-->

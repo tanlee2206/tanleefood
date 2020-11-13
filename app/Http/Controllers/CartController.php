@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Food;
+use App\Shop;
 use App\Cart;
 use DB;
 use Session;
@@ -23,6 +24,7 @@ class CartController extends Controller
 
     public function Addcart(Request $request,$id){
         $food = Food::where('id',$id)->first();
+        $shop = Shop::find($food->shop_id);
         if ($food->image_food->count()) {
             foreach ($food->image_food as $item) {
                 if ($item->index == 0) {
@@ -36,7 +38,7 @@ class CartController extends Controller
         if($food !=null){
             $oldCart = Session('Cart') ?  Session('Cart'): null;
             $newCart = new Cart($oldCart);
-            $newCart->Addcart($food,$id,$image);
+            $newCart->Addcart($food,$id,$image,$shop);
 
             $request->session()->put('Cart',$newCart);
 

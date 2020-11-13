@@ -19,7 +19,7 @@
                          <ul class="product-category">
                              <li><a href="#" class="active">All</a></li>
                              @foreach ($category as $item) 
-                         <li><a href="{{URL::to($province_now->id.'/shop/'.$item->id)}}" >{{$item->name}}</a></li>
+                         <li><a href="{{URL::to($province_now->id.'/shop/'.$item->slug)}}" >{{$item->name}}</a></li>
                              @endforeach
                          </ul>
                      </div>
@@ -41,7 +41,7 @@
                         <ul class="product-category">
                             <li><a href="#" class="active">All</a></li>
                             @foreach ($category as $item) 
-                        <li><a href="{{URL::to($province_now->id.'/shop/'.$item->id)}}" >{{$item->name}}</a></li>
+                        <li><a href="{{URL::to($province_now->id.'/shop/'.$item->slug)}}" >{{$item->name}}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -52,7 +52,7 @@
        </div>
     </div>
 </section>
- <section class="ftco-section">
+ <section class="ftco-section" style="padding-bottom : 0" data-aos="fade-right">
     <div class="container">
      
        <div class="row no-gutters ftco-services">
@@ -104,14 +104,47 @@
        </div>
     </div>
  </section>
+ <section class="ftco-section testimony-section">
+   <div class="container">
+      <div class="row justify-content-center mb-5 " data-aos="zoom-in">
+         <div class="col-md-7 heading-section ftco-animate text-center" >
+            <h2 class="subheading">Cửa hàng mới</h2>
+         </div>
+      </div>
+      <div class="row ftco-animate">
+         <div class="col-md-12">
+            <div class="carousel-testimony owl-carousel">
+               @foreach ($shop as $item)
+                 <div class="item">
+                  <div class="testimony-wrap p-4 pb-5">
+                     <div class="user-img mb-3" style="background-image: url({{$item->img}})">
+                        <span class="quote d-flex align-items-center justify-content-center">
+                        <img src="asset/customer/images/new.gif" alt="">
+                        </span>
+                     </div>
+                     <div class="text text-center">
+                        <a class="name mb-3" href="{{URL::to($province_now->id.'/shop-single/'.$item->slug)}}">{{$item->name}}</a>
+                        {{-- <p class="name mb-3">{{$item->name}}</p> --}}
+                        <p class=" pl-4 line">{{$item->address->address_detail}},{{$item->address->ward->name}},
+                          {{$item->address->ward->district->name}},{{$item->address->ward->district->province->name}}</p>
+                        
+                       
+                     </div>
+                  </div>
+               </div>
+               @endforeach
+              
+            </div>
+         </div>
+      </div>
+   </div>
+ </section>
  <section class="ftco-section" style="padding-top: 0px;">
     <div class="container">
-       <div class="row justify-content-center mb-3 pb-3">
-          <div class="col-md-12 heading-section text-center ftco-animate">
-             {{-- <span class="subheading">Featured Products</span> --}}
-          <h2 class="mb-4">Cửa hàng ở {{$province_now->name}}</h2>
-             {{-- <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p> --}}
-          </div>
+       <div class="row justify-content-center mb-5 " data-aos="zoom-in">
+         <div class="col-md-7 heading-section ftco-animate text-center" >
+            <h2 class="subheading">Cửa hàng {{$province_now->name}}</h2>
+         </div>
        </div>
     </div>
     <div class="container">
@@ -126,7 +159,7 @@
                      <div class="overlay"></div>
                  </a>
                  <div class="text py-3 pb-4 px-3 text-center">
-                 <h3><a href="">{{$item->name}}</a></h3>
+                 <h3><a href="{{URL::to($province_now->id.'/shop-single/'.$item->slug)}}">{{$item->name}}</a></h3>
                      <div class="d-flex">
                          <div class="">
                              {{-- <p class="x">{!! $item->address->address_detail !!}, {{$item->address->ward->name}},
@@ -220,41 +253,7 @@
        </div>
     </div>
  </section>
- <section class="ftco-section testimony-section">
-    <div class="container">
-       <div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section ftco-animate text-center">
-             <span class="subheading">Testimony</span>
-             <h2 class="mb-4">cửa hàng mới</h2>
-             {{-- <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p> --}}
-          </div>
-       </div>
-       <div class="row ftco-animate">
-          <div class="col-md-12">
-             <div class="carousel-testimony owl-carousel">
-                @foreach ($shop as $item)
-                  <div class="item">
-                   <div class="testimony-wrap p-4 pb-5">
-                      <div class="user-img mb-5" style="background-image: url({{$item->img}})">
-                         <span class="quote d-flex align-items-center justify-content-center">
-                         <i class="icon-quote-left"></i>
-                         </span>
-                      </div>
-                      <div class="text text-center">
-                         <p class="mb-5 pl-4 line">{{$item->address->address_detail}},{{$item->address->ward->name}},
-                           {{$item->address->ward->district->name}},{{$item->address->ward->district->province->name}}</p>
-                         <p class="name">{{$item->name}}</p>
-                         <span class="position">Marketing Manager</span>
-                      </div>
-                   </div>
-                </div>
-                @endforeach
-               
-             </div>
-          </div>
-       </div>
-    </div>
- </section>
+
  <hr>
  {{-- <section class="ftco-section ftco-partner">
     <div class="container">

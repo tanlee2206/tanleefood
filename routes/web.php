@@ -52,7 +52,7 @@ Route::get('pages/check_slug', 'PagesController@check_slug')
   ->name('pages.check_slug');
 
 Route::get('/search', 'SearchController@search')->name('search');
-
+Route::post('/rating', 'RatingController@store')->name('rating');
 Route::get('/food', 'FoodController@showlist')->name('food');
 // Route::get('/shop', 'ShopController@showlist')->name('shop.show');
 // Route::get('/shop-single/{shop}', 'ShopController@showShopSingle')->name('shopSingle.show');
@@ -104,10 +104,11 @@ Route::group(['prefix'=>'/{province}'],function(){
 	Route::get('/','HomeController@showhome' )->name('showhome');
 	Route::get('/food', 'FoodController@showlist');
 	Route::get('/shop', 'ShopController@showlist')->name('shop.show');
-	Route::get('/shop/{id}', 'ShopController@showlistCategory')->name('shop.showCategory');
+	Route::get('/shop/{shop}', 'ShopController@showlistCategory')->name('shop.showCategory');
 	Route::get('/shop-single/{shop}', 'ShopController@showShopSingle')->name('shopSingle.show');
 	Route::get('/cart', 'CartController@cart')->name('cart');
 	Route::get('/checkout',   'CheckoutController@confirm')->name('checkout.confirm');
+	Route::post('/checkout',   'CheckoutController@checkout')->name('checkout');
 
 });
 // Route::get('/admin', function () {

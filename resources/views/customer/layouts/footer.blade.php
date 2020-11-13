@@ -183,7 +183,7 @@
 </script>
 
 
-
+{{-- search script --}}
 <script type="text/javascript">
   $('#search').on('keyup',function(){
       $value = $(this).val();
@@ -252,5 +252,46 @@
       
  });
 </script>
-  </body>
+<script>
+  $("#save-comment").click(function(event){
+      event.preventDefault();
+      let content= $("textarea[name=content]").val();
+      let user_id = $("input[name=user_id]").val();
+      let shop_id = $("input[name=shop_id]").val();
+      let star = $("input[name=star]:checked").val();
+      let _token   = $('meta[name="csrf-token"]').attr('content');
+
+      $.ajax({
+        url: "/rating",
+        type:"POST",
+        data:{
+          content:content,
+          user_id:user_id,
+          star:star,
+          shop_id:shop_id,
+          _token: _token
+        },
+        success:function(response){
+          console.log(response);
+          if(response) {
+            $("#rating_list").empty();
+            $("#rating_list").html(response);
+            $("#ratingform")[0].reset();
+            Swal.fire({
+                toast: true,
+                position: 'bottom-end',
+                background: '#7fff9c',
+                icon: 'success',
+                title: 'đã đánh giá',
+                showConfirmButton: false,
+                timer: 1500,
+                width: 350,
+              })
+          }
+        },
+       });
+  });
+</script>
+
+</body>
 </html>

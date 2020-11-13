@@ -9,6 +9,7 @@ use App\Address;
 use App\Ward;
 use App\District;
 use App\User;
+use App\Rating;
 use App\Province;
 
 
@@ -48,7 +49,7 @@ class ShopController extends Controller
         //    dd($shop);
         return view('customer.pages.shop.shop',compact('shop','category','province','province_now'));
     }
-    public function showlistCategory($province,$id)
+    public function showlistCategory($province,$slug)
     {
         $province_now = Province::find($province);
         $province = Province::whereIn('name', ['Thành phố Hà Nội', 'Thành phố Cần Thơ','Thành phố Hồ Chí Minh'])->get();
@@ -57,9 +58,10 @@ class ShopController extends Controller
 
        }
     //  dd($shop_id1);
-        $category_now = Category::find($id);
+        $category_now = Category::where('slug', $slug)->firstOrFail();
         $food=$category_now->food;
         // dd($food);
+        $shop_id2 = [];
         foreach ($food as $item) {
             // if (!in_array($item->shop_id,$shop_id)) {
             //     $shop_id[]= $item->shop_id ; 
@@ -91,6 +93,7 @@ class ShopController extends Controller
         
         $shop = Shop::where('slug', $slug)->firstOrFail();
         $shop_id = $shop->id;
+        $rating = Rating::where('shop_id',$shop_id)->get();
         $foods = Food::where('shop_id',$shop_id)->get();
 
         
@@ -111,7 +114,7 @@ class ShopController extends Controller
         // dd($foods->category->id);
         // $category = Category::whereIn('id', $foods->category->id);
         // // dd($foods);
-        return view('customer.pages.shop.shop_single',compact('shop','foods','province','province_now','category_name' ));
+        return view('customer.pages.shop.shop_single',compact('shop','foods','province','province_now','category_name','rating' ));
         
     }
     public function dashboard()

@@ -5,12 +5,23 @@
 @endsection
 @section('content')
 
-<div class="hero-wrap hero-bread" style="background-image: url('asset/customer/images/bg_4.jpg');">
+<div class="hero-wrap hero-bread" style="background-image: url('asset/customer/images/bg_4.jpg');padding-bottom: 0rem;padding-top: 2rem;">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
                 <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>shop</span></p>
                 <h1 class="mb-0 bread">shop</h1>
+                <div class="row justify-content-center">
+                    <div class="col-md-12 mb-5 text-center">
+                        <ul class="product-category">
+                            <li><a href="#" class="active">All</a></li>
+                            @foreach ($category as $item) 
+                        <li><a href="{{URL::to($province_now->id.'/shop/'.$item->slug)}}" >{{$item->name}}</a></li>
+                            @endforeach
+                         
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -18,17 +29,7 @@
 
 <section class="ftco-section">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-10 mb-5 text-center">
-                <ul class="product-category">
-                    <li><a href="#" class="active">All</a></li>
-                    @foreach ($category as $item) 
-                <li><a href="{{URL::to($province_now->id.'/shop/'.$item->id)}}" >{{$item->name}}</a></li>
-                    @endforeach
-                 
-                </ul>
-            </div>
-        </div>
+        
         <div class="row">
             
             @foreach ($shop as $item)    
@@ -40,7 +41,7 @@
                         <span class="status">30%</span>
                         <div class="overlay"></div>
                     </a>
-                    <div class="text py-3 pb-4 px-3 text-center">
+                    <div class="text py-3 pb-4 px-3 " style=" text-align: justify;">
                     <h3><a href="">{{$item->name}}</a></h3>
                         <div class="d-flex">
                             <div class="">

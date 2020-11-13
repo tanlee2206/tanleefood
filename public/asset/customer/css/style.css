@@ -8924,10 +8924,39 @@ form:hover .fa{
     overflow-y: scroll;
     position: relative;
     height: 40rem;
+    border-radius: 12px ;
   
 }
-.food-panel::-webkit-scrollbar {
+/* .food-panel::-webkit-scrollbar {
   display: none;
+} */
+.comment-list::-webkit-scrollbar {
+  display: none;
+}
+.comment-list{
+  overflow-y: scroll;
+  height: 22rem;
+}
+
+.food-panel::-webkit-scrollbar-track
+{
+	/* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+.food-panel::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+.food-panel::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+	
+  background: rgb(233,229,73);
+background: linear-gradient(153deg, rgba(233,229,73,1) 0%, rgba(130,174,70,1) 48%, rgba(0,255,119,1) 100%);
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
@@ -9073,7 +9102,7 @@ scrollbar-width: none;  /* Firefox */
       -o-transition: all 0.3s ease;
       -webkit-transition: all 0.3s ease;
       -ms-transition: all 0.3s ease;
-      height: 250px;
+      height: 180px;
       width: 340px;
   
       transition: all 0.3s ease; }
@@ -9325,14 +9354,14 @@ scrollbar-width: none;  /* Firefox */
         .table tbody tr td.product-remove a:hover span {
           color: #fff; }
     .table tbody tr td.quantity {
-      width: 20%; }
+      width: 10%; }
     .table tbody tr td.image-prod .img {
       display: block;
       width: 70px;
       height: 70px;
       margin: 0 auto; }
     .table tbody tr td.product-name {
-      width: 30%; }
+      width: 20%; }
       .table tbody tr td.product-name h3 {
         font-size: 16px; }
     .table tbody tr td.total, .table tbody tr td.price {
@@ -9650,7 +9679,7 @@ textarea.form-control {
 .heading-section {
   position: relative; }
   .heading-section .subheading {
-    font-size: 18px;
+    font-size: 47px;
     display: block;
     margin-bottom: 10px;
     font-family: "Lora", Georgia, serif;
@@ -9836,9 +9865,10 @@ textarea.form-control {
   background: rgba(255, 255, 255, 0.1);
   color: rgba(0, 0, 0, 0.8); }
   .testimony-wrap .user-img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+    width: 250px;
+    height: 180px;
+    position: relative;
+    border-radius: 10px;
     position: relative;
     margin-top: -75px;
     margin: 0 auto; }
@@ -9856,7 +9886,7 @@ textarea.form-control {
       .testimony-wrap .user-img .quote i {
         color: #82ae46; }
   .testimony-wrap .name {
-    font-weight: 400;
+    font-weight: bold;
     font-size: 18px;
     margin-bottom: 0;
     color: #000000; }
@@ -11916,3 +11946,151 @@ textarea.form-control {
   display: block;
   font-size: 14px;
 }
+.process-list {
+  text-align: center;
+  
+  padding: 0;
+  margin: 0;
+  margin-top: 50px;
+  list-style-type: none;
+  font-size: 0;
+  display: block;
+}
+
+.process-step {
+  display: inline-block;
+  vertical-align: top;
+  width: 300px;
+  min-height: 20px;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 16px;
+}
+
+.step-wrapper {
+  padding: 30px 5px 0 5px;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.step-wrapper:before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 0;
+  height: 5px;
+  width: 300px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAFAQMAAABGqu8rAAAAA1BMVEXgUSCWVqGnAAAACklEQVQI12NABQAADwABdYmHTwAAAABJRU5ErkJggg==);
+  background-repeat: repeat-x;
+}
+
+.first .step-wrapper:before {
+  left: 150px;
+}
+
+.last .step-wrapper:before {
+  left: auto;
+  right: 150px;
+}
+
+.step-wrapper:after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAA8CAMAAABRqGpkAAAAJ1BMVEUAAADgUSDgUSDgUSDgUSDgUSDgUSDgUSDgUSD////42tDrjm/yt6IPf6ysAAAACHRSTlMAZu67Ed2qmaQXgZMAAACJSURBVHja7ZPbCsAwCEO1dpt2+//vHYR2N/M8GOw82ZBQa1FAVSvuxbTKgU7emXRoi19YBMx+Y0bWH6hILajWFtFWlKV24xZg61aDLzrwmiDdhtiQFwTiAEcq0ji9iLZEm2fPZAPho+NDTt/x8w3e3qPBuUfZalk0SWnsEYGKNE4voi2l5l/dox3ttBONuskuxgAAAABJRU5ErkJggg==);
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.active .step-wrapper:after {
+  background-position: bottom center;
+}
+.txt-center {
+      text-align: center;
+    }
+    .hide {
+      display: none;
+    }
+
+    .clear {
+      float: none;
+      clear: both;
+    }
+
+    .rating2 {
+        width: 200px;
+        unicode-bidi: bidi-override;
+        direction: rtl;
+        text-align: center;
+        position: relative;
+    }
+
+    .rating2 > label {
+        float: right;
+        display: inline;
+        padding: 0;
+        margin: 0;
+        font-size: 36px;
+        position: relative;
+        width: 1.1em;
+        cursor: pointer;
+        color: #000;
+    }
+
+    .rating2 > label:hover,
+    .rating2 > label:hover ~ label,
+    .rating2 > input.radio-btn:checked ~ label {
+        color: transparent;
+    }
+
+    .rating2 > label:hover:before,
+    .rating2 > label:hover ~ label:before,
+    .rating2 > input.radio-btn:checked ~ label:before,
+    .rating2 > input.radio-btn:checked ~ label:before {
+        content: "\2605";
+        position: absolute;
+        left: 0;
+        color: #FFD700;
+    }
+.rating3 {
+        width: 200px;
+        unicode-bidi: bidi-override;
+        direction: rtl;
+        /* text-align: center; */
+        position: relative;
+        
+    }
+
+    .rating3 > label {
+        /* float: right; */
+        display: inline;
+        padding: 0;
+        margin: 0;
+        /* font-size: 36px; */
+        position: relative;
+        width: 1.1em;
+        /* cursor: pointer; */
+        color: #000;
+    }
+
+    .rating3 > input.radio-btn:checked ~ label {
+        color: transparent;
+    }
+
+    .rating3 > input.radio-btn:checked ~ label:before,
+    .rating3 > input.radio-btn:checked ~ label:before {
+        content: "\2605";
+        position: absolute;
+        left: 0;
+        color: #FFD700;
+    }
+
+.checked {
+    color: orange;
+}
+

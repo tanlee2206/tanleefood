@@ -8,10 +8,11 @@
                         <tr class="text-center">
                             <th>&nbsp;</th>
                             <th>&nbsp;</th>
-                            <th>Product name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
+                            <th>Tên món</th>
+                            <th>Cửa hàng</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>tổng từng món</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,6 +28,10 @@
                             <td class="product-name">
                                 <h3>{{$item['foodInfo']->name}}</h3>
                                 {{-- <p>{{$item['foodInfo']->shop->name}}</p> --}}
+                            </td>
+                            <td class="product-name">
+                                <h3>{{$item['shop']->name}}</h3>
+                            
                             </td>
 
                             <td class="price">  {{ number_format($item['foodInfo']->price).' '.'VNĐ'}}</td>

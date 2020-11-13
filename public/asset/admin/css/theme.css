@@ -14850,3 +14850,73 @@ section {
 .caret{
     display: none !important;
 }
+.toast {
+    width: 100%;
+    color: inherit;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 4px;
+    box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.05);
+    display: flex;
+    margin-left: 14px;
+    align-items: center;
+    position: relative;
+  }
+  .toast:not(:last-child) {
+    margin-bottom: 2.4rem;
+  }
+  .toast::before {
+    content: "";
+    width: 0.5rem;
+    height: 100%;
+    background: 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 4px 0 0 4px;
+  }
+  .toast-success::before {
+    background-color: #47d764;
+  }
+  
+  .toast-info::before {
+    background-color: #2f86eb;
+  }
+  
+  .toast-warning::before {
+    background-color: #ffc021;
+  }
+  
+  .icon__holder {
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 50%;
+    margin-right: 2rem;
+    font-size: 1.4rem;
+  }
+  
+  .toast-success .icon__holder {
+    background-color: #47d764;
+  }
+  
+  .toast-info .icon__holder {
+    background-color: #2f86eb;
+  }
+  
+  .toast-warning .icon__holder {
+    background-color: #ffc021;
+  }
+  
+  
+  
+  .close {
+    display: block;
+    margin-left: auto;
+    font-size: 2em;
+    cursor: pointer;
+    color: #bfc0c3;
+  }
+  
