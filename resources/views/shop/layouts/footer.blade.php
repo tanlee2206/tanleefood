@@ -27,6 +27,54 @@
             });
         });
     })
+    $(function(){
+        $(".js_orders_item").click(function(event){
+            event.preventDefault();
+            let $this = $(this);
+            let url = $this.attr('href');
+            $(".orders-id").text('').text($this.attr('data-id'));
+            $("#myModalorders").modal('show');
+            $.ajax({
+            url: url,
+            }).done(function(result){
+                console.log(result);
+                if (result) {
+                    $("#md_content_orders").html('').append(result);
+                }
+            });
+        });
+    })
+    $(function(){
+        $(".js_status_item").click(function(event){
+            event.preventDefault();
+            let $this = $(this);
+            let url = $this.attr('href');
+            let status = $this.attr('data-status') ;
+            $(".status-id").text('').text('đơn hàng : #'+$this.attr('data-id'));
+            $("#myModalStatus").modal('show');
+            $('#formStatus').attr('action', '/shop-manager/updateStatus/'+$this.attr('data-id'));
+            if ( $('#1').val() == status) {
+                $("#1").prop("checked", true);
+            }
+            else if ( $('#2').val() == status) {
+                $("#2").prop("checked", true);
+            }
+            else if ( $('#3').val() == status) {
+                $("#3").prop("checked", true);
+            }
+            else if ( $('#4').val() == status) {
+                $("#4").prop("checked", true);
+            }
+            else if ( $('#5').val() == status) {
+                $("#5").prop("checked", true);
+            }
+           
+            
+
+           
+           
+        });
+    })
 </script>
 {{-- xóa food --}}
 <script>
@@ -118,6 +166,20 @@
             "info": "hiển thị _START_ tới _END_ của _TOTAL_ món ăn",
             "infoEmpty": "không có món ăn hiển thị",
             "lengthMenu": "_MENU_ món ăn",
+            },
+            
+        });
+        $('div.dataTables_info').html('');
+        $('#bootstrap-data-orders-table').DataTable({
+            "language": {
+            "search": "Tìm kiếm",
+            "paginate": {
+                            "next":       "Sau",
+                            "previous":   "Trước"
+                        },
+            "info": "hiển thị _START_ tới _END_ của _TOTAL_ đơn hàng",
+            "infoEmpty": "không có đơn hàng hiển thị",
+            "lengthMenu": "_MENU_ đơn hàng",
             },
             
         });

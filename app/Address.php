@@ -20,5 +20,8 @@ class Address extends Model
     {
         return $this->belongsTo('App\User');
     }
-    
+    public function orders()
+    {
+        return $this->belongsTo('App\Orders');
+    }
 }

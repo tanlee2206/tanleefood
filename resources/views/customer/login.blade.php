@@ -52,18 +52,18 @@
 				</div>
 				<div class="form-wrapper">
 					<div class="social-list align-items-center sign-up">
-						<div class="align-items-center facebook-bg">
+						<a href="{{route('login.google')}}" class="align-items-center facebook-bg">
 							<i class='bx bxl-facebook'></i>
-						</div>
-						<div class="align-items-center google-bg">
+						</a>
+						<a href="{{route('login.google')}}" class="align-items-center google-bg">
 							<i class='bx bxl-google'></i>
-						</div>
-						<div class="align-items-center twitter-bg">
+						</a>
+						<a href="{{route('login.google')}}" class="align-items-center twitter-bg">
 							<i class='bx bxl-twitter'></i>
-						</div>
-						<div class="align-items-center insta-bg">
+						</a>
+						<a href="{{route('login.google')}}" class="align-items-center insta-bg">
 							<i class='bx bxl-instagram-alt'></i>
-						</div>
+						</a>
 					</div>
                 </div>
                 </form>
@@ -103,18 +103,18 @@
 				</div>
 				<div class="form-wrapper">
 					<div class="social-list align-items-center sign-in">
-						<div class="align-items-center facebook-bg">
+						<a href="{{route('login.google')}}" class="align-items-center facebook-bg">
 							<i class='bx bxl-facebook'></i>
-						</div>
-						<div class="align-items-center google-bg">
+						</a>
+						<a href="{{route('login.google')}}" class="align-items-center google-bg">
 							<i class='bx bxl-google'></i>
-						</div>
-						<div class="align-items-center twitter-bg">
+						</a>
+						<a href="{{route('login.google')}}" class="align-items-center twitter-bg">
 							<i class='bx bxl-twitter'></i>
-						</div>
-						<div class="align-items-center insta-bg">
+						</a>
+						<a href="{{route('login.google')}}" class="align-items-center insta-bg">
 							<i class='bx bxl-instagram-alt'></i>
-						</div>
+						</a>
 					</div>
                 </div>
                 </form>

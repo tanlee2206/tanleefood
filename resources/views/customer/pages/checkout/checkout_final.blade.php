@@ -33,4 +33,22 @@ Thanh Toán
      </li>
    </ul>
  </div>
+ <div class="container">
+   <div>
+    {{-- @if(session('message')) --}}
+    <div class="toast toast-success">
+        <div class="icon__holder">
+          <i class="fas fa-check"></i>
+        </div>
+        <div class="text">
+          <h5>thành công</h5>
+          <p>{{'Đặt hàng thành công, bạn có thể xem lại đơn hàng trong lịch sử mua hàng'}}</p>
+        </div>
+        <div class="close">
+          <i class="fas fa-eye"></i>
+        </div>
+      </div>
+    {{-- @endif --}}
+   </div>
+ </div>
 @endsection

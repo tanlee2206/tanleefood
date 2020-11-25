@@ -5,7 +5,7 @@ Cart
 @endsection
 @section('content')
 
-<div class="hero-wrap hero-bread" style="background-image: url('asset/customer/images/bg_1.jpg');">
+<div class="hero-wrap hero-bread"  style="background-image: url('asset/customer/images/bg_5.jpg');    padding: 4em 0;">
     <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
             <div class="col-md-9 ftco-animate text-center">
@@ -29,6 +29,7 @@ Cart
                                 <th>Tên món</th>
                                 <th>Cửa hàng</th>
                                 <th>Giá</th>
+                                <th>giảm giá</th>
                                 <th>Số lượng</th>
                                 <th>tổng từng món</th>
                             </tr>
@@ -53,6 +54,7 @@ Cart
                                 </td>
 
                                 <td class="price">  {{ number_format($item['foodInfo']->price).' '.'VNĐ'}}</td>
+                                <td class="sale">{{$item['foodInfo']->sale}} %</td>
 
                                 <td class="quantity">
                                     <div class="input-group mb-3">

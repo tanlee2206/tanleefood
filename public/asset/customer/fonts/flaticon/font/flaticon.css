@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 20/08/2020 04:40
+  	Creation date: 17/07/2019 12:38
   	*/
 
 @font-face {
@@ -30,15 +30,9 @@ font-style: normal;
 margin-left: 20px;
 }
 
-.flaticon-heart-1:before { content: "\f100"; }
-.flaticon-truck:before { content: "\f101"; }
-.flaticon-delivery:before { content: "\f102"; }
-.flaticon-box:before { content: "\f103"; }
-.flaticon-delivered:before { content: "\f104"; }
-.flaticon-free-delivery:before { content: "\f105"; }
-.flaticon-startup:before { content: "\f106"; }
-.flaticon-air-freight:before { content: "\f107"; }
-.flaticon-warning:before { content: "\f108"; }
-.flaticon-document:before { content: "\f109"; }
-.flaticon-wrench:before { content: "\f10a"; }
-.flaticon-pencil:before { content: "\f10b"; }
+.flaticon-shipped:before { content: "\f100"; }
+.flaticon-box:before { content: "\f101"; }
+.flaticon-award:before { content: "\f102"; }
+.flaticon-customer-service:before { content: "\f103"; }
+.flaticon-salad:before { content: "\f104"; }
+.flaticon-diet:before { content: "\f105"; }

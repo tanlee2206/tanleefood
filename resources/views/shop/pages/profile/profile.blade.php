@@ -17,15 +17,15 @@
                     <div class="card-body card-block">
                           <div class="row form-group">
                             <div class="col-8">
-                            <form action="{{route('shop.update', $shop->id)}}" method="POST" >
+                            <form action="{{route('shop.updateprofile', $shop->id)}}" method="POST" >
                                 @csrf
-                                @method('PUT')
+                                
                                 <div class="form-group">
                                     <label  class=" form-control-label {{ $errors->has('name') ? ' has-error' : '' }}">Tên cửa hàng</label>
                                     <input type="text" name="name" id="name" value="{{$shop->name }}" placeholder="" class="form-control">
                                     <small class="text-danger">{{ $errors->first('name') }}</small>
                                 </div>
-                                    <input type="text" hidden name="slug" id="slug" value="{{$shop->slug }}" placeholder="" class="form-control">
+                                    <input type="text" name="slug" id="slug" value="{{$shop->slug }}" placeholder="" class="form-control">
                                 <div class="form-group">
                                     <label  class=" form-control-label {{ $errors->has('cost') ? ' has-error' : '' }}">mức giá</label>
                                     <input type="text" name="cost" id="cost" value="{{ $shop->cost }}" placeholder="10.000 - 90.000" class="form-control">

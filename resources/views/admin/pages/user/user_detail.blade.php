@@ -126,7 +126,7 @@
                             <div class="{{ $errors->has('category_id') ? ' has-error' : '' }}">
                                 <select class="form-control" style="height: auto;" name="province" id="province" data-live-search="true">
                                     <option >tỉnh</option>
-{{-- 
+
                                     @foreach ($province as $province)
                                         @if ($user_detail->address != null)
                                         <option value="{{ $province->id }} "{{ $user_detail->address->ward->district->province->id == $province->id ? 'selected':'' }} >{{ $province->name }}</option>
@@ -134,7 +134,7 @@
                                         <option value="{{ $province->id }}" >{{ $province->name }}</option>
                                         @endif
 
-                                     @endforeach --}}
+                                     @endforeach
                                 </select>
                                
                             </div>

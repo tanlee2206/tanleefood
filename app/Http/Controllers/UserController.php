@@ -199,7 +199,8 @@ class UserController extends Controller
     public function detailuser(Request $request, $id){
         if ($request->ajax()) {
             $user_detail = User::where('id',$id)->first();
-            $html = view('admin.pages.user.user_detail', compact('user_detail'))->render();
+            $province = Province::all();
+            $html = view('admin.pages.user.user_detail', compact('user_detail','province'))->render();
             return \response()->json($html);
         }
     }

@@ -33,7 +33,7 @@
                <i class="fas fa-tachometer-alt"></i>Shop</a>
                <ul class="list-unstyled navbar__sub-list js-sub-list">
                   <li>
-                     <a href="index.html">thông tin</a>
+                     <a href="{{route('shop.profile')}}">thông tin</a>
                   </li>
                   <li>
                      <a href="index2.html">Chỉnh sửa</a>
@@ -43,20 +43,10 @@
                   </li>
                </ul>
             </li>
-             <li>
-                <a href="table.html">
+             <li class="{{ Request::segment(2) === 'food' ? 'active' : null }}">
+                <a href="{{route('orders.index')}}">
                 <i class="fas fa-table"></i>Đơn Hàng</a>
              </li>
-             <li>
-                <a href="form.html">
-                <i class="far fa-check-square"></i>Địa chỉ</a>
-             </li>
-             <li>
-                <a href="calendar.html">
-                <i class="fas fa-calendar-alt"></i>Khuyến mãi</a>
-             </li>
-          
-           
           </ul>
        </nav>
     </div>

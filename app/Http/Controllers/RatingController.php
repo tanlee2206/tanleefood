@@ -23,7 +23,7 @@ class RatingController extends Controller
    $rating->rating = $request->star;
    $rating->save();
 
-   $rating = Rating::where('shop_id',$request->shop_id)->get();
+   $rating = Rating::where('shop_id',$request->shop_id)->orderBy('id','DESC')->get();
    $html = view('customer.pages.shop.rating_ajax', compact('rating'))->render();
 
    return response()->json($html);

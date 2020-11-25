@@ -7,13 +7,25 @@ use App\Ward;
 use App\Permission;
 use App\District;
 use App\Province;
+use Auth;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
     public function getLogin()
     {
-        return view('customer.login');
+        if (Auth::user() != null) {
+            if (Auth::user()->permission->permission == 'customer') {
+                return back();
+            }else {
+                Auth::logout();
+                return view('customer.login');
+            }
+        }else{
+            return view('customer.login');
+
+        }
+       
     }
     public function postLogin(Request $request)
     {

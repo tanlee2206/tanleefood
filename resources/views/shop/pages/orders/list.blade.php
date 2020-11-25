@@ -13,8 +13,8 @@
                 <div class="col-md-12">
                     <div class="overview-wrap">
                         <h2 class="title-1 m-b-25">Bảng đơn hàng</h2>
-                         <a href="{{route('orders.create')}}" class="au-btn au-btn-icon au-btn--blue">
-                            <i class="zmdi zmdi-plus"></i>Thêm đơn hàng</a>
+                         {{-- <a href="{{route('orders.create')}}" class="au-btn au-btn-icon au-btn--blue">
+                            <i class="zmdi zmdi-plus"></i>Thêm đơn hàng</a> --}}
                     </div>
                 </div>
             </div>
@@ -40,17 +40,51 @@
                                 {{-- <table  class="table table-shop table-borderless table-striped"> --}}
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>tin nhắn</th>
+                                        <th>STT</th>
+                                        <th>MÃ ĐƠN</th>
+                                        <th>KHÁCH HÀNG</th>
+                                        <th>ĐIỆN THOẠI</th>
+                                        <th>GIAO ĐẾN</th>
+                                        <th>TRANG THÁI</th>
+                                        <th>TIN NHẮN</th>
                                         <th></th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($orders as $key => $item)                                
+                                    @foreach ($orders as $key => $item)  
+                                    {{-- {{dd($item->user)}}                               --}}
                                     <tr>
                                         <td>{{$key + 1}}</td>
+                                        <td>#{{$item->id}}</td>
+                                        <td>{{$item->user->last_name.' '.$item->user->first_name}}</td>
+                                        <td>{{$item->user->phone}}</td>
+                                        <td>{{Str::limit($item->address->address_detail,40)}}</td>
+                                        <td class="status-orders">
+                                            <a href="#" data-id="{{$item->id}}" data-status="{{$item->status->id}}"
+                                               class="js_status_item 
+                                               @if($item->status->id == 1)
+                                               badge badge-primary
+                                               @elseif($item->status->id == 2)
+                                               badge badge-warning
+                                               @elseif($item->status->id == 3)
+                                               badge badge-info
+                                               @elseif($item->status->id == 4)
+                                               badge badge-secondary
+                                               @elseif($item->status->id == 5)
+                                               badge badge-success
+                                               @elseif($item->status->id == 6)
+                                               badge badge-danger
+                                               @endif">{{$item->status->status}}
+                                            </a>
+                                        </td>
                                         <td>{{$item->message}}</td>
                                         <td>
+                                            <div class="table-data-feature">
+                                                <a href="{{route('orders.detail',$item->id)}}" data-id="{{$item->id}}" class="item js_orders_item" title="detail">
+                                                    <i class="zmdi zmdi-eye"></i>
+                                                </a >
+                                            </div>
                                         </td>
                                     </tr> 
                                     @endforeach         
@@ -72,24 +106,41 @@
             </div>
         </div>
     </div>
-    {{-- delete modal --}}
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+       <!-- Modal change status-->
+    <div class="modal fade" id="myModalStatus" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
+               
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete orders Confirmation</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                       <span aria-hidden="true">&times;</span>
-                    </button>
+                  <p class="status-id"></p>
                 </div>
-                <div class="modal-body">
-                    <p>Bạn có muốn xóa đơn hàng ?</p>
-                    <input type="hidden" name="del_id"/>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Trở lại</button>
-                    <button type="button" class="btn btn-danger btn-raised" id="delete">Xóa</button>
-                </div>
+                    <div class="modal-body" id="md_content_status">
+                        <div id="form-wrapper">
+                        <form action="" method="post" id="formStatus">
+                            @csrf
+                            {{-- @method('PUT') --}}
+                                <div id="debt-amount-slider">
+                                    <input type="radio" name="status_id" id="1" value="1" required>
+                                    <label for="1" data-debt-amount="chờ xử lý"></label>
+                                    <input type="radio" name="status_id" id="2" value="2" required>
+                                    <label for="2" data-debt-amount="đã gởi đi"></label>
+                                    <input type="radio" name="status_id" id="3" value="3" required>
+                                    <label for="3" data-debt-amount="đã xử lý"></label>
+                                    <input type="radio" name="status_id" id="4" value="4" required>
+                                    <label for="4" data-debt-amount="đang vận chuyển"></label>
+                                    <input type="radio" name="status_id" id="5" value="5" required>
+                                    <label for="5" data-debt-amount="đã giao hàng"></label>
+                                    {{-- <input type="radio" name="status_id" id="6" value="6" required>
+                                    <label for="6" data-debt-amount="hủy đơn hàng"></label> --}}
+                                    <div id="debt-amount-pos"></div>
+                                    
+                                </div>
+                        </form>
+                            <button type="submit" form="formStatus">Chuyển trạng thái</button>
+                        </div>
+                        
+                    </div>
+                
             </div>
         </div>
     </div>

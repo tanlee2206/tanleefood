@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Shop;
 use App\Food;
+use App\Orders;
 use App\Category;
 use Auth;
 use App\Address;
@@ -10,6 +11,7 @@ use App\Ward;
 use App\District;
 use App\User;
 use App\Rating;
+use App\Wishlist;
 use App\Province;
 
 
@@ -93,7 +95,7 @@ class ShopController extends Controller
         
         $shop = Shop::where('slug', $slug)->firstOrFail();
         $shop_id = $shop->id;
-        $rating = Rating::where('shop_id',$shop_id)->get();
+        $rating = Rating::where('shop_id',$shop_id)->orderBy('id','DESC')->get();
         $foods = Food::where('shop_id',$shop_id)->get();
 
         
@@ -111,19 +113,19 @@ class ShopController extends Controller
 
            }
         }
+        if (Auth::user() != null) {
+            $wishlist = Wishlist::where('shop_id',$shop_id)->where('user_id',Auth::user()->id)->first();
+        }else{
+            $wishlist = null;
+        }
+        
         // dd($foods->category->id);
         // $category = Category::whereIn('id', $foods->category->id);
         // // dd($foods);
-        return view('customer.pages.shop.shop_single',compact('shop','foods','province','province_now','category_name','rating' ));
+        return view('customer.pages.shop.shop_single',compact('shop','foods','province','province_now','category_name','rating','wishlist' ));
         
     }
-    public function dashboard()
-    {
-        $shop = Shop::where('user_id',Auth::user()->id)->first();
-        // $category = Category::all();
-        // dd($shop);
-        return view('shop.index',compact('shop'));
-    }
+   
     public function index(){
         $shop = Shop::all();
         // dd($user);
@@ -274,5 +276,59 @@ class ShopController extends Controller
         }
     //    return view('admin.pages.shop.profile',compact('shop'));
     }
+    public function updateprofile(Request $request, $id){
+        // dd($request);
+        // $this->validate($request, [
+       //     // Validate the max number of characters to avoid database truncation
+       //     'name' => ['required', 'string', 'max:100','min:1'],
+       //     
+       //     'img' => ['required'],
+       //     'address'=>['required', 'string'],
+       //    
+       //     'ward_id'=>['required'],
+       //    
+       //     // The user should select at least one category
+       // ],[
+       //     'name.required'=>'Bạn chưa nhập tên ',
+       //     'name.min'=>'Tên phải có độ dài từ 1 đến 100 ký tự',
+       //     'name.max'=>'Tên phải có độ dài từ 1 đến 100 ký tự',
+       //     
+       //     'img.required'=>'Bạn chọn hình ảnh',
+       //     'address.required'=>'Bạn chưa nhập địa chỉ chi tiết',
+       //     'ward_id.required'=>'Bạn chưa chọn phường xã',   
+       // ]
+       // );
+       $shop = Shop::find($id);
+       if ($shop->address != null) {
+           $address = Address::find($shop->address->id);
+       }
+       else{
+           $address = new Address();
+       }
+       $shop->slug = $request->slug;
+       $shop->name = $request->name;
+       $shop->cost = $request->cost;
+       $shop->open_time = $request->open_time;
+       $shop->close_time = $request->close_time;
+       $shop->description = $request->description;
+       $shop->img = $request->img;
+       $shop->save();
+       
+
+       $address->ward_id = $request->ward_id;
+       $address->shop_id = $shop->id;
+       $address->address_detail = $request->address;
+       
+       $address->save();  
+       return redirect()->back()->with('message', 'chỉnh sửa thành công!');
+       
+       
+   }
+   public function dashboard()
+   {
+       $shop = Shop::where('user_id',Auth::user()->id)->first();
+       $orders = Orders::where('shop_id',$shop->id)->count();
+       return view('shop.index',compact('shop','orders'));
+   }
 
 }

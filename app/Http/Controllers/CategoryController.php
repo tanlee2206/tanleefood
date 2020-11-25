@@ -39,9 +39,19 @@ class CategoryController extends Controller
             return view('admin.pages.category.edit', compact('category'));
     }
     public function destroy(Request $request){
-        Category::find($request->id)->delete();
-        $category = Category::all();
+        $cate = Category::find($request->id);
+        if ($cate->food == null) {
+            $cate->delete();
+            $category = Category::all();
+            // dd($shop);
+            return view('admin.pages.category.list_ajax',compact('category'))->with('message', 'xóa thành công!');
+        }
+        else{
+            $category = Category::all();
         // dd($shop);
         return view('admin.pages.category.list_ajax',compact('category'));
+
+        }
+        
     }
 }

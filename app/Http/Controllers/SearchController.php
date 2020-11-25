@@ -27,5 +27,38 @@ class SearchController extends Controller
             return \response()->json($html);
         }
     }
+    public function filter($province,Request $request)
+    {
+        $province_now = Province::find($province);
+    //     foreach ($province_now->address as $address) {   
+    //         $shop_id[] = $address->shop_id;
+
+    //    }
+
+        if ($request->ajax()){
+            $shop = Shop::query()->name($request)
+                                 ->province($province_now)
+                                 ->local($request)
+                                 ->cate($request)
+                                 ->get();
+            // dd($shop);
+            $html = view('customer.pages.search.filter_ajax',compact('shop','province_now'))->render();
+            return \response()->json($html);
+            // return $request;
+        }
+           
+    
+    }
+    public function getfilter($province){
+        $province_now = Province::find($province);
+        $province = Province::whereIn('name', ['Thành phố Hà Nội', 'Thành phố Cần Thơ','Thành phố Hồ Chí Minh'])->get();
+        $category = Category::all();
+        
+       $shop = Shop::query()->province($province_now)->get();
+        $districts = District::where('province_id', $province_now->id)->get();
+        return view('customer.pages.search.search',compact('province','province_now','category','districts','shop'));
+        
+    }
+    
 
 }

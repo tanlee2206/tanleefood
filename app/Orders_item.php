@@ -13,6 +13,6 @@ class Orders_item extends Model
     }
     public function food()
     {
-        return $this->hasOne('App\Food');
+        return $this->belongsTo('App\Food','food_id', 'id');
     }
 }

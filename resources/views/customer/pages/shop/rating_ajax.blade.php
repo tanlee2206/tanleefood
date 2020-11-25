@@ -1,7 +1,7 @@
 @foreach ($rating as $item)
 <li class="comment">
   <div class="vcard bio">
-    <img src="{{$item->user->img}}" width="50px" height="50px" alt="Image placeholder">
+    <img src="{{$item->user->img}}" width="30px" height="30px" alt="Image placeholder">
   </div>
   <div class="comment-body">
   <h3 style="margin-bottom: 0px">{{$item->user->last_name}} {{$item->user->first_name}}</h3>

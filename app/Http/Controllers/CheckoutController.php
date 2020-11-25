@@ -57,51 +57,34 @@ class CheckoutController extends Controller
         //     'ward_id.required'=>'Bạn chưa chọn phường xã',   
         // ]
         // );
-        $cart = Session::get("Cart");
-
-        $shop =  $shop[]=array(
-            "orders_id" =>null,
-            "shop_id" =>  null
-             );
-        foreach ($cart->food as $key) {
-            if (!in_array_r($key['foodInfo']->shop_id,$shop)) {
-               
-                $orders = new Orders();
-                $address = new Address();
-
-                $orders->user_id = $request->user_id;
-                // $orders->total = $request->total;
-                $orders->payment_method = $request->payment_method;
-                $orders->message=$request->message;
-                $orders->shop_id=$key['foodInfo']->shop_id;
-                $orders->save();
-                $shop[]=array(
-               "orders_id" => $orders->id,
-               "shop_id" =>  $key['foodInfo']->shop_id
+       if ($request->payment_method == 1) {
+            $cart = Session::get("Cart");
+            $shop =  $shop[]=array(
+                "orders_id" =>null,
+                "shop_id" =>  null
                 );
-                $address->orders_id = $orders->id;
-                $address->ward_id = $request->ward_id;
-                $address->address_detail = $request->address;
-                $address->save();
-
-                $orders_item = new Orders_item;
-                $orders_item->orders_id = $orders->id;
-                $orders_item->food_id=$key['foodInfo']->id; 
+            foreach ($cart->food as $key) {
+                if (!in_array_r($key['foodInfo']->shop_id,$shop)) {
                 
-                $orders_item->amount =$key['price'];
-                $orders_item->number = $key['quanty'];
-                // $food = Food::find($key['foodInfo']->id);
-                // $food->number = $food->number - $key['quanty'];
-                $orders_item->save();
-                // $food ->save();
-                
+                    $orders = new Orders();
+                    $address = new Address();
 
-            }
-          
-            else{
-                foreach ($shop as $value) {
-                   if ($value['shop_id'] == $key['foodInfo']->shop_id) {
-                    $orders = Orders::find($value['orders_id']);
+                    $orders->user_id = $request->user_id;
+                    // $orders->total = $request->total;
+                    $orders->payment_method = $request->payment_method;
+                    $orders->message=$request->message;
+                    $orders->total = $key['price'];
+                    $orders->shop_id=$key['foodInfo']->shop_id;
+                    $orders->save();
+                    $shop[]=array(
+                        "orders_id" => $orders->id,
+                        "shop_id" =>  $key['foodInfo']->shop_id
+                    );
+                    $address->orders_id = $orders->id;
+                    $address->ward_id = $request->ward_id;
+                    $address->address_detail = $request->address;
+                    $address->save();
+
                     $orders_item = new Orders_item;
                     $orders_item->orders_id = $orders->id;
                     $orders_item->food_id=$key['foodInfo']->id; 
@@ -112,20 +95,162 @@ class CheckoutController extends Controller
                     // $food->number = $food->number - $key['quanty'];
                     $orders_item->save();
                     // $food ->save();
-                   }
-                }
-            
+                    
+
+                } 
+                else{
+                    foreach ($shop as $value) {
+                    if ($value['shop_id'] == $key['foodInfo']->shop_id) {
+                        $orders = Orders::find($value['orders_id']);
+                        $orders->total +=  $key['price'];
+                        $orders->save();
+                        $orders_item = new Orders_item;
+                        $orders_item->orders_id = $orders->id;
+                        $orders_item->food_id=$key['foodInfo']->id; 
+                        
+                        $orders_item->amount =$key['price'];
+                        $orders_item->number = $key['quanty'];
+                        // $food = Food::find($key['foodInfo']->id);
+                        // $food->number = $food->number - $key['quanty'];
+                        $orders_item->save();
+                        // $food ->save();
+                    }
+                    }
+                
+                }          
             }
-           
+            // dd($shop);
+            Session::forget("Cart");
+            $province_now = Province::find($province);
+            $province = Province::whereIn('name', ['Thành phố Hà Nội', 'Thành phố Cần Thơ','Thành phố Hồ Chí Minh'])->get();
+            return view('customer.pages.checkout.checkout_final', compact('province_now','province'))->with('message', 'đơn hàng đã được duyệt');
         }
-        // dd($shop);
-        // Session::forget("Cart");
+        if ($request->payment_method == 2) {
+            $cart = Session::get("Cart");
+            $shop =  $shop[]=array(
+                "orders_id" =>null,
+                "shop_id" =>  null
+                );
+            foreach ($cart->food as $key) {
+                if (!in_array_r($key['foodInfo']->shop_id,$shop)) {
+                
+                    $orders = new Orders();
+                    $address = new Address();
+
+                    $orders->user_id = $request->user_id;
+                    // $orders->total = $request->total;
+                    $orders->payment_method = $request->payment_method;
+                    $orders->message=$request->message;
+                    $orders->total = $key['price'];
+                    $orders->shop_id=$key['foodInfo']->shop_id;
+                    $orders->save();
+                    $shop[]=array(
+                        "orders_id" => $orders->id,
+                        "shop_id" =>  $key['foodInfo']->shop_id
+                    );
+                    $address->orders_id = $orders->id;
+                    $address->ward_id = $request->ward_id;
+                    $address->address_detail = $request->address;
+                    $address->save();
+
+                    $orders_item = new Orders_item;
+                    $orders_item->orders_id = $orders->id;
+                    $orders_item->food_id=$key['foodInfo']->id; 
+                    
+                    $orders_item->amount =$key['price'];
+                    $orders_item->number = $key['quanty'];
+                    // $food = Food::find($key['foodInfo']->id);
+                    // $food->number = $food->number - $key['quanty'];
+                    $orders_item->save();
+                    // $food ->save();
+                    
+
+                } 
+                else{
+                    foreach ($shop as $value) {
+                    if ($value['shop_id'] == $key['foodInfo']->shop_id) {
+                        $orders = Orders::find($value['orders_id']);
+                        $orders->total +=  $key['price'];
+                        $orders->save();
+                        $orders_item = new Orders_item;
+                        $orders_item->orders_id = $orders->id;
+                        $orders_item->food_id=$key['foodInfo']->id; 
+                        
+                        $orders_item->amount =$key['price'];
+                        $orders_item->number = $key['quanty'];
+                        // $food = Food::find($key['foodInfo']->id);
+                        // $food->number = $food->number - $key['quanty'];
+                        $orders_item->save();
+                        // $food ->save();
+                    }
+                    }
+                
+                }          
+            }
+            // dd($shop);
+            // Session::forget("Cart");
+            session(['cost_id' => $request->user_id]);
+            session(['url_prev' => url()->previous()]);
+            $vnp_TmnCode = "BLM6SRIX"; //Mã website tại VNPAY 
+            $vnp_HashSecret = "XVVYHGEGYETWOQTWRHMJTSJFYIXUVUOX"; //Chuỗi bí mật
+            $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+            $vnp_Returnurl = "http://localhost:8000/return-vnpay";
+            $vnp_TxnRef = date("YmdHis"); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+            $vnp_OrderInfo = "Thanh toán hóa đơn phí dich vụ";
+            $vnp_OrderType = 'billpayment';
+            $vnp_Amount = ($cart->totalPrice) *100 ;
+            $vnp_Locale = 'vn';
+            $vnp_IpAddr = request()->ip();
+
+            $inputData = array(
+                "vnp_Version" => "2.0.0",
+                "vnp_TmnCode" => $vnp_TmnCode,
+                "vnp_Amount" => $vnp_Amount,
+                "vnp_Command" => "pay",
+                "vnp_CreateDate" => date('YmdHis'),
+                "vnp_CurrCode" => "VND",
+                "vnp_IpAddr" => $vnp_IpAddr,
+                "vnp_Locale" => $vnp_Locale,
+                "vnp_OrderInfo" => $vnp_OrderInfo,
+                "vnp_OrderType" => $vnp_OrderType,
+                "vnp_ReturnUrl" => $vnp_Returnurl,
+                "vnp_TxnRef" => $vnp_TxnRef,
+            );
+
+            if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+                $inputData['vnp_BankCode'] = $vnp_BankCode;
+            }
+            ksort($inputData);
+            $query = "";
+            $i = 0;
+            $hashdata = "";
+            foreach ($inputData as $key => $value) {
+                if ($i == 1) {
+                    $hashdata .= '&' . $key . "=" . $value;
+                } else {
+                    $hashdata .= $key . "=" . $value;
+                    $i = 1;
+                }
+                $query .= urlencode($key) . "=" . urlencode($value) . '&';
+            }
+
+            $vnp_Url = $vnp_Url . "?" . $query;
+            if (isset($vnp_HashSecret)) {
+            // $vnpSecureHash = md5($vnp_HashSecret . $hashdata);
+                $vnpSecureHash = hash('sha256', $vnp_HashSecret . $hashdata);
+                $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
+            }
+            Session::forget("Cart");
+            return redirect($vnp_Url);
 
 
 
-        // $province_now = Province::find($province);
-        // $province = Province::whereIn('name', ['Thành phố Hà Nội', 'Thành phố Cần Thơ','Thành phố Hồ Chí Minh'])->get();
-        // return view('customer.pages.checkout.checkout_final', compact('province_now','province'))->with('message', 'đơn hàng đã được duyệt');
+
+
+        //     $province_now = Province::find($province);
+        //     $province = Province::whereIn('name', ['Thành phố Hà Nội', 'Thành phố Cần Thơ','Thành phố Hồ Chí Minh'])->get();
+        //     return view('customer.pages.checkout.checkout_final', compact('province_now','province'))->with('message', 'đơn hàng đã được duyệt');
+        }
 
         
     }

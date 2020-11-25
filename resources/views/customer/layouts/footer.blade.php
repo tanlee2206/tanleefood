@@ -78,15 +78,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-						  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</p>
-          </div>
-        </div>
+        
       </div>
     </footer>
     
@@ -124,9 +116,10 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
   <!-- Bootstrap theme -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js"></script>
-  <script src="asset/customer/js/jquery.jqZoom.js"></script>
+<script src="asset/customer/js/jquery.jqZoom.js"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=409238026928522&autoLogAppEvents=1" nonce="vNkMzanE"></script>
   
 <script>
     $(function(){
@@ -184,24 +177,6 @@
 
 
 {{-- search script --}}
-<script type="text/javascript">
-  $('#search').on('keyup',function(){
-      $value = $(this).val();
-      $.ajax({
-          type: 'get',
-          url: '{{ URL::to('search') }}',
-          data: {
-              'search': $value,
-              'shop_id': $('input[name=shop_id]').val()
-          },
-          success:function(data){
-              $("#menu-food").empty();
-              $("#menu-food").html(data);
-          }
-      });
-  })
-  $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
-</script>
 
 <script type="text/javascript">
   $('#province').change(function(){
@@ -292,6 +267,236 @@
        });
   });
 </script>
+<script>
+  $('.food-hot').on('click', function(event){
+			
+			event.preventDefault();
 
+			$('html,body').animate({
+				scrollTop: $('.section-hot').offset().top-100
+			}, 600, 'easeInOutExpo');
+			
+			return false;
+    });
+    $('.food-new').on('click', function(event){
+			
+			event.preventDefault();
+
+			$('html,body').animate({
+				scrollTop: $('.section-new').offset().top-100
+			}, 1200, 'easeInOutExpo');
+			
+			return false;
+    });
+    $('.what-food').on('click', function(event){
+			
+			event.preventDefault();
+
+			$('html,body').animate({
+				scrollTop: $('.section-what').offset().top-100
+			}, 1200, 'easeInOutExpo');
+			
+			return false;
+		});
+</script>
+<script>
+  $(document).ready(function(){
+    
+    $("#editProfile").click(function(){
+        $("#userProfile").hide();
+      
+        $("#formEditProfile").show();
+    });
+    $("#cancelProfile").click(function(){
+        $("#userProfile").show();
+      
+        $("#formEditProfile").hide();
+    });
+    // $("#hidePanel").click(function(){
+    //     $("#panel").hide();
+    // });
+  
+});
+</script>
+<script type="text/javascript">
+  $('#filterButton').on('click',function(){
+    event.preventDefault();
+      $.ajax({
+          type: 'post',
+          url: $('#formFilter').attr('action'),
+          data: {
+              "_token": "{{ csrf_token() }}",
+              'name': $('input[name=name]').val(),
+              'district': $("select[name=district] option:selected").val(),
+              'category': $("select[name=category] option:selected").val(),
+          },
+          success:function(response){
+              $("#filterResult").empty();
+              $("#filterResult").html(response);
+          }
+      });
+      // console.log('aa');
+  })
+  $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
+<script>
+  const searchForm = document.querySelector("#search-voice");
+const searchFormInput = searchForm.querySelector("input"); // <=> document.querySelector("#search-form input");
+const info = document.querySelector(".info");
+
+// The speech recognition interface lives on the browser’s window object
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; // if none exists -> undefined
+
+if(SpeechRecognition) {
+  console.log("Your Browser supports speech Recognition");
+  
+  const recognition = new SpeechRecognition();
+  recognition.continuous = true;
+  recognition.lang = "vi-VN";
+
+  searchForm.insertAdjacentHTML("beforeend", '<button type="button"><i class="fas fa-microphone"></i></button>');
+  searchFormInput.style.paddingRight = "50px";
+
+  const micBtn = searchForm.querySelector("button");
+  const micIcon = micBtn.firstElementChild;
+
+  micBtn.addEventListener("click", micBtnClick);
+  function micBtnClick() {
+    if(micIcon.classList.contains("fa-microphone")) { // Start Voice Recognition
+      recognition.start(); // First time you have to allow access to mic!
+    }
+    else {
+      recognition.stop();
+    }
+  }
+
+  recognition.addEventListener("start", startSpeechRecognition); // <=> recognition.onstart = function() {...}
+  function startSpeechRecognition() {
+    micIcon.classList.remove("fa-microphone");
+    micIcon.classList.add("fa-microphone-slash");
+    searchFormInput.focus();
+    console.log("Voice activated, SPEAK");
+  }
+
+  recognition.addEventListener("end", endSpeechRecognition); // <=> recognition.onend = function() {...}
+  function endSpeechRecognition() {
+    micIcon.classList.remove("fa-microphone-slash");
+    micIcon.classList.add("fa-microphone");
+    searchFormInput.focus();
+    console.log("Speech recognition service disconnected");
+  }
+
+  recognition.addEventListener("result", resultOfSpeechRecognition); // <=> recognition.onresult = function(event) {...} - Fires when you stop talking
+  function resultOfSpeechRecognition(event) {
+    const current = event.resultIndex;
+    const transcript = event.results[current][0].transcript;
+    
+    if(transcript.toLowerCase().trim()==="stop recording") {
+      recognition.stop();
+    }
+    else if(!searchFormInput.value) {
+      searchFormInput.value = transcript;
+    }
+    else {
+      if(transcript.toLowerCase().trim()==="go") {
+        searchForm.submit();
+      }
+      else if(transcript.toLowerCase().trim()==="reset input") {
+        searchFormInput.value = "";
+      }
+      else {
+        searchFormInput.value = transcript;
+      }
+    }
+    // searchFormInput.value = transcript;
+    // searchFormInput.focus();
+    // setTimeout(() => {
+    //   searchForm.submit();
+    // }, 500);
+  }
+  
+  // info.textContent = 'Voice Commands: "stop recording", "reset input", "go"';
+  
+}
+else {
+  console.log("Your Browser does not support speech Recognition");
+  info.textContent = "Your Browser does not support Speech Recognition";
+}
+</script>
+<script type="text/javascript">
+  $('#search').on('keyup',function(){
+      $value = $(this).val();
+      $.ajax({
+          type: 'get',
+          url: '{{ URL::to('search') }}',
+          data: {
+              'search': $value,
+              'shop_id': $('input[name=shop_id]').val()
+          },
+          success:function(data){
+              $("#menu-food").empty();
+              $("#menu-food").html(data);
+          }
+      });
+  })
+  $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
+<script type="text/javascript">
+  $('#btn-heart').on('change',function(){
+      $value = $(this).val();
+      
+      if($(this).is(":checked")) {
+        console.log('yêu thích');
+        $.ajax({
+          type: 'post',
+          url: '{{ URL::to('addwishlist') }}',
+          data: {
+               "_token": "{{ csrf_token() }}",
+              'user_id': $('input[name=user_id]').val(),
+              'shop_id': $('input[name=shop_id]').val()
+          },
+          success:function(data){
+            Swal.fire({
+                toast: true,
+                position: 'top-start',
+                background: '#7fff9c',
+                icon: 'success',
+                text: ' đã thêm vào yêu thích',
+                showConfirmButton: false,
+                timer: 1500,
+                width: 350,
+              })
+          }
+        });
+        
+        } else {
+          console.log('không yêu thích');
+          $.ajax({
+            type: 'post',
+            url: '{{ URL::to('removewishlist') }}',
+            data: {
+                "_token": "{{ csrf_token() }}",
+                'user_id': $('input[name=user_id]').val(),
+                'shop_id': $('input[name=shop_id]').val()
+            },
+            success:function(data){
+              Swal.fire({
+                  toast: true,
+                  position: 'top-start',
+                  background: '#7fff9c',
+                  icon: 'error',
+                  text: ' đã xóa khỏi yêu thích',
+                  showConfirmButton: false,
+                  timer: 1500,
+                  width: 350,
+                })
+            }
+          });
+        }
+      
+      
+  })
+  $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+</script>
 </body>
 </html>

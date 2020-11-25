@@ -29,9 +29,9 @@ class Cart{
 			}
 		}
 		$newfood['quanty']++;
-		$newfood['price'] = $newfood['quanty'] * $food->price;
+		$newfood['price'] = $newfood['quanty'] * ($food->price - $food->price*$food->sale/100) ;
 		$this->food[$id] = $newfood;
-		$this->totalPrice += $food->price;
+		$this->totalPrice +=($food->price - $food->price*$food->sale/100);
 		$this->totalQuanty ++;
 	}
 	public function DeleteItemCart($id){
@@ -44,7 +44,7 @@ class Cart{
 		$this->totalQuanty -= $this->food[$id]['quanty'];
 
 		$this->food[$id]['quanty'] = $quanty;
-		$this->food[$id]['price']= $quanty* $this->food[$id]['foodInfo']->price;
+		$this->food[$id]['price']= $quanty* ($this->food[$id]['foodInfo']->price - ($this->food[$id]['foodInfo']->price * $this->food[$id]['foodInfo']->sale / 100));
 
 		$this->totalPrice += $this->food[$id]['price'];
 		$this->totalQuanty += $this->food[$id]['quanty'];

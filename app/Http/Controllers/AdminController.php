@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
-use App\Food;
 use App\Shop;
+use App\Food;
 use App\Category;
+use Auth;
+use App\Address;
+use App\Ward;
+use App\District;
+use App\User;
+use App\Orders;
+use App\Rating;
+use App\Province;
+use DB;
 
 class AdminController extends Controller
 {
@@ -33,6 +41,18 @@ class AdminController extends Controller
         // dd($food);
         return view('admin.pages.food.list',compact('food'));
     }
+    public function dashboard()
+    {
+        $users = User::where('permission_id', '=', 3)->count();
+        $shop = Shop::where('status', '=', 1)->count();
+        $orders = Orders::count();
+        $orders_total =Orders::sum('total');
+
+
+
+        return view('admin.index',compact('users','shop','orders','orders_total'));
+    }
+
 
     
 }

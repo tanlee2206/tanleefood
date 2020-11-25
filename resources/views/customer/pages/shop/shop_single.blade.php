@@ -72,6 +72,36 @@
                     {{$shop->cost}}
                   </p>
               </div>
+             
+              
+                <div id="fb-root"></div>
+                <div class="fb-share-button" data-href="http://127.0.0.1:8000/59/shop-single/{{$shop->slug}}" data-layout="button_count" data-size="small">
+                  <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+                  Chia sẻ
+                  </a>
+                </div>
+                @if (Auth::user() != null)
+                <div class="wishlist">
+                  <form action="">
+                    Thêm vào yêu thích
+                    <input type="checkbox" 
+                    @if ($wishlist != null)
+                        checked
+                    @endif
+                    
+                    
+                    name="" id="btn-heart" />
+                    
+                    <label class="btn-love" for="btn-heart"></label>
+
+                    <input hidden value="{{Auth::user()->id}}" name="user_id" type="">
+                    <input hidden value="{{$shop->id}}" name="shop_id" type="">
+                  </form>
+                </div>
+                @endif
+                
+             
+          
             <p>{!!$shop->description !!}</p>
               <div class="tag-widget post-tag-container mb-5 mt-5">
                 <div class="tagcloud">
@@ -80,6 +110,7 @@
                   @endforeach
                 </div>
               </div>
+              
             </div>
           </div>
         </div> <!-- .col-md-8 -->
@@ -90,12 +121,12 @@
         <div class="col-lg-12 sidebar ftco-animate">
           <div class="row">
             <div class="col-lg-12 search-panel">
-              <form action="#" class="search-form">
+              <form action="#" id="search-voice" class="search-form">
                 <div class="row">
                   <div class="sidebar-box col-lg-5">
                     <div class="form-group">
                       <span class="icon ion-ios-search"></span>
-                      <input type="text" autocomplete="off" id="search" name="search" class="form-control" placeholder="Search...">
+                      <input type="text" autocomplete="off" id="search"  name="search" class="form-control "  target="_blank" placeholder="Search...">
                     <input value="{{$shop->id}}" name="shop_id" hidden>
                     </div>
                 </div>
@@ -124,11 +155,11 @@
                           @if ($item->image_food != null)
                           @foreach ($item->image_food as $image)
                               @if ($image->index == 0)
-                              <img src="{{$image->path}}" class="image" width="70" height="70" alt="Image placeholder" >    
+                              <img src="{{$image->path}}" class="image" width="80" height="70" alt="Image placeholder" >    
                               @endif
                           @endforeach
                           @else
-                          <img src="{{$item->img}}" class="image" width="70" height="70" alt="Image placeholder" >
+                          <img src="{{$item->img}}" class="image" width="80" height="70" alt="Image placeholder" >
                           @endif
                           {{-- <img src="{{$item->img}}" class="image" width="70" height="70" alt="Image placeholder" > --}}
                           @if ($item->sale > 0)
@@ -175,16 +206,49 @@
             </div>
             <div class="col-lg-4 comment-panel">
               <div class="">
-                <h3 class="mb-5"></h3>
+               
+                  @if (Auth::user())
+                  <div class="comment-form-wrap mt-3 " style="height: 14rem">
+                  <form action="#" id="ratingform"  class="">
+                    <div class="form-group mb-0">
+                      <textarea name="content" id="message" cols="30" rows="3" class="form-control "></textarea>
+                    <input hidden value="{{$shop->id}}" name="shop_id">
+                    <input hidden value="{{Auth::user() ? Auth::user()->id : ''}}" name="user_id">
+                    </div>
+                    
+                    <div class="rating2">
+                      <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
+                      <label for="star5" >☆</label>
+                      <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
+                      <label for="star4" >☆</label>
+                      <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
+                      <label for="star3" >☆</label>
+                      <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
+                      <label for="star2" >☆</label>
+                      <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
+                      <label for="star1" >☆</label>
+                      <div class="clear"></div>
+                    </div>
+                    <div class="form-group" >
+                      <input type="submit" value="Post Comment" id="save-comment" class="btn btn-success">
+                    </div>
+                  </form>
+                  @else
+                  <div class="form-group mt-3" style="height: 2rem">
+                  <p>bạn phải đăng nhập để bình luận</p>
+                  @endif
+                  </div>
+                </div>
+                <h3 class="mb-3"></h3>
                 <ul class="comment-list" id="rating_list">
                   @foreach ($rating as $item)
                   <li class="comment">
                     <div class="vcard bio">
-                      <img src="{{$item->user->img}}" width="50px" height="50px" alt="Image placeholder">
+                      <img src="{{$item->user->img}}" width="30px" height="30px" alt="Image placeholder">
                     </div>
                     <div class="comment-body">
-                    <h3 style="margin-bottom: 0px">{{$item->user->last_name}} {{$item->user->first_name}}</h3>
-                      <span class="meta"> {{date("D, d.m.Y h:i a", strtotime($item->created_at))}}</span>
+                    <h3 style="margin-bottom: 0px">{{$item->user->last_name}} {{$item->user->first_name}} <span class="meta"> {{date("D, d.m.Y h:i a", strtotime($item->created_at))}}</span></h3>
+                      
                     <p style="margin-bottom: 0px">{{$item->content}}</p>
                     <div class="rating3">
                       <input id="star10" type="radio" value="5" disabled class="radio-btn hide" {{$item->rating == 5 ?'checked': ''}} />
@@ -210,38 +274,7 @@
                 </ul>
                 <!-- END comment-list -->
                 
-                <div class="comment-form-wrap " style="height: 15rem">
-                  @if (Auth::user())
-                  <form action="#" id="ratingform"  class="">
-                    <div class="form-group">
-                      <textarea name="content" id="message" cols="30" rows="3" class="form-control"></textarea>
-                    <input hidden value="{{$shop->id}}" name="shop_id">
-                    <input hidden value="{{Auth::user() ? Auth::user()->id : ''}}" name="user_id">
-                    </div>
-                    
-                    <div class="rating2">
-                      <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" />
-                      <label for="star5" >☆</label>
-                      <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" />
-                      <label for="star4" >☆</label>
-                      <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" />
-                      <label for="star3" >☆</label>
-                      <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" />
-                      <label for="star2" >☆</label>
-                      <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" />
-                      <label for="star1" >☆</label>
-                      <div class="clear"></div>
-                  </div>
-                    <div class="form-group" >
-                      <input type="submit" value="Post Comment" id="save-comment" class="btn py-3 px-4 btn-secondary">
-                    </div>
-                  </form>
-                  @else
-                  <div class="form-group" style="height: 15rem">
-                  <p>bạn phải đăng nhập để bình luận</p>
-                  @endif
-                  </div>
-                </div>
+               
               </div>
             </div>
           </div>

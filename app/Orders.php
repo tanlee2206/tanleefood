@@ -15,4 +15,16 @@ class Orders extends Model
     {
         return $this->belongsTo('App\User','user_id', 'id');
     }
+    public function shop()
+    {
+        return $this->belongsTo('App\Shop','shop_id', 'id');
+    }
+    public function address()
+    {
+        return $this->hasOne('App\Address');
+    }
+    public function status()
+    {
+        return $this->belongsTo('App\Status','status_id', 'id');
+    }
 }

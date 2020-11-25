@@ -104,16 +104,8 @@
                @endif
             <span class="caret"></span></button>
             <ul class="dropdown-menu" >
-               @foreach ($province as $province)
-            <li><a class="province" data-title="chuyển thành phố?" href="{{route('showhome',$province->id)}}">{{$province->name}}</a></li>
-                  @foreach ($province->district as $districts)
-                  {{-- <li><a href="#">{{$item->name}}</a></li> --}}
-                     @foreach ($districts->ward as $wards)
-                        @foreach ($wards->address as $item)
-                           
-                        @endforeach
-                     @endforeach
-                  @endforeach
+               @foreach ($province as $prov)
+            <li><a class="province" data-title="chuyển thành phố?" href="{{route('showhome',$prov->id)}}">{{$prov->name}}</a></li>
                @endforeach
               
              
@@ -129,24 +121,13 @@
             
             <li class="nav-item {{ Route::is('showhome') ? 'active' : null }}"><a href="{{route('showhome',$province_now->id)}}" class="nav-link">Trang chủ</a></li>
             <li class="nav-item">
-               <a href="" class="nav-link">Tin tức</a>
+               <a href="{{route('blog',$province_now->id)}}" class="nav-link">Tin tức</a>
             </li>
            
             <li class="nav-item"><a href="{{route('shop.show',$province_now->id)}}" class="nav-link {{ Route::is('shop.show') ? 'active' : null }} ">Cửa hàng</a></li>
             {{-- <li class="nav-item"><a href="{{route('food')}}" class="nav-link {{ Route::is('food') ? 'active' : null }}">FOOD</a></li> --}}
             <li class="nav-item">
-               <a  class="nav-link">tìm kiếm</a>
-               <div class="cart-hover ">
-                  <div >
-                     <div class="select-items">
-                        <form class="form-inline  my-2 my-lg-0">
-                           <input class="form-control form-search mr-sm-2" type="search" placeholder="..." aria-label="Search">
-                           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">tìm</button>
-                        </form>
-                     </div>
-                  
-                  </div>
-               </div>
+               <a href="{{route('get.filter',$province_now->id)}}" class="nav-link">tìm kiếm</a>
             </li>
             @if(isset(Auth::user()->id)&& Auth::user()->permission_id ==3)
             <li class="nav-item">
@@ -156,7 +137,7 @@
                   <div >
                      <div class="select-total">
                         <ul>
-                           <li><a href="" class="dropdown-item">Thông tin cá nhân</a> </li>
+                           <li><a href="{{route('profile',$province_now->id)}}" class="dropdown-item">Thông tin cá nhân</a> </li>
                            <li><a href="" class="dropdown-item">Lịch sử mua hàng</a> </li>
                            <li><a href="" class="dropdown-item">Chi Tiết giỏ hàng</a> </li>
                            <li><a class="dropdown-item" href="{{ route('logout') }}"> Đang xuất </a></li>

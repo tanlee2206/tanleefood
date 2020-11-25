@@ -11,8 +11,14 @@
     "laravel/helpers": {
         "version": "v1.3.0"
     },
+    "laravel/socialite": {
+        "version": "v5.1.0"
+    },
     "laravel/ui": {
         "version": "v2.1.0"
+    },
+    "league/oauth1-client": {
+        "version": "v1.8.2"
     },
     "maatwebsite/excel": {
         "version": "3.1.21"
