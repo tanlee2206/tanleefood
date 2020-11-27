@@ -12343,4 +12343,17 @@ textarea.form-control {
   }
 }
 
-
+#search-voice button {
+  position: absolute;
+    top: -11px;
+    right: 24rem;
+    bottom: 0;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    width: 1rem;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #333;
+}

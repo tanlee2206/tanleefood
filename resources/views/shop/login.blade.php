@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Login admin</title>
+    <title>Đăng nhập cửa hàng</title>
 
     <!-- Fontfaces CSS-->
     <link href="../asset/admin/css/font-face.css" rel="stylesheet" media="all">
@@ -46,6 +46,20 @@
                                 <img src="../asset/admin/images/icon/logo_shop.png" alt="CoolAdmin">
                             </a>
                         </div>
+                        @if(session('message'))
+                        <div class="toast toast-warning" style="padding:1rem;">
+                            <div class="icon__holder">
+                              <i style="font-size: 13px" class="fa fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="text">
+                              <h5>Đăng nhập thất bại</h5>
+                              <p>{{session('message')}}</p>
+                            </div>
+                            <div class="close">
+                              <i class="fas fa-times"></i>
+                            </div>
+                          </div>
+                        @endif
                         <div class="login-form">
                             <form  action="{{route('loginShop')}}" method="post">
                                 @csrf
@@ -107,9 +121,17 @@
     <script src="../asset/admin/vendor/chartjs/Chart.bundle.min.js"></script>
     <script src="../asset/admin/vendor/select2/select2.min.js">
     </script>
-
+    <script>
+        $(document).ready(function(){
+        
+            $(".close").click(function(){
+                $(".toast").hide();
+            });
+        });
+    </script>
     <!-- Main JS-->
     <script src="../asset/admin/js/main.js"></script>
+
 
 </body>
 

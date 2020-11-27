@@ -327,6 +327,14 @@
    });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+    $(document).ready(function(){
+    
+        $(".close").click(function(){
+            $(".toast").hide();
+        });
+    });
+</script>
 <!-- Main JS-->
 <script src="asset/admin/js/main.js"></script>
 

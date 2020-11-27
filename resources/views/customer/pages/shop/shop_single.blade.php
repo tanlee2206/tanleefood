@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 {{-- {{dd($shop)}} --}}
-<section class="ftco-section ftco-degree-bg">
+<section class="ftco-section ftco-degree-bg" style="padding-top: 2em;">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 ftco-animate introduce">
@@ -46,7 +46,7 @@
               </div>
             </div>
             <div class="col-lg-7">
-              <h2 class="mb-3">{{$shop->name}}</h2>
+              <h2 class="" style="margin-top: 34px;">{{$shop->name}}</h2>
               <div class=" d-flex">
                   <p class="text-left mr-4">
                     <a href="#" class="mr-2">5.0</a>
@@ -73,7 +73,8 @@
                   </p>
               </div>
              
-              
+              <div class="zalo-share-button" data-href="" data-oaid="3744294305259401201" data-layout="1" data-color="blue" data-customize=false></div>
+
                 <div id="fb-root"></div>
                 <div class="fb-share-button" data-href="http://127.0.0.1:8000/59/shop-single/{{$shop->slug}}" data-layout="button_count" data-size="small">
                   <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
@@ -102,7 +103,7 @@
                 
              
           
-            <p>{!!$shop->description !!}</p>
+            <p>{!! Str::limit($shop->description,400) !!}</p>
               <div class="tag-widget post-tag-container mb-5 mt-5">
                 <div class="tagcloud">
                   @foreach ($category_name as $item)
@@ -123,24 +124,14 @@
             <div class="col-lg-12 search-panel">
               <form action="#" id="search-voice" class="search-form">
                 <div class="row">
-                  <div class="sidebar-box col-lg-5">
-                    <div class="form-group">
-                      <span class="icon ion-ios-search"></span>
+                  <div class="sidebar-box col-lg-12">
+                    <div class="form-group" style="padding-right: 23rem">
+                      {{-- <span class="icon ion-ios-search"></span> --}}
                       <input type="text" autocomplete="off" id="search"  name="search" class="form-control "  target="_blank" placeholder="Search...">
                     <input value="{{$shop->id}}" name="shop_id" hidden>
                     </div>
                 </div>
-                  <div class="sidebar-box col-lg-7">
-                    <div class="form-group">
-                      <select class="form-control" id="exampleFormControlSelect1">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </select>
-                    </div>
-                  </div>
+                  
                   
                </div>
               </form>

@@ -67,6 +67,14 @@
                       
                     </ul>
                 </li>
+                <li class="">
+                    <a class="js-arrow" href="{{route('list.shop.register')}}">
+                        <i class="fas fa-tachometer-alt"></i>Cửa hàng chờ duyệt
+                        <span class="arrow">
+                            
+                        </span>
+                    </a>
+                </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
                         <i class="fas fa-trophy"></i>Danh mục

@@ -21,6 +21,14 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
+                               
+                                <select class="form-control"  style="height: auto;" name="status">
+                                        <option {{$shop->status == 1 ? 'selected' : ''}} value="1">khả dụng</option>
+                                        <option  {{$shop->status == 2 ? 'selected' : ''}} value="2">vô hiệu hóa</option>
+                                </select>
+                                
+                            </div>
+                            <div class="form-group">
                                 <label  class=" form-control-label {{ $errors->has('name') ? ' has-error' : '' }}">Tên cửa hàng</label>
                                 <input type="text" name="name" id="name" value="{{$shop->name }}" placeholder="" class="form-control">
                                 <small class="text-danger">{{ $errors->first('name') }}</small>

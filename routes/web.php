@@ -28,6 +28,8 @@ Route::get('/getwards','UserController@getWards');
 /*
  *đăng nhập 
  */
+Route::get('/register-shop',   'ShopController@register')->name('register-shop.form');
+Route::post('/register-shop',   'ShopController@registerstore')->name('register-shop');
 Route::get('/register',   'CustomerController@getRegister')->name('register.form');
 Route::post('/register',   'CustomerController@postRegister')->name('register');
 Route::get('/login',   'CustomerController@getLogin')->name('login.form');
@@ -83,6 +85,7 @@ Route::group(['prefix'=>'shop-manager', 'middleware'=> 'shopMiddleware'],functio
 	Route::get('/','ShopController@dashboard')->name('shop');
 	Route::post('/updateStatus/{id}','OrdersController@updateStatus')->name('updateStatus');
 	Route::resource('food','FoodController');
+	
 	// Route::resource('orders','OrdersController');
 	Route::delete('/food','FoodController@destroy');
 	route::get('/detail-food/{id}','FoodController@detailfood')->name('food.detail');
@@ -99,6 +102,7 @@ Route::group(['prefix'=>'admin', 'middleware'=> 'adminMiddleware'],function(){
 	Route::resource('user','UserController');
 	Route::delete('/user','UserController@destroy');
 	Route::resource('shop','ShopController');
+	Route::get('/list-register','ShopController@showlistregister')->name('list.shop.register');
 	Route::delete('/shop','ShopController@destroy');
 	Route::resource('category','CategoryController');
 	Route::delete('/category','CategoryController@destroy');

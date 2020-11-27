@@ -342,7 +342,7 @@
 <script>
   const searchForm = document.querySelector("#search-voice");
 const searchFormInput = searchForm.querySelector("input"); // <=> document.querySelector("#search-form input");
-const info = document.querySelector(".info");
+// const info = document.querySelector(".info");
 
 // The speech recognition interface lives on the browser’s window object
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; // if none exists -> undefined
@@ -390,12 +390,36 @@ if(SpeechRecognition) {
   function resultOfSpeechRecognition(event) {
     const current = event.resultIndex;
     const transcript = event.results[current][0].transcript;
+    $.ajax({
+          type: 'get',
+          url: '{{ URL::to('search') }}',
+          data: {
+              'search': transcript,
+              'shop_id': $('input[name=shop_id]').val()
+          },
+          success:function(data){
+              $("#menu-food").empty();
+              $("#menu-food").html(data);
+          }
+      });
     
     if(transcript.toLowerCase().trim()==="stop recording") {
       recognition.stop();
     }
     else if(!searchFormInput.value) {
       searchFormInput.value = transcript;
+      // $.ajax({
+      //     type: 'get',
+      //     url: '{{ URL::to('search') }}',
+      //     data: {
+      //         'search': transcript,
+      //         'shop_id': $('input[name=shop_id]').val()
+      //     },
+      //     success:function(data){
+      //         $("#menu-food").empty();
+      //         $("#menu-food").html(data);
+      //     }
+      // });
     }
     else {
       if(transcript.toLowerCase().trim()==="go") {
@@ -498,5 +522,10 @@ else {
   })
   $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 </script>
+
+
+<div class="zalo-chat-widget" data-oaid="3744294305259401201" data-welcome-message="tanlee food xin chào bạn!" data-autopopup="2" data-width="350" data-height="420"></div>
+
+<script src="https://sp.zalo.me/plugins/sdk.js"></script>
 </body>
 </html>

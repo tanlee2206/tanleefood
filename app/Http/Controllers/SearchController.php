@@ -40,6 +40,7 @@ class SearchController extends Controller
                                  ->province($province_now)
                                  ->local($request)
                                  ->cate($request)
+                                 ->where('status',1)
                                  ->get();
             // dd($shop);
             $html = view('customer.pages.search.filter_ajax',compact('shop','province_now'))->render();
@@ -54,7 +55,7 @@ class SearchController extends Controller
         $province = Province::whereIn('name', ['Thành phố Hà Nội', 'Thành phố Cần Thơ','Thành phố Hồ Chí Minh'])->get();
         $category = Category::all();
         
-       $shop = Shop::query()->province($province_now)->get();
+       $shop = Shop::query()->province($province_now)->where('status',1)->get();
         $districts = District::where('province_id', $province_now->id)->get();
         return view('customer.pages.search.search',compact('province','province_now','category','districts','shop'));
         

@@ -30,7 +30,7 @@ class AdminController extends Controller
         {
             return redirect('/admin');
         }else{
-            return back()->with('error','không thể đăng nhập');
+            return back()->with('message', 'email hoặc mật khẩu không đúng!');
         }
     }
     public function showFood()

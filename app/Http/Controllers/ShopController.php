@@ -31,7 +31,7 @@ class ShopController extends Controller
         {
             return redirect('/shop-manager');
         }else{
-            return back()->with('error','không thể đăng nhập');
+            return back()->with('message', 'email hoặc mật khẩu không đúng!');
         }
     }
 
@@ -46,7 +46,7 @@ class ShopController extends Controller
 
         }
     //    $shop_count = Shop::whereIn('shop.address_id',$address_count)->get();
-        $shop = Shop::whereIn('shop.id',$shop_id)->paginate(8);
+        $shop = Shop::whereIn('shop.id',$shop_id)->where('status',1)->paginate(8);
         $category = Category::all();
         //    dd($shop);
         return view('customer.pages.shop.shop',compact('shop','category','province','province_now'));
@@ -73,7 +73,7 @@ class ShopController extends Controller
         }
         
         // dd($shop_id2);
-        $shop = Shop::whereIn('shop.id', $shop_id1)->whereIn('shop.id', $shop_id2)->paginate(8);
+        $shop = Shop::whereIn('shop.id', $shop_id1)->whereIn('shop.id', $shop_id2)->where('status',1)->paginate(8);
         // dd($shop);
         // foreach ($category->food->shop as $food) {
         //    echo $food->name;
@@ -93,7 +93,7 @@ class ShopController extends Controller
 
     //    }
         
-        $shop = Shop::where('slug', $slug)->firstOrFail();
+        $shop = Shop::where('slug', $slug)->where('status',1)->firstOrFail();
         $shop_id = $shop->id;
         $rating = Rating::where('shop_id',$shop_id)->orderBy('id','DESC')->get();
         $foods = Food::where('shop_id',$shop_id)->get();
@@ -127,7 +127,7 @@ class ShopController extends Controller
     }
    
     public function index(){
-        $shop = Shop::all();
+        $shop = Shop::where('status',1)->get();
         // dd($user);
         return view('admin.pages.shop.list',compact('shop'));
     }
@@ -144,7 +144,7 @@ class ShopController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id){
-         // dd($request);
+        //  dd($request);
          // $this->validate($request, [
         //     // Validate the max number of characters to avoid database truncation
         //     'name' => ['required', 'string', 'max:100','min:1'],
@@ -174,6 +174,7 @@ class ShopController extends Controller
         }
         $shop->slug = $request->slug;
         $shop->name = $request->name;
+        $shop->status = $request->status;
         $shop->cost = $request->cost;
         $shop->open_time = $request->open_time;
         $shop->close_time = $request->close_time;
@@ -187,7 +188,7 @@ class ShopController extends Controller
         $address->address_detail = $request->address;
         
         $address->save();  
-        return redirect()->route('shop.index')->with('message', 'thêm mới thành công!');
+        return redirect()->route('shop.index')->with('message', 'chỉnh sửa thành công!');
         
         
     }
@@ -270,7 +271,7 @@ class ShopController extends Controller
     }
     public function profile(){
         $province= Province::all();
-        $shop = Shop::where('user_id',Auth::user()->id)->first();
+        $shop = Shop::where('user_id',Auth::user()->id)->where('status',1)->first();
         if (isset(Auth::user()->id)) {
             return view('shop.pages.profile.profile',compact('shop','province'));
         }
@@ -326,9 +327,60 @@ class ShopController extends Controller
    }
    public function dashboard()
    {
-       $shop = Shop::where('user_id',Auth::user()->id)->first();
-       $orders = Orders::where('shop_id',$shop->id)->count();
-       return view('shop.index',compact('shop','orders'));
+       $shop = Shop::where('user_id',Auth::user()->id)->where('status',1)->first();
+    //    dd($shop);
+        if ($shop != null) {
+            $orders = Orders::where('shop_id',$shop->id)->count();
+            return view('shop.index',compact('shop','orders'));
+        }else{
+            Auth::logout();
+            return redirect()->back()->with('message', 'Cửa hàng của bạn chưa được duyệt!');
+        }
+      
    }
+
+   public function register()
+   {
+         $province= Province::whereIn('name', ['Thành phố Hà Nội', 'Thành phố Cần Thơ','Thành phố Hồ Chí Minh'])->get();
+       return view('shop.register',compact('province'));
+   }
+   public function registerstore(Request $request)
+   {
+        $user = new User();
+        $address = new Address();
+        $shop = new Shop();
+        $shop->slug = $request->slug;
+        $user->login_name = $request->user_name;
+        $user->password=bcrypt($request->password);
+        $user->email = $request->email;
+        $user->permission_id = 2;
+        $user->save(); 
+
+
+        $shop->name = $request->name;
+        $shop->status =2;
+        $shop->user_id = $user->id;
+        $shop->cost = $request->cost;
+        $shop->open_time = $request->open_time;
+        $shop->close_time = $request->close_time;
+        $shop->description = $request->description;
+        $shop->img = $request->img;
+        $shop->save();
+        
+
+        $address->ward_id = $request->ward_id;
+        $address->shop_id = $shop->id;
+        $address->address_detail = $request->address;
+        
+        $address->save();  
+        // return redirect()->route('shop.index')->with('message', 'thêm mới thành công!');
+   }
+   public function showlistregister(){
+    $shop = Shop::where('status',2)->get();
+    // dd($user);
+    return view('admin.pages.shop.list_register',compact('shop'));
+}
+
+
 
 }

@@ -69,7 +69,7 @@ class HomeController extends Controller
              $shop_id[] = $address->shop_id;
 
         }
-        $shop = Shop::whereIn('shop.id',$shop_id)->paginate(8);
+        $shop = Shop::whereIn('shop.id',$shop_id)->where('status',1)->paginate(8);
 
 
         $food = Food::all()->take(12);
