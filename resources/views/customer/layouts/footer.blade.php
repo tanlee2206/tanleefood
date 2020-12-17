@@ -298,6 +298,16 @@
 			
 			return false;
 		});
+    $('.register-shop').on('click', function(event){
+			
+			event.preventDefault();
+
+			$('html,body').animate({
+				scrollTop: $('.section-register').offset().top-100
+			}, 1200, 'easeInOutExpo');
+			
+			return false;
+		});
 </script>
 <script>
   $(document).ready(function(){
@@ -307,10 +317,20 @@
       
         $("#formEditProfile").show();
     });
+    $("#changePass").click(function(){
+        $("#userProfile").hide();
+      
+        $("#formChangePass").show();
+    });
     $("#cancelProfile").click(function(){
         $("#userProfile").show();
       
         $("#formEditProfile").hide();
+    });
+    $("#cancelPass").click(function(){
+        $("#userProfile").show();
+      
+        $("#formChangePass").hide();
     });
     // $("#hidePanel").click(function(){
     //     $("#panel").hide();

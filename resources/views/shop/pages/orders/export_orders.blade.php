@@ -1,13 +1,29 @@
 @if ($orders_detail)
-<a href="pdf/{{$orders_detail->id}}" 
-style="
-    padding: 0.55rem;
-    background-color: #82ae46;
-    border-radius: 12px;
-    color: #fff;
-    text-transform: uppercase;
-    font-weight: bold;
-  ">in hóa đơn</a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: DejaVu Sans, sans-serif;
+
+        }
+        .modal-body {
+            position: relative;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            padding: 1rem;}
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;
+        }  
+        .table th, .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+        }
+    </style>
+</head>
 
 {{-- @foreach ($orders_status as $item)
     @if ($item->status ==6)
@@ -55,13 +71,19 @@ style="
   </ul>
   @endif
 @endforeach --}}
-
-<div>
-  Đơn hàng : <strong>#{{$orders_detail->id}}</strong>  <br>
-  Ngày : <strong>{{date("d/m/Y h:i a", strtotime($orders_detail->created_at))}} </strong><br>
-  Thành tiền : <strong>{{number_format($total,0)}} vnd</strong> <br>
-  Địa chỉ giao hàng: <strong>{{$orders_detail->address->address_detail}}</strong><br>
-  Điên thoại : <strong>{{$orders_detail->user->phone}}</strong>
+<body>
+  
+  <div style="text-align: center; margin-bottom: 70px;">
+    <img style="height: 30px" src="{{public_path().'/asset/admin/images/icon/logo.png'}}" alt="">
+    <h2>HÓA ĐƠN MUA HÀNG</h2>
+  </div>
+<div style="margin-bottom: 50px;">
+    Đơn hàng : <strong>#{{$orders_detail->orders_code}}</strong>  <br>
+    Cửa Hàng : <strong>#{{$orders_detail->shop->name}}</strong>  <br>
+    Ngày : <strong>{{date("d/m/Y h:i a", strtotime($orders_detail->created_at))}} </strong><br>
+    Thành tiền : <strong>{{number_format($total,0)}} vnd</strong> <br>
+    Địa chỉ giao hàng: <strong>{{$orders_detail->address->address_detail}}</strong><br>
+    Điên thoại : <strong>{{$orders_detail->user->phone}}</strong>
 
 </div>
 <table cellpadding="0" cellspacing="0" border="0" class="display table table-cat table-bordered table-hover" id="hidden-table-info">
@@ -89,7 +111,7 @@ style="
           @if ($value->food->image_food != null)
           @foreach ($value->food->image_food as $image)
               @if ($image->index == 0)
-              <img src="{{$image->path}}" width="80" height="80" alt="">
+              <img src="{{public_path().$image->path}}" width="80" height="80" alt="">
               @endif
           @endforeach
           @else
@@ -106,4 +128,9 @@ style="
       @endforeach
     </tbody>
   </table>
+<footer>
+  <div>tanlee food</div>
+</footer>
+</body>
+</html>
 @endif

@@ -75,7 +75,7 @@
                             <button id="editProfile" class="btn btn-primary py-3 px-5">Sửa Thông Tin</button>
                         </div>
                         <div class="col-lg-3">
-                            <button class="btn btn-primary py-3 px-5">Đổi Mật Khẩu</button>
+                            <button id="changePass" class="btn btn-primary py-3 px-5">Đổi Mật Khẩu</button>
                         </div>
                       </div>
                     </div>
@@ -230,7 +230,52 @@
                      
                      </div>
                   </div>
-                </section>          
+                </section>    
+                <section id="formChangePass" style="display: none">
+                  <div class="container">
+                     <div class="row justify-content-center">
+                        <div class="col-xl-12 ftco-animate">
+                          <div ><button style="float: left; margin-right:2rem" id="cancelPass" class="btn btn-success"> <i class="far fa-window-close"></i></button> 
+                            {{-- <h3 style="color: #29a746;font-weight: 600;font-size: 19px;" class="mb-4 billing-heading">Đổi mật khẩu</h3> --}}
+                          </div>
+                        <form action="{{route ('change.password')}}" method="post" class="billing-form">
+                          @csrf
+                          <input type="text" hidden value="{{$user->id}}" name="user_id">
+                              
+                              <div class="row align-items-end">
+                                <div class="col-md-12 ">
+                                 
+                                  <div class="row">
+                                    <div class="col-md-6 offset-md-3">
+                                      <div class="form-group">
+                                         <label for="firstname">Mật khẩu cũ</label>
+                                      <input type="password" name="current_password" value="" class="form-control" placeholder="********">
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="firstname">Mật khẩu mới</label>
+                                      <input type="password" name="new_password" value="" class="form-control" placeholder="********">
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="firstname">nhập lại mât khẩu </label>
+                                      <input type="password" name="new_confirm_password" value="" class="form-control" placeholder="********">
+                                      </div>
+                                      <div class="form-group">
+                                        <button class="btn btn-success" style="margin-top: 32px; padding: 14px;" type="submit"> Xác nhận</button>
+                                      </div>
+                                      
+                                    </div>
+                                     
+                                  </div>
+                                </div>
+                              </div>                         
+                           <!-- END -->
+                        </div>
+                        
+                      </form>
+                     
+                     </div>
+                  </div>
+                </section>        
             </div>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

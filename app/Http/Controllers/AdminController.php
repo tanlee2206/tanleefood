@@ -47,10 +47,15 @@ class AdminController extends Controller
         $shop = Shop::where('status', '=', 1)->count();
         $orders = Orders::count();
         $orders_total =Orders::sum('total');
+        $revenue = [];
+        for ($i=1; $i <= 12 ; $i++) { 
+         $revenue[] = Orders::whereMonth('created_at',$i)->count();
+        }
+        // dd($revenue);
 
 
 
-        return view('admin.index',compact('users','shop','orders','orders_total'));
+        return view('admin.index',compact('users','shop','orders','orders_total','revenue'));
     }
 
 

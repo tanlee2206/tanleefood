@@ -13,6 +13,8 @@ use App\Orders;
 use App\Orders_item;
 use App\District;
 use App\Province;
+use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -64,6 +66,18 @@ class ProfileController extends Controller
         
         $address->save();  
         return redirect()->back()->with('message', 'chỉnh sửa thành công!');
+    }
+    public function changePass(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+   
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+        return redirect()->back()->with('message', 'chỉnh sửa thành công!'); 
+        // dd('Password change successfully.');
     }
 
 

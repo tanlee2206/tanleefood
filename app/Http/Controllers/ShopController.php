@@ -12,6 +12,7 @@ use App\District;
 use App\User;
 use App\Rating;
 use App\Wishlist;
+use Carbon\Carbon;
 use App\Province;
 
 
@@ -327,11 +328,25 @@ class ShopController extends Controller
    }
    public function dashboard()
    {
+       
        $shop = Shop::where('user_id',Auth::user()->id)->where('status',1)->first();
     //    dd($shop);
         if ($shop != null) {
+            // $data = [0,0,0,0,0,0,0,0,0,0,0,0];
+            $revenue = [];
+           for ($i=1; $i <= 12 ; $i++) { 
+            $revenue[] = Orders::where('shop_id',$shop->id)->whereMonth('created_at',$i)->sum('total')/1000000;
+           }
+           
+            // dd($revenue);
+            // foreach($monthly_uploaded_product as $key)   
+            // $year[$key->month-1] = $key->total;//update each month with the total value
+            // };
             $orders = Orders::where('shop_id',$shop->id)->count();
-            return view('shop.index',compact('shop','orders'));
+            $food = Food::where('shop_id',$shop->id)->count();
+            $rating = Rating::where('shop_id',$shop->id)->count();
+            $wishlist = Wishlist::where('shop_id',$shop->id)->count();
+            return view('shop.index',compact('shop','orders','food','rating','wishlist','revenue'));
         }else{
             Auth::logout();
             return redirect()->back()->with('message', 'Cửa hàng của bạn chưa được duyệt!');

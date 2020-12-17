@@ -20,8 +20,9 @@
                                     <i class="zmdi zmdi-account-o"></i>
                                 </div>
                                 <div class="text">
-                                    <h2>10368</h2>
-                                    <span>members online</span>
+                                    <h2>{{$wishlist}}</h2>
+                                    <span>lượt yêu thích</span>
+
                                 </div>
                             </div>
                             <div class="overview-chart">
@@ -56,8 +57,9 @@
                                     <i class="zmdi zmdi-calendar-note"></i>
                                 </div>
                                 <div class="text">
-                                    <h2>1,086</h2>
-                                    <span>this week</span>
+                                    <h2>{{$food}}</h2>
+                                    <span>Món ăn</span>
+
                                 </div>
                             </div>
                             <div class="overview-chart">
@@ -74,8 +76,9 @@
                                     <i class="zmdi zmdi-money"></i>
                                 </div>
                                 <div class="text">
-                                    <h2>$1,060,386</h2>
-                                    <span>total earnings</span>
+                                    <h2>{{$rating}}</h2>
+                                    <span>Bình luận</span>
+
                                 </div>
                             </div>
                             <div class="overview-chart">
@@ -86,19 +89,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="au-card recent-report">
                         <div class="au-card-inner">
-                            <h3 class="title-2">recent reports</h3>
+                            <h3 class="title-2">Biểu đồ doanh thu</h3>
                             <div class="chart-info">
                                 <div class="chart-info__left">
                                     <div class="chart-note">
                                         <span class="dot dot--blue"></span>
-                                        <span>products</span>
-                                    </div>
-                                    <div class="chart-note mr-0">
-                                        <span class="dot dot--green"></span>
-                                        <span>services</span>
+                                        <span>Triệu đồng</span>
                                     </div>
                                 </div>
                                 <div class="chart-info__right">
@@ -123,7 +122,7 @@
                 <div class="col-lg-6">
                     <div class="au-card chart-percent-card">
                         <div class="au-card-inner">
-                            <h3 class="title-2 tm-b-5">char by %</h3>
+                            <h3 class="title-2 tm-b-5"></h3>
                             <div class="row no-gutters">
                                 <div class="col-xl-6">
                                     <div class="chart-note-wrap">
@@ -150,4 +149,7 @@
         </div>
     </div>
 </div>
+<script>
+     var revenue = {!! json_encode($revenue) !!};
+</script>
 <!-- END MAIN CONTENT-->

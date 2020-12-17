@@ -177,13 +177,7 @@ Thanh Toán
                             </div>
                          </div>
                       </div>
-                      <div class="form-group">
-                         <div class="col-md-12">
-                            <div class="radio">
-                               <label><input type="radio" name="payment_method" value="3" class="mr-2"> Paypal</label>
-                            </div>
-                         </div>
-                      </div>
+                     
          
                       <p><button type="submit" class="btn btn-primary py-3 px-4">đặt hàng</button></p>
                    </div>

@@ -68,7 +68,13 @@ class CheckoutController extends Controller
                 
                     $orders = new Orders();
                     $address = new Address();
-
+                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    $charactersLength = strlen($characters);
+                    $randomString = '';
+                    for ($i = 0; $i < 10; $i++) {
+                        $randomString .= $characters[rand(0, $charactersLength - 1)];
+                    }
+                    $orders->orders_code= $randomString;
                     $orders->user_id = $request->user_id;
                     // $orders->total = $request->total;
                     $orders->payment_method = $request->payment_method;
@@ -136,7 +142,13 @@ class CheckoutController extends Controller
                 
                     $orders = new Orders();
                     $address = new Address();
-
+                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    $charactersLength = strlen($characters);
+                    $randomString = '';
+                    for ($i = 0; $i < 10; $i++) {
+                        $randomString .= $characters[rand(0, $charactersLength - 1)];
+                    }
+                    $orders->orders_code= $randomString;
                     $orders->user_id = $request->user_id;
                     // $orders->total = $request->total;
                     $orders->payment_method = $request->payment_method;

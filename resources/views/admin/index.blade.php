@@ -93,10 +93,10 @@ Trang chủ
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="au-card recent-report">
                         <div class="au-card-inner">
-                            <h3 class="title-2">recent reports</h3>
+                            <h3 class="title-2">Biểu đồ đơn hàng</h3>
                             <div class="chart-info">
                                 <div class="chart-info__left">
                                     <div class="chart-note">
@@ -160,5 +160,8 @@ Trang chủ
     </div>
 </div>
 <!-- END MAIN CONTENT-->
+<script>
+    var revenue = {!! json_encode($revenue) !!};
+</script>
 
 @endsection

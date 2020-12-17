@@ -70,10 +70,16 @@ class HomeController extends Controller
 
         }
         $shop = Shop::whereIn('shop.id',$shop_id)->where('status',1)->paginate(8);
+        $shop_new = Shop::whereIn('shop.id',$shop_id)->where('status',1)->orderBy('id', 'desc')->take(8)->get();
+        $shop_random = Shop::whereIn('shop.id',$shop_id)->where('status',1)->inRandomOrder()->take(8)->get();
+        $shop_hot = Shop::whereIn('shop.id',$shop_id)->where('status',1)->paginate(8);
+
+
+
 
 
         $food = Food::all()->take(12);
         $category = Category::all();
-        return view('customer.index', compact('food','category','province','province_now','shop'));
+        return view('customer.index', compact('food','category','province','province_now','shop','shop_hot','shop_new','shop_random'));
     }
 }

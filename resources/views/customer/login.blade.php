@@ -7,7 +7,7 @@
 	<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="asset/customer/css/style_login.css">
 	<title>
-		Animated login signup
+		Tanlee food
 	</title>
 </head>
 
@@ -131,8 +131,7 @@
 						TanLee Food
 					</h2>
 					<p>
-                        Chào mừng bạn trở lại,
-						Hãy đăng nhập để thực hiện nhiều chức năng khác của website. Và nhận nhiều ưu đãi khác
+                        Chào mừng bạn trở lại hãy đăng nhập để thực hiện nhiều chức năng khác của website và nhận nhiều ưu đãi khác
 					</p>
 				</div>
 				<div class="img sign-in">

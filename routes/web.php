@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 vnpay
 
 */
+// export pdf
+Route::get('pdf/{id}','pdfController@index')->name('exportpdf');
 
 
 Route::get('/return-vnpay','VnpayController@return');
@@ -105,7 +107,9 @@ Route::group(['prefix'=>'admin', 'middleware'=> 'adminMiddleware'],function(){
 	Route::get('/list-register','ShopController@showlistregister')->name('list.shop.register');
 	Route::delete('/shop','ShopController@destroy');
 	Route::resource('category','CategoryController');
+	Route::resource('news','NewsController');
 	Route::delete('/category','CategoryController@destroy');
+	Route::delete('/news','NewsController@destroy');
 	route::get('/detail-user/{id}','UserController@detailuser')->name('user.detail');
 	Route::get('/getdistricts','UserController@getDistricts');
 	Route::get('/getwards','UserController@getWards');
@@ -120,6 +124,7 @@ Route::group(['prefix' => 'laravel-filemanager'], function () {
 
 
 Route::resource('','HomeController');
+Route::post('/change-password', 'ProfileController@changePass')->name('change.password');
 // Route::get('/{province}','HomeController@showhome' )->name('showhome');
 Route::group(['prefix'=>'/{province}'],function(){
 	Route::get('/','HomeController@showhome' )->name('showhome');
@@ -127,7 +132,9 @@ Route::group(['prefix'=>'/{province}'],function(){
 	Route::get('/profile', 'ProfileController@index')->name('profile');
 	Route::post('/profile', 'ProfileController@updateProfileUser')->name('updateProfileUser');
 	
+	
 	Route::get('/blog', 'BlogController@index')->name('blog');
+	Route::get('/blog-detail/{news}', 'BlogController@blog_detail')->name('blog.detail');
 	Route::post('/filter', 'SearchController@filter')->name('filter');
 	Route::get('/filter', 'SearchController@getfilter')->name('get.filter');
 	Route::get('/shop', 'ShopController@showlist')->name('shop.show');

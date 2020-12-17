@@ -253,8 +253,9 @@
     const brandService = 'rgba(0,173,95,0.8)'
 
     var elements = 10
-    var data1 = [52, 60, 55, 50, 65, 80, 57, 70, 105, 115]
-    var data2 = [102, 70, 80, 100, 56, 53, 80, 75, 65, 90]
+    // var data1 = [1, 5, 6, 4, 3, 7, 9, 4, 10, 5,20,13]
+    // var data1 = @json($revenue);
+    var data2 = [1, 70, 80, 100, 1, 53, 80, 75, 65, 90]
 
     var ctx = document.getElementById("recent-rep-chart");
     if (ctx) {
@@ -262,26 +263,26 @@
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', ''],
+          labels: ['Tháng 1 ', 'Tháng 2 ', 'Tháng 3 ', 'Tháng 4 ', 'Tháng 5 ', 'Tháng 6 ', 'Tháng 7 ', 'Tháng 8 ', 'Tháng 9 ', 'Tháng 10','Tháng 11','Tháng 12'],
           datasets: [
             {
-              label: 'My First dataset',
-              backgroundColor: brandService,
-              borderColor: 'transparent',
-              pointHoverBackgroundColor: '#fff',
-              borderWidth: 0,
-              data: data1
-
-            },
-            {
-              label: 'My Second dataset',
+              label: '',
               backgroundColor: brandProduct,
               borderColor: 'transparent',
-              pointHoverBackgroundColor: '#fff',
+              pointHoverBackgroundColor: '#82ae46',
               borderWidth: 0,
-              data: data2
+              data: revenue
 
-            }
+            },
+            // {
+            //   label: 'My Second dataset',
+            //   backgroundColor: brandProduct,
+            //   borderColor: 'transparent',
+            //   pointHoverBackgroundColor: '#fff',
+            //   borderWidth: 0,
+            //   data: data2
+
+            // }
           ]
         },
         options: {
@@ -304,9 +305,9 @@
             yAxes: [{
               ticks: {
                 beginAtZero: true,
-                maxTicksLimit: 5,
-                stepSize: 50,
-                max: 150,
+                maxTicksLimit: 1,
+                stepSize: 10,
+                max: 50,
                 fontFamily: "Poppins",
                 fontSize: 12
               },

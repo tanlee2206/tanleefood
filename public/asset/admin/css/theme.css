@@ -4376,9 +4376,10 @@ section {
 
 .table-data thead tr td {
     font-size: 12px;
-    font-weight: 600;
-    color: #808080;
+    /* font-weight: 600; */
+    color: #000000;
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 .table-data .table td {
